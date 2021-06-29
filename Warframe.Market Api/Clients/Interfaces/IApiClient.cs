@@ -9,13 +9,13 @@ namespace Warframe.Market_Api.Api.Clients.Interfaces
         Task<RequestResult<LoginResponse>> LogInAsync(string email, string password);
         Task<RequestResult<LogoutResponse>> LogOutAsync();
 
-        Task<RequestResult<Items>> GetAllItemsAsync();
-        Task<RequestResult<ItemInformation>> GetItemInformationAsync(string itemUrl);
-        Task<RequestResult<Orders>> GetItemOrders(string itemUrl);
-
         Task<RequestResult<ProfileOrders>> GetProfileOrdersAsync(string profileName = null);
-        RequestResult<Order> CreateOrder(string itemUrl, short quanitity, short price);
-        Task<RequestResult<ProfileOrders>> UpdateOrder(UpdateOrder updatedOrder);
-        Task<RequestResult<DeleteOrderResponse>> DeleteOrder(string OrderID);
+        Task<RequestResult<ItemInformation>> GetItemInformationAsync(string itemUrl);
+        Task<RequestResult<Items>> GetAllItemsAsync();
+        Task<RequestResult<Orders>> GetItemOrdersAsync(string itemUrl);
+
+        Task<RequestResult<CreateOrderResponse>> CreateOrderAsync(CreateOrderRequest createOrder);
+        Task<RequestResult<ProfileOrders>> UpdateOrderAsync(UpdateOrderRequest updatedOrder);
+        Task<RequestResult<DeleteOrderResponse>> DeleteOrderAsync(string OrderID);
     }
 }

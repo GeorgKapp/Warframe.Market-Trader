@@ -1,16 +1,18 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
-using System.Threading.Tasks;
+using System.Threading;
 using Warframe.Market_Api.Api.Clients.Implementation;
 using Warframe.Market_Api.Api.Clients.Interfaces;
 using Warframe.Market_Api.Api.Data;
+using Warframe.Market_Api.JsonData.Content;
 
 namespace Warframe.Market_Api_Unit_Tests
 {
     [TestClass]
     public class UnitTests
     {
-        IApiClient _client;
+        private static IApiClient _client;
+        private int _clientWaitTime = 5000;
 
         private const string AshPrimeSetLink = "ash_prime_set";
         private const string GladiatorMightModLink = "gladiator_might";
@@ -18,83 +20,98 @@ namespace Warframe.Market_Api_Unit_Tests
         private const string CompanionRivenModVeiledLink = "companion_weapon_riven_mod_(veiled)";
         private const string LegendaryFusionCoreLink = "legendary_fusion_core";
 
-        public UnitTests()
+
+        [ClassInitialize]
+        public static void InitializeSetup(TestContext context)
         {
             _client = new ApiClient();
         }
 
-        [TestMethod("Test Login Request")]
-        public async Task TestLoginAsync()
+        [TestMethod("1. Login Request")]
+        public void Test1LoginAsync()
         {
-            var result = await _client.LogInAsync(LoginData.UserName, LoginData.Password);
+            var result = LogIn();
             Assert.IsTrue(result.IsSuccess);
         }
 
-        [TestMethod("Test Logout Request")]
-        public async Task TestLogoutAsync()
+        [TestMethod("2. Recieving of own Profile Orders")]
+        public void Test2MyProfileOrdersAsync()
         {
-            var loginResult = await _client.LogInAsync(LoginData.UserName, LoginData.Password);
-            Assert.IsTrue(loginResult.IsSuccess);
+            Thread.Sleep(_clientWaitTime);
 
-            var logoutResult = await _client.LogOutAsync();
-            Assert.IsTrue(logoutResult.IsSuccess);
-        }
-
-        [TestMethod("Test Recieving of own Profile Orders")]
-        public async Task TestMyProfileOrdersAsync()
-        {
-            var loginResult = await _client.LogInAsync(LoginData.UserName, LoginData.Password);
-            Assert.IsTrue(loginResult.IsSuccess);
-
-            var orderResult = await _client.GetProfileOrdersAsync();
+            var orderResult = GetProfileOrders();
             Assert.IsTrue(orderResult.IsSuccess);
+            Assert.IsTrue(orderResult.Result.Info.BuyOrders.Length > 0 && orderResult.Result.Info.SellOrders.Length > 0);
         }
 
-        [TestMethod("Test Recieving of Item Information")]
+        [TestMethod("3. Recieving of Item Information")]
         [DataRow(AshPrimeSetLink)]
         [DataRow(GladiatorMightModLink)]
         [DataRow(AxiA6RelicLink)]
         [DataRow(CompanionRivenModVeiledLink)]
-        public async Task TestItemInformationAsync(string value)
+        public void Test3ItemInformationAsync(string value)
         {
-            var itemResult = await _client.GetItemInformationAsync(value);
+            Thread.Sleep(_clientWaitTime);
+            var itemResult = GetItemInformation(value);
             Assert.IsTrue(itemResult.IsSuccess);
         }
 
-        [TestMethod("Test Getting All Items")]
-        public async Task TestGetAllItemsAsync()
+        [TestMethod("4. Getting All Items")]
+        public void Test4GetAllItemsAsync()
         {
-            var itemsResult = await _client.GetAllItemsAsync();
+            Thread.Sleep(_clientWaitTime);
+            var itemsResult = GetAllItems();
             Assert.IsTrue(itemsResult.IsSuccess);
             Assert.IsTrue(itemsResult.Result.Info.Items.Length > 0);
         }
 
-        [TestMethod("Test Getting Orders For Item")]
+        [TestMethod("5. Getting Orders For Item")]
         [DataRow(AshPrimeSetLink)]
         [DataRow(GladiatorMightModLink)]
         [DataRow(AxiA6RelicLink)]
         [DataRow(CompanionRivenModVeiledLink)]
-        public async Task TestGettingOrdersForItem(string value)
+        public void Test5GettingOrdersForItem(string value)
         {
-            var itemOrdersResult = await _client.GetItemOrders(value);
+            Thread.Sleep(_clientWaitTime);
+            var itemOrdersResult = GetItemOrders(value);
             Assert.IsTrue(itemOrdersResult.IsSuccess);
             Assert.IsTrue(itemOrdersResult.Result.Info.Orders.Length > 0);
         }
 
-        [TestMethod("Test Upgrade Order on profile")]
+        [TestMethod("6. Create Order on profile")]
         [DataRow(LegendaryFusionCoreLink)]
-        public async Task TestUpgradeOrder(string value)
+        public void Test6CreateOrder(string value)
         {
-            var loginResult = await _client.LogInAsync(LoginData.UserName, LoginData.Password);
-            Assert.IsTrue(loginResult.IsSuccess);
+            Thread.Sleep(_clientWaitTime);
 
-            var orderResult = await _client.GetProfileOrdersAsync();
+            var itemInformationResult = GetItemInformation(value);
+            Assert.IsTrue(itemInformationResult.IsSuccess);
+
+            var orderResult = CreateOrder(new CreateOrderRequest
+            {
+                ItemId = itemInformationResult.Result.Info.Item.Id,
+                OrderType = Market_Api.JsonData.Enums.OrderType.Sell,
+                Platinum = 1000,
+                Quantity = 1,
+                Visible = false
+            });
+
+            Assert.IsTrue(orderResult.IsSuccess);
+        }
+
+        [TestMethod("7. Upgrade Order on profile")]
+        [DataRow(LegendaryFusionCoreLink)]
+        public void Test7UpgradeOrder(string value)
+        {
+            Thread.Sleep(_clientWaitTime);
+
+            var orderResult = GetProfileOrders();
             Assert.IsTrue(orderResult.IsSuccess);
 
             var legendaryFusionCoreItemOrder = orderResult.Result.Info.SellOrders.Where(p => p.Item.UrlName == value).First();
             var endPrice = legendaryFusionCoreItemOrder.Platinum == 1000 ? 1001 : 1000;
 
-            var updateResult = await _client.UpdateOrder(new Market_Api.JsonData.Content.UpdateOrder
+            var updateResult = UpdateOrder(new UpdateOrderRequest
             {
                 OrderID = legendaryFusionCoreItemOrder.Id,
                 Platinum = endPrice,
@@ -105,20 +122,55 @@ namespace Warframe.Market_Api_Unit_Tests
             Assert.IsTrue(updateResult.IsSuccess);
         }
 
-        [TestMethod("Test Delete Order on profile")]
+        [TestMethod("8. Delete Order on profile")]
         [DataRow(LegendaryFusionCoreLink)]
-        public async Task TestDeleteOrder(string value)
+        public void Test8DeleteOrder(string value)
         {
-            var loginResult = await _client.LogInAsync(LoginData.UserName, LoginData.Password);
-            Assert.IsTrue(loginResult.IsSuccess);
+            Thread.Sleep(_clientWaitTime);
 
-            var orderResult = await _client.GetProfileOrdersAsync();
+            var orderResult = GetProfileOrders();
             Assert.IsTrue(orderResult.IsSuccess);
 
             var legendaryFusionCoreItemOrder = orderResult.Result.Info.SellOrders.Where(p => p.Item.UrlName == value).First();
-            var deleteResult = await _client.DeleteOrder(legendaryFusionCoreItemOrder.Id);
+            var deleteResult = DeleteOrder(legendaryFusionCoreItemOrder.Id);
 
             Assert.IsTrue(deleteResult.IsSuccess);
         }
+
+        [TestMethod("9. Logout Request")]
+        public void Test9LogoutAsync()
+        {
+            Thread.Sleep(_clientWaitTime);
+
+            var logoutResult = LogOut();
+            Assert.IsTrue(logoutResult.IsSuccess);
+        }
+
+        private RequestResult<LoginResponse> LogIn()
+            => AsyncHelpers.RunSync(() => _client.LogInAsync(LoginData.UserName, LoginData.Password));
+
+        private RequestResult<LogoutResponse> LogOut()
+            => AsyncHelpers.RunSync(() => _client.LogOutAsync());
+
+        private RequestResult<ProfileOrders> GetProfileOrders(string profileName = null)
+            => AsyncHelpers.RunSync(() => _client.GetProfileOrdersAsync(profileName));
+
+        private RequestResult<ItemInformation> GetItemInformation(string itemUrl)
+            => AsyncHelpers.RunSync(() => _client.GetItemInformationAsync(itemUrl));
+
+        private RequestResult<Items> GetAllItems()
+            => AsyncHelpers.RunSync(() => _client.GetAllItemsAsync());
+
+        private RequestResult<Orders> GetItemOrders(string itemUrl)
+            => AsyncHelpers.RunSync(() => _client.GetItemOrdersAsync(itemUrl));
+
+        private RequestResult<CreateOrderResponse> CreateOrder(CreateOrderRequest createOrder)
+            => AsyncHelpers.RunSync(() => _client.CreateOrderAsync(createOrder));
+
+        private RequestResult<ProfileOrders> UpdateOrder(UpdateOrderRequest updatedOrder)
+            => AsyncHelpers.RunSync(() => _client.UpdateOrderAsync(updatedOrder));
+
+        private RequestResult<DeleteOrderResponse> DeleteOrder(string OrderID)
+            => AsyncHelpers.RunSync(() => _client.DeleteOrderAsync(OrderID));
     }
 }

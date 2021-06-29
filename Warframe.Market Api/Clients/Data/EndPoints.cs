@@ -32,7 +32,10 @@
             return $"{BaseUrl}{ProfileUrl}{ordersUrl}";
         }
 
-        public static string GetProfileOrderUrl(string OrderID)
+        public static string GetProfileOrderUrl()
+            => $"{BaseUrl}{ProfileUrl}{OrdersUrl}";
+
+        public static string GetProfileOrderUrlByID(string OrderID)
             => $"{BaseUrl}{ProfileUrl}{OrdersUrl}/{OrderID}";
 
         public static string GetLoginUrl() 

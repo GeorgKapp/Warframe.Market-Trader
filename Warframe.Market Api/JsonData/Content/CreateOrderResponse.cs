@@ -4,36 +4,24 @@ using Warframe.Market_Api.JsonData.Enums;
 
 namespace Warframe.Market_Api.JsonData.Content
 {
-    public class ProfileOrders
+    public class CreateOrderResponse
     {
         [JsonProperty("payload")]
         public Payload Info { get; set; }
 
         public class Payload
         {
-            [JsonProperty("sell_orders")]
-            public Order[] SellOrders { get; set; }
-
-            [JsonProperty("buy_orders")]
-            public Order[] BuyOrders { get; set; }
+            [JsonProperty("order")]
+            public Order Order { get; set; }
         }
 
         public class Order
         {
-            [JsonProperty("platform")]
-            public Platform Platform { get; set; }
-
-            [JsonProperty("platinum")]
-            public long Platinum { get; set; }
-
-            [JsonProperty("id")]
-            public string Id { get; set; }
-
             [JsonProperty("order_type")]
             public OrderType OrderType { get; set; }
 
-            [JsonProperty("region")]
-            public Region Region { get; set; }
+            [JsonProperty("platinum")]
+            public long Platinum { get; set; }
 
             [JsonProperty("visible")]
             public bool Visible { get; set; }
@@ -44,38 +32,50 @@ namespace Warframe.Market_Api.JsonData.Content
             [JsonProperty("creation_date")]
             public DateTimeOffset CreationDate { get; set; }
 
-            [JsonProperty("quantity")]
-            public long Quantity { get; set; }
-
             [JsonProperty("last_update")]
             public DateTimeOffset LastUpdate { get; set; }
 
-            [JsonProperty("mod_rank", NullValueHandling = NullValueHandling.Ignore)]
-            public long? ModRank { get; set; }
+            [JsonProperty("subtype")]
+            public SubType Subtype { get; set; }
+
+            [JsonProperty("platform")]
+            public Platform Platform { get; set; }
+
+            [JsonProperty("quantity")]
+            public long Quantity { get; set; }
+
+            [JsonProperty("region")]
+            public Region Region { get; set; }
+
+            [JsonProperty("id")]
+            public string Id { get; set; }
         }
 
         public class Item
         {
-            [JsonProperty("sub_icon")]
-            public string SubIcon { get; set; }
-
-            [JsonProperty("id")]
-            public string Id { get; set; }
-
-            [JsonProperty("thumb")]
-            public string Thumb { get; set; }
+            [JsonProperty("tags")]
+            public string[] Tags { get; set; }
 
             [JsonProperty("icon")]
             public string Icon { get; set; }
 
-            [JsonProperty("icon_format")]
-            public IconFormat IconFormat { get; set; }
-
             [JsonProperty("url_name")]
             public string UrlName { get; set; }
 
-            [JsonProperty("tags")]
-            public string[] Tags { get; set; }
+            [JsonProperty("sub_icon")]
+            public object SubIcon { get; set; }
+
+            [JsonProperty("thumb")]
+            public string Thumb { get; set; }
+
+            [JsonProperty("icon_format")]
+            public IconFormat IconFormat { get; set; }
+
+            [JsonProperty("subtypes")]
+            public SubType[] Subtypes { get; set; }
+
+            [JsonProperty("id")]
+            public string Id { get; set; }
 
             [JsonProperty("en")]
             public Language En { get; set; }
@@ -109,12 +109,6 @@ namespace Warframe.Market_Api.JsonData.Content
 
             [JsonProperty("pl")]
             public Language Pl { get; set; }
-
-            [JsonProperty("mod_max_rank", NullValueHandling = NullValueHandling.Ignore)]
-            public long? ModMaxRank { get; set; }
-
-            [JsonProperty("ducats", NullValueHandling = NullValueHandling.Ignore)]
-            public long? Ducats { get; set; }
         }
 
         public class Language

@@ -2,7 +2,7 @@
 
 namespace Warframe.Market_Api.JsonData.Content
 {
-    public class UpdateOrder
+    public class UpdateOrderRequest
     {
         [JsonProperty("order_id")]
         public string OrderID { get; set; }

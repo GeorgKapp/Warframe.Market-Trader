@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
+using Warframe.Market_Api.JsonData.Enums;
 
 namespace Warframe.Market_Api.JsonData.Content
 {
@@ -32,7 +33,7 @@ namespace Warframe.Market_Api.JsonData.Content
             public string UrlName { get; set; }
 
             [JsonProperty("icon_format")]
-            public string IconFormat { get; set; }
+            public IconFormat IconFormat { get; set; }
 
             [JsonProperty("icon")]
             public string Icon { get; set; }

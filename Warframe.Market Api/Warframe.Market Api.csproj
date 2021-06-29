@@ -54,6 +54,8 @@
     <Compile Include="Clients\Interfaces\IApiClient.cs" />
     <Compile Include="Clients\Interfaces\IBaseHttpClient.cs" />
     <Compile Include="Converter\JsonConverter.cs" />
+    <Compile Include="JsonData\Content\CreateOrderRequest.cs" />
+    <Compile Include="JsonData\Content\CreateOrderResponse.cs" />
     <Compile Include="JsonData\Content\DeleteOrderResponse.cs" />
     <Compile Include="JsonData\Content\ItemInformation.cs" />
     <Compile Include="JsonData\Content\Items.cs" />
@@ -63,8 +65,9 @@
     <Compile Include="JsonData\Content\Order.cs" />
     <Compile Include="JsonData\Content\Orders.cs" />
     <Compile Include="JsonData\Content\ProfileOrders.cs" />
-    <Compile Include="JsonData\Content\UpdateOrder.cs" />
+    <Compile Include="JsonData\Content\UpdateOrderRequest.cs" />
     <Compile Include="JsonData\Enums\AuthType.cs" />
+    <Compile Include="JsonData\Enums\IconFormat.cs" />
     <Compile Include="JsonData\Enums\OrderType.cs" />
     <Compile Include="JsonData\Enums\Platform.cs" />
     <Compile Include="JsonData\Enums\Region.cs" />
