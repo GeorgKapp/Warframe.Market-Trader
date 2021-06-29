@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{3C72C59C-A5DB-41B4-8AA6-950EE2D58065}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>Warframe.Market_Trader</RootNamespace>
-    <AssemblyName>Warframe.Market Trader</AssemblyName>
+    <RootNamespace>Warframe.Market_Trader_Control_Center</RootNamespace>
+    <AssemblyName>Warframe.Market Trader Control Center</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
