@@ -2,7 +2,7 @@
 
 namespace Warframe.Market_Api.Api.Clients.Interfaces
 {
-    public interface IBaseHttpClient
+    internal interface IBaseHttpClient
     {
         /// <summary>
         /// Get Request that returns T Result

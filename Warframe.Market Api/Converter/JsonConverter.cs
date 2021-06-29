@@ -4,7 +4,7 @@ using System.Globalization;
 
 namespace Warframe.Market_Api.Converter
 {
-    public static class JsonConverter
+    internal static class JsonConverter
     {
         private static readonly JsonSerializerSettings settings = new JsonSerializerSettings
         {

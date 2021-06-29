@@ -11,7 +11,7 @@ using Warframe.Market_Api.Converter;
 
 namespace Warframe.Market_Api.Api.Clients.Implementation
 {
-    public class BaseHttpClient : IBaseHttpClient
+    internal class BaseHttpClient : IBaseHttpClient
     {
         private HttpClient _channel;
         private Dictionary<string, string> _headerDictionary;

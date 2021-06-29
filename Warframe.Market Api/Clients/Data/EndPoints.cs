@@ -1,6 +1,6 @@
 ﻿namespace Warframe.Market_Api.Api.Data
 {
-    public static class EndPoints
+    internal static class EndPoints
     {
         private const string BaseApiUrl = "https://api.warframe.market/";
         private const string ApiVersion = "v1";
