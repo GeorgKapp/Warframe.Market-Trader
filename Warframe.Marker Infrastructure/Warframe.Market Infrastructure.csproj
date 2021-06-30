@@ -66,19 +66,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataBaseContext.cs" />
-    <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\Enums\IconFormat.cs" />
-    <Compile Include="Models\Enums\IconFormatEnum.cs" />
-    <Compile Include="Models\Enums\LanguageEnum.cs" />
-    <Compile Include="Models\Enums\OrderType.cs" />
-    <Compile Include="Models\Enums\OrderTypeEnum.cs" />
-    <Compile Include="Models\Enums\Language.cs" />
-    <Compile Include="Models\Item.cs" />
-    <Compile Include="Models\SetItem.cs" />
-    <Compile Include="Models\Tag.cs" />
-    <Compile Include="Models\Translation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Test.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.8">
@@ -95,6 +84,9 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="BasisSetup.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

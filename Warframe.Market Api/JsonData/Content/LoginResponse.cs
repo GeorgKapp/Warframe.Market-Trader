@@ -51,6 +51,9 @@ namespace Warframe.Market_Api.JsonData.Content
             [JsonProperty("verification")]
             public bool Verification { get; set; }
 
+            [JsonProperty("background")]
+            public object Background { get; set; }
+
             [JsonProperty("linked_accounts")]
             public LinkedAccounts LinkedAccounts { get; set; }
 
