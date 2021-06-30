@@ -15,67 +15,57 @@ namespace Warframe.Market_Api.Api.Clients.Implementation
     {
         private HttpClient _channel;
         private Dictionary<string, string> _headerDictionary;
+        public Dictionary<string, string> HeaderDictionary => _headerDictionary;
 
         public BaseHttpClient()
         {
             _channel = new HttpClient();
             _headerDictionary = new Dictionary<string, string>();
+        }
 
-            _headerDictionary.Add("User-Agent", "georg.kapp@gmx.at Warframe.Market API Client");
-            _headerDictionary.Add("Authorization", "JWT");
-            _headerDictionary.Add("language", "en");
-            _headerDictionary.Add("accept", "application/json");
-            _headerDictionary.Add("platform", "pc");
-            _headerDictionary.Add("auth_type", "cookie");
+        public BaseHttpClient(Dictionary<string, string> headerDictionary) : base()
+        {
+            _headerDictionary = headerDictionary;
         }
 
         #region Send Methods
 
-        public async Task<T> GetAsync<T>(string requestUrl)
-            where T : new()
-        {
-            using (var responseContent = await SendRequestAsync(requestUrl, HttpMethod.Get))
-            {
-                return await GetResponseContentAsync<T>(responseContent);
-            }
-        }
+        public async Task<T> GetAsync<T>(string requestUrl) 
+            where T : new() 
+            => await SendAsync<T>(requestUrl, HttpMethod.Get);
 
-        public async Task<T> DeleteAsync<T>(string requestUrl)
+        public async Task<T> DeleteAsync<T>(string requestUrl) 
             where T : new()
-        {
-            using (var responseContent = await SendRequestAsync(requestUrl, HttpMethod.Delete))
-            {
-                return await GetResponseContentAsync<T>(responseContent);
-            }
-        }
+            => await SendAsync<T>(requestUrl, HttpMethod.Delete);
 
         public async Task<TResponse> PostAsync<TRequest, TResponse>(string requestUrl, TRequest requestContent)
             where TRequest : new()
             where TResponse : new()
-        {
-            var jsonString = JsonConverter.ToJson(requestContent);
-            using (var responseContent = await SendRequestAsync(requestUrl, HttpMethod.Post, jsonString))
-            {
-                return await GetResponseContentAsync<TResponse>(responseContent);
-            }
-        }
+            => await SendAsync<TRequest, TResponse>(requestUrl, requestContent, HttpMethod.Post);
 
         public async Task<TResponse> PutAsync<TRequest, TResponse>(string requestUrl, TRequest requestContent)
             where TRequest : new()
             where TResponse : new()
+            => await SendAsync<TRequest, TResponse>(requestUrl, requestContent, HttpMethod.Put);
+
+        private async Task<T> SendAsync<T>(string requestUrl, HttpMethod httpMethod)
+            where T : new()
         {
-            var jsonString = JsonConverter.ToJson(requestContent);
-            using (var responseContent = await SendRequestAsync(requestUrl, HttpMethod.Put, jsonString))
+            using (var responseContent = await SendRequestAsync(requestUrl, httpMethod))
             {
-                return await GetResponseContentAsync<TResponse>(responseContent);
+                return await GetResponseContentAsync<T>(responseContent);
             }
         }
 
-        public async Task PostAsync<T>(string requestUrl, T requestContent)
-            where T : new()
+        private async Task<TResponse> SendAsync<TRequest, TResponse>(string requestUrl, TRequest requestContent, HttpMethod httpMethod)
+            where TRequest : new()
+            where TResponse : new()
         {
             var jsonString = JsonConverter.ToJson(requestContent);
-            (await SendRequestAsync(requestUrl, HttpMethod.Post, jsonString)).Dispose();
+            using (var responseContent = await SendRequestAsync(requestUrl, httpMethod, jsonString))
+            {
+                return await GetResponseContentAsync<TResponse>(responseContent);
+            }
         }
 
         #endregion

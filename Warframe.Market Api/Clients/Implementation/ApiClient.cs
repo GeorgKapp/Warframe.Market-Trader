@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Warframe.Market_Api.Api.Clients.Interfaces;
 using Warframe.Market_Api.Api.Data;
@@ -9,10 +11,19 @@ namespace Warframe.Market_Api.Api.Clients.Implementation
     public class ApiClient : IApiClient
     {
         private BaseHttpClient _baseHttpClient;
+        private Dictionary<string, string> _headerDictionary;
 
         public ApiClient()
         {
-            _baseHttpClient = new BaseHttpClient();
+            _headerDictionary = new Dictionary<string, string>();
+            _headerDictionary.Add("User-Agent", "georg.kapp@gmx.at Warframe.Market API Client");
+            _headerDictionary.Add("Authorization", "JWT");
+            _headerDictionary.Add("language", "en");
+            _headerDictionary.Add("accept", "application/json");
+            _headerDictionary.Add("platform", "pc");
+            _headerDictionary.Add("auth_type", "cookie");
+
+            _baseHttpClient = new BaseHttpClient(_headerDictionary);
         }
 
         #region Login/Logout
