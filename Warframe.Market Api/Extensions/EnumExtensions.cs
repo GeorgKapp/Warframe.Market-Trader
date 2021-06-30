@@ -10,20 +10,23 @@ namespace Warframe.Market_Api.Extensions
         /// <summary>
         /// Gets the EnumMember Value of the given enum
         /// </summary>
-        /// <typeparam name="T">the type of the enum that will be used</typeparam>
-        /// <param name="value">the value of the enum</param>
-        /// <returns>the EnumMember Value of the enum</returns>
-        public static string GetEnumMemberValue<T>(this T value)
-            where T : Enum
+        /// <param name="enumValue">the value of the enum</param>
+        /// <returns>the EnumMember value of the enum</returns>
+        public static string GetEnumMemberValue(this Enum enumValue)
         {
-            return typeof(T)
-                .GetTypeInfo()
-                .DeclaredMembers
-                .Single(x => x.Name == value.ToString())
-                ?.GetCustomAttribute<EnumMemberAttribute>(false)
-                ?.Value;
+            return enumValue.GetType()
+                        .GetMember(enumValue.ToString())
+                        .First()
+                        .GetCustomAttribute<EnumMemberAttribute>()
+                        .Value;
         }
 
+        /// <summary>
+        /// Gets the Attribute Value of the given enum
+        /// </summary>
+        /// <typeparam name="TAttribute">the type of attribute that will be looked up</typeparam>
+        /// <param name="enumValue">the value of the enum</param>
+        /// <returns>the Attribute value of the enum</returns>
         public static TAttribute GetAttribute<TAttribute>(this Enum enumValue)
             where TAttribute : Attribute
         {
