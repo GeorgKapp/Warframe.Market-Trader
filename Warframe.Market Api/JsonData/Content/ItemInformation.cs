@@ -44,6 +44,9 @@ namespace Warframe.Market_Api.JsonData.Content
             [JsonProperty("trading_tax")]
             public long TradingTax { get; set; }
 
+            [JsonProperty("tradable")]
+            public bool Tradable { get; set; }
+
             [JsonProperty("set_root")]
             public bool SetRoot { get; set; }
 
