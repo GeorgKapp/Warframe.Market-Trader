@@ -54,6 +54,7 @@
     <Compile Include="Clients\Interfaces\IApiClient.cs" />
     <Compile Include="Clients\Interfaces\IBaseHttpClient.cs" />
     <Compile Include="Converter\JsonConverter.cs" />
+    <Compile Include="Extensions\EnumExtensions.cs" />
     <Compile Include="JsonData\Content\CreateOrderRequest.cs" />
     <Compile Include="JsonData\Content\CreateOrderResponse.cs" />
     <Compile Include="JsonData\Content\DeleteOrderResponse.cs" />

@@ -4,7 +4,9 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Warframe.Market_Api.Api.Clients.Interfaces;
 using Warframe.Market_Api.Api.Data;
+using Warframe.Market_Api.Extensions;
 using Warframe.Market_Api.JsonData.Content;
+using Warframe.Market_Api.JsonData.Enums;
 
 namespace Warframe.Market_Api.Api.Clients.Implementation
 {
@@ -20,8 +22,8 @@ namespace Warframe.Market_Api.Api.Clients.Implementation
             _headerDictionary.Add("Authorization", "JWT");
             _headerDictionary.Add("language", "en");
             _headerDictionary.Add("accept", "application/json");
-            _headerDictionary.Add("platform", "pc");
-            _headerDictionary.Add("auth_type", "cookie");
+            _headerDictionary.Add("platform", Platform.Pc.GetEnumMemberValue());
+            _headerDictionary.Add("auth_type", AuthType.Cookie.GetEnumMemberValue());
 
             _baseHttpClient = new BaseHttpClient(_headerDictionary);
         }
