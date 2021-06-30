@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Warframe.Market Api Unit Te
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Warframe.Market Api", "Warframe.Market Api\Warframe.Market Api.csproj", "{16782002-7816-4000-9AD8-DD8739C265CE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Warframe.Market DomainModels", "Warframe.Market DomainModels\Warframe.Market DomainModels.csproj", "{B7D70E21-E5ED-41B0-A1E1-7895F901266E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{16782002-7816-4000-9AD8-DD8739C265CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{16782002-7816-4000-9AD8-DD8739C265CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{16782002-7816-4000-9AD8-DD8739C265CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7D70E21-E5ED-41B0-A1E1-7895F901266E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7D70E21-E5ED-41B0-A1E1-7895F901266E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7D70E21-E5ED-41B0-A1E1-7895F901266E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7D70E21-E5ED-41B0-A1E1-7895F901266E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
