@@ -53,6 +53,9 @@ namespace Warframe.Market_Api.JsonData.Content
             [JsonProperty("ducats")]
             public long Ducats { get; set; }
 
+            [JsonProperty("rarity")]
+            public string Rarity { get; set; }
+
             [JsonProperty("tags")]
             public string[] Tags { get; set; }
 
