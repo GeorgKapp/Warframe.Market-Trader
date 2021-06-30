@@ -67,22 +67,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataBaseContext.cs" />
-    <Compile Include="Migrations\202106301059050_addTestTable.cs" />
-    <Compile Include="Migrations\202106301059050_addTestTable.designer.cs">
-      <DependentUpon>202106301059050_addTestTable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202106301244122_CreateItemTable.cs" />
-    <Compile Include="Migrations\202106301244122_CreateItemTable.designer.cs">
-      <DependentUpon>202106301244122_CreateItemTable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202106301250377_AddTextPropertyToTranlsation.cs" />
-    <Compile Include="Migrations\202106301250377_AddTextPropertyToTranlsation.designer.cs">
-      <DependentUpon>202106301250377_AddTextPropertyToTranlsation.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202106301259355_AddExplicitTableStructure.cs" />
-    <Compile Include="Migrations\202106301259355_AddExplicitTableStructure.designer.cs">
-      <DependentUpon>202106301259355_AddExplicitTableStructure.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Enums\IconFormat.cs" />
     <Compile Include="Models\Enums\IconFormatEnum.cs" />
@@ -91,6 +75,7 @@
     <Compile Include="Models\Enums\OrderTypeEnum.cs" />
     <Compile Include="Models\Enums\Language.cs" />
     <Compile Include="Models\Item.cs" />
+    <Compile Include="Models\SetItem.cs" />
     <Compile Include="Models\Tag.cs" />
     <Compile Include="Models\Translation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -110,20 +95,6 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\202106301059050_addTestTable.resx">
-      <DependentUpon>202106301059050_addTestTable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202106301244122_CreateItemTable.resx">
-      <DependentUpon>202106301244122_CreateItemTable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202106301250377_AddTextPropertyToTranlsation.resx">
-      <DependentUpon>202106301250377_AddTextPropertyToTranlsation.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202106301259355_AddExplicitTableStructure.resx">
-      <DependentUpon>202106301259355_AddExplicitTableStructure.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

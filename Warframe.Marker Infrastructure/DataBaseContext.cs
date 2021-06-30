@@ -17,6 +17,7 @@ namespace Warframe.Market_Infrastructure
         public DbSet<Item> Item { get; set; }
         public DbSet<Translation> Translation { get; set; }
         public DbSet<Tag> Tag { get; set; }
+        public DbSet<SetItem> SetItem { get; set; }
         #endregion
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -32,14 +33,6 @@ namespace Warframe.Market_Infrastructure
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 
             modelBuilder.Entity<IconFormat>()
-                .Property(s => s.Id)
-                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
-
-            modelBuilder.Entity<Item>()
-                .HasOptional(s => s.ParentItem)
-                .WithMany(s => s.ItemsInSet);
-
-            modelBuilder.Entity<Item>()
                 .Property(s => s.Id)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
         }
