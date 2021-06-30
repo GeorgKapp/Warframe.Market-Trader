@@ -147,7 +147,12 @@ namespace Warframe.Market_Api_Unit_Tests
         }
 
         private RequestResult<LoginResponse> LogIn()
-            => AsyncHelpers.RunSync(() => _client.LogInAsync(LoginData.UserName, LoginData.Password));
+            => AsyncHelpers.RunSync(() => _client.LogInAsync(new LoginRequest
+            {
+                AuthType = Market_Api.JsonData.Enums.AuthType.Cookie,
+                Email = LoginData.UserName,
+                Password = LoginData.Password
+            }));
 
         private RequestResult<LogoutResponse> LogOut()
             => AsyncHelpers.RunSync(() => _client.LogOutAsync());

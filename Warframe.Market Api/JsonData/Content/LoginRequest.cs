@@ -3,7 +3,7 @@ using Warframe.Market_Api.JsonData.Enums;
 
 namespace Warframe.Market_Api.JsonData.Content
 {
-    public class Login
+    public class LoginRequest
     {
         [JsonProperty("auth_type")]
         public AuthType AuthType { get; set; }

@@ -59,7 +59,7 @@
     <Compile Include="JsonData\Content\DeleteOrderResponse.cs" />
     <Compile Include="JsonData\Content\ItemInformation.cs" />
     <Compile Include="JsonData\Content\Items.cs" />
-    <Compile Include="JsonData\Content\Login.cs" />
+    <Compile Include="JsonData\Content\LoginRequest.cs" />
     <Compile Include="JsonData\Content\LoginResponse.cs" />
     <Compile Include="JsonData\Content\LogoutResponse.cs" />
     <Compile Include="JsonData\Content\Order.cs" />

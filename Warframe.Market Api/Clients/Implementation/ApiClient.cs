@@ -16,19 +16,13 @@ namespace Warframe.Market_Api.Api.Clients.Implementation
         }
 
         #region Login/Logout
-        public async Task<RequestResult<LoginResponse>> LogInAsync(string email, string password)
+        public async Task<RequestResult<LoginResponse>> LogInAsync(LoginRequest loginRequest)
         {
             try
             {
                 return RequestResult<LoginResponse>.Success(
-                    await _baseHttpClient.PostAsync<Login, LoginResponse>(
-                       EndPoints.GetLoginUrl(),
-                       new Login
-                       {
-                           AuthType = JsonData.Enums.AuthType.Cookie,
-                           Email = email,
-                           Password = password
-                       }));
+                    await _baseHttpClient.PostAsync<LoginRequest, LoginResponse>(
+                       EndPoints.GetLoginUrl(), loginRequest));
             }
             catch (Exception exception)
             {

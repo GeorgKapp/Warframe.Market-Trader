@@ -6,7 +6,7 @@ namespace Warframe.Market_Api.Api.Clients.Interfaces
 {
     public interface IApiClient
     {
-        Task<RequestResult<LoginResponse>> LogInAsync(string email, string password);
+        Task<RequestResult<LoginResponse>> LogInAsync(LoginRequest loginRequest);
         Task<RequestResult<LogoutResponse>> LogOutAsync();
 
         Task<RequestResult<ProfileOrders>> GetProfileOrdersAsync(string profileName = null);
