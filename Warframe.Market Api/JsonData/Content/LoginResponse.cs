@@ -68,6 +68,9 @@ namespace Warframe.Market_Api.JsonData.Content
 
             [JsonProperty("xbox_profile")]
             public bool XboxProfile { get; set; }
+
+            [JsonProperty("discord_profile")]
+            public bool DiscordProfile { get; set; }
         }
     }
 }
