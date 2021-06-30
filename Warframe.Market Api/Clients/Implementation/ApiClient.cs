@@ -20,7 +20,8 @@ namespace Warframe.Market_Api.Api.Clients.Implementation
         {
             try
             {
-                return RequestResult<LoginResponse>.Success(await _baseHttpClient.PostAsync<Login, LoginResponse>(
+                return RequestResult<LoginResponse>.Success(
+                    await _baseHttpClient.PostAsync<Login, LoginResponse>(
                        EndPoints.GetLoginUrl(),
                        new Login
                        {
@@ -39,7 +40,9 @@ namespace Warframe.Market_Api.Api.Clients.Implementation
         {
             try
             {
-                return RequestResult<LogoutResponse>.Success(await _baseHttpClient.GetAsync<LogoutResponse>(EndPoints.GetLogoutUrl()));
+                return RequestResult<LogoutResponse>.Success(
+                    await _baseHttpClient.GetAsync<LogoutResponse>(
+                        EndPoints.GetLogoutUrl()));
             }
             catch (Exception exception)
             {
@@ -54,7 +57,9 @@ namespace Warframe.Market_Api.Api.Clients.Implementation
         {
             try
             {
-                return RequestResult<ProfileOrders>.Success(await _baseHttpClient.GetAsync<ProfileOrders>(EndPoints.GetProfileOrdersUrl(profileName)));
+                return RequestResult<ProfileOrders>.Success(
+                    await _baseHttpClient.GetAsync<ProfileOrders>(
+                        EndPoints.GetProfileOrdersUrl(profileName)));
             }
             catch (Exception exception)
             {
@@ -66,7 +71,9 @@ namespace Warframe.Market_Api.Api.Clients.Implementation
         {
             try
             {
-                return RequestResult<ItemInformation>.Success(await _baseHttpClient.GetAsync<ItemInformation>(EndPoints.GetItemInformationUrl(itemUrl)));
+                return RequestResult<ItemInformation>.Success(
+                    await _baseHttpClient.GetAsync<ItemInformation>(
+                        EndPoints.GetItemInformationUrl(itemUrl)));
             }
             catch (Exception exception)
             {
@@ -78,7 +85,9 @@ namespace Warframe.Market_Api.Api.Clients.Implementation
         {
             try
             {
-                return RequestResult<Items>.Success(await _baseHttpClient.GetAsync<Items>(EndPoints.GetAllItemsUrl()));
+                return RequestResult<Items>.Success(
+                    await _baseHttpClient.GetAsync<Items>(
+                        EndPoints.GetAllItemsUrl()));
             }
             catch(Exception exception)
             {
@@ -90,7 +99,9 @@ namespace Warframe.Market_Api.Api.Clients.Implementation
         {
             try
             {
-                return RequestResult<Orders>.Success(await _baseHttpClient.GetAsync<Orders>(EndPoints.GetItemOrdersUrl(itemUrl)));
+                return RequestResult<Orders>.Success(
+                    await _baseHttpClient.GetAsync<Orders>(
+                        EndPoints.GetItemOrdersUrl(itemUrl)));
             }
             catch (Exception exception)
             {
@@ -104,9 +115,9 @@ namespace Warframe.Market_Api.Api.Clients.Implementation
         {
             try
             {
-                return RequestResult<CreateOrderResponse>.Success(await _baseHttpClient.PostAsync<CreateOrderRequest, CreateOrderResponse>(
-                       EndPoints.GetProfileOrderUrl(),
-                       createOrder));
+                return RequestResult<CreateOrderResponse>.Success(
+                    await _baseHttpClient.PostAsync<CreateOrderRequest, CreateOrderResponse>(
+                        EndPoints.GetProfileOrderUrl(), createOrder));
             }
             catch (Exception exception)
             {
@@ -118,9 +129,9 @@ namespace Warframe.Market_Api.Api.Clients.Implementation
         {
             try
             {
-                return RequestResult<ProfileOrders>.Success(await _baseHttpClient.PutAsync<UpdateOrderRequest, ProfileOrders>(
-                    EndPoints.GetProfileOrderUrlByID(updatedOrder.OrderID),
-                    updatedOrder));
+                return RequestResult<ProfileOrders>.Success(
+                    await _baseHttpClient.PutAsync<UpdateOrderRequest, ProfileOrders>(
+                        EndPoints.GetProfileOrderUrlByID(updatedOrder.OrderID), updatedOrder));
             }
             catch (Exception exception)
             {
@@ -132,7 +143,9 @@ namespace Warframe.Market_Api.Api.Clients.Implementation
         {
             try
             {
-                return RequestResult<DeleteOrderResponse>.Success(await _baseHttpClient.DeleteAsync<DeleteOrderResponse>(EndPoints.GetProfileOrderUrlByID(OrderID)));
+                return RequestResult<DeleteOrderResponse>.Success(
+                    await _baseHttpClient.DeleteAsync<DeleteOrderResponse>(
+                        EndPoints.GetProfileOrderUrlByID(OrderID)));
             }
             catch (Exception exception)
             {
