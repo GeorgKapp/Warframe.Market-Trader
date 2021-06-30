@@ -20,6 +20,11 @@ namespace Warframe.Market_Api_Unit_Tests
         private const string CompanionRivenModVeiledLink = "companion_weapon_riven_mod_(veiled)";
         private const string LegendaryFusionCoreLink = "legendary_fusion_core";
 
+        [TestInitialize()]
+        public void TestSetup()
+        {
+            Thread.Sleep(_clientWaitTime);
+        }
 
         [ClassInitialize]
         public static void InitializeSetup(TestContext context)
@@ -34,56 +39,41 @@ namespace Warframe.Market_Api_Unit_Tests
             Assert.IsTrue(result.IsSuccess);
         }
 
-        [TestMethod("2. Recieving of own Profile Orders")]
-        public void Test2MyProfileOrdersAsync()
-        {
-            Thread.Sleep(_clientWaitTime);
-
-            var orderResult = GetProfileOrders();
-            Assert.IsTrue(orderResult.IsSuccess);
-            Assert.IsTrue(orderResult.Result.Info.BuyOrders.Length > 0 && orderResult.Result.Info.SellOrders.Length > 0);
-        }
-
-        [TestMethod("3. Recieving of Item Information")]
+        [TestMethod("2. Recieving of Item Information")]
         [DataRow(AshPrimeSetLink)]
         [DataRow(GladiatorMightModLink)]
         [DataRow(AxiA6RelicLink)]
         [DataRow(CompanionRivenModVeiledLink)]
-        public void Test3ItemInformationAsync(string value)
+        public void Test2ItemInformationAsync(string value)
         {
-            Thread.Sleep(_clientWaitTime);
             var itemResult = GetItemInformation(value);
             Assert.IsTrue(itemResult.IsSuccess);
         }
 
-        [TestMethod("4. Getting All Items")]
-        public void Test4GetAllItemsAsync()
+        [TestMethod("3. Getting All Items")]
+        public void Test3GetAllItemsAsync()
         {
-            Thread.Sleep(_clientWaitTime);
             var itemsResult = GetAllItems();
             Assert.IsTrue(itemsResult.IsSuccess);
             Assert.IsTrue(itemsResult.Result.Info.Items.Length > 0);
         }
 
-        [TestMethod("5. Getting Orders For Item")]
+        [TestMethod("4. Getting Orders For Item")]
         [DataRow(AshPrimeSetLink)]
         [DataRow(GladiatorMightModLink)]
         [DataRow(AxiA6RelicLink)]
         [DataRow(CompanionRivenModVeiledLink)]
-        public void Test5GettingOrdersForItem(string value)
+        public void Test4GettingOrdersForItem(string value)
         {
-            Thread.Sleep(_clientWaitTime);
             var itemOrdersResult = GetItemOrders(value);
             Assert.IsTrue(itemOrdersResult.IsSuccess);
             Assert.IsTrue(itemOrdersResult.Result.Info.Orders.Length > 0);
         }
 
-        [TestMethod("6. Create Order on profile")]
+        [TestMethod("5. Create Order on profile")]
         [DataRow(LegendaryFusionCoreLink)]
-        public void Test6CreateOrder(string value)
+        public void Test5CreateOrder(string value)
         {
-            Thread.Sleep(_clientWaitTime);
-
             var itemInformationResult = GetItemInformation(value);
             Assert.IsTrue(itemInformationResult.IsSuccess);
 
@@ -99,12 +89,24 @@ namespace Warframe.Market_Api_Unit_Tests
             Assert.IsTrue(orderResult.IsSuccess);
         }
 
+
+        [TestMethod("6. Recieving Orders on profile")]
+        public void Test6MyProfileOrdersAsync()
+        {
+            var orderResult = GetProfileOrders();
+            Assert.IsTrue(orderResult.IsSuccess);
+            Assert.IsTrue(orderResult.Result.Info.SellOrders.Length > 0);
+            var fusionCoreItems = orderResult.Result.Info.SellOrders.Where(p => p.Item.UrlName == LegendaryFusionCoreLink).ToArray();
+            Assert.IsTrue(fusionCoreItems.Length > 0);
+            var selectedFusionCoreItem = fusionCoreItems.Where(p => p.Visible == false && p.Platinum == 1000 && p.Quantity == 1).FirstOrDefault();
+            Assert.IsTrue(selectedFusionCoreItem != null);
+        }
+
+
         [TestMethod("7. Upgrade Order on profile")]
         [DataRow(LegendaryFusionCoreLink)]
         public void Test7UpgradeOrder(string value)
         {
-            Thread.Sleep(_clientWaitTime);
-
             var orderResult = GetProfileOrders();
             Assert.IsTrue(orderResult.IsSuccess);
 
@@ -126,8 +128,6 @@ namespace Warframe.Market_Api_Unit_Tests
         [DataRow(LegendaryFusionCoreLink)]
         public void Test8DeleteOrder(string value)
         {
-            Thread.Sleep(_clientWaitTime);
-
             var orderResult = GetProfileOrders();
             Assert.IsTrue(orderResult.IsSuccess);
 
@@ -140,8 +140,6 @@ namespace Warframe.Market_Api_Unit_Tests
         [TestMethod("9. Logout Request")]
         public void Test9LogoutAsync()
         {
-            Thread.Sleep(_clientWaitTime);
-
             var logoutResult = LogOut();
             Assert.IsTrue(logoutResult.IsSuccess);
         }

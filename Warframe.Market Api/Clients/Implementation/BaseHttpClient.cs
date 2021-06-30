@@ -15,16 +15,15 @@ namespace Warframe.Market_Api.Api.Clients.Implementation
     {
         private HttpClient _channel;
         private Dictionary<string, string> _headerDictionary;
-        public Dictionary<string, string> HeaderDictionary => _headerDictionary;
-
         public BaseHttpClient()
         {
             _channel = new HttpClient();
             _headerDictionary = new Dictionary<string, string>();
         }
 
-        public BaseHttpClient(Dictionary<string, string> headerDictionary) : base()
+        public BaseHttpClient(Dictionary<string, string> headerDictionary)
         {
+            _channel = new HttpClient();
             _headerDictionary = headerDictionary;
         }
 
