@@ -46,6 +46,9 @@ namespace Warframe.Market_Api.JsonData.Content
 
             [JsonProperty("id")]
             public string Id { get; set; }
+
+            [JsonProperty("mod_rank", NullValueHandling = NullValueHandling.Ignore)]
+            public long? ModRank { get; set; }
         }
 
         public class User
