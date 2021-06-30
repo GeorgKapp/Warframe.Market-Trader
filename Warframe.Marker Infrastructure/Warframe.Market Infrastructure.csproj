@@ -58,6 +58,8 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -66,7 +68,67 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IconFormatType.cs">
+      <DependentUpon>InfrastructureModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InfrastructureModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InfrastructureModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InfrastructureModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InfrastructureModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InfrastructureModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InfrastructureModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Item.cs">
+      <DependentUpon>InfrastructureModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ItemTag.cs">
+      <DependentUpon>InfrastructureModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LinkedAccounts.cs">
+      <DependentUpon>InfrastructureModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LoginUser.cs">
+      <DependentUpon>InfrastructureModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Order.cs">
+      <DependentUpon>InfrastructureModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OrderType.cs">
+      <DependentUpon>InfrastructureModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PlatformType.cs">
+      <DependentUpon>InfrastructureModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RegionType.cs">
+      <DependentUpon>InfrastructureModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RoleType.cs">
+      <DependentUpon>InfrastructureModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SetItem.cs">
+      <DependentUpon>InfrastructureModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="StatusType.cs">
+      <DependentUpon>InfrastructureModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Tag.cs">
+      <DependentUpon>InfrastructureModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Translation.cs">
+      <DependentUpon>InfrastructureModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="User.cs">
+      <DependentUpon>InfrastructureModel.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.8">
@@ -82,10 +144,30 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <EntityDeploy Include="InfrastructureModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>InfrastructureModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="InfrastructureModel.edmx.diagram">
+      <DependentUpon>InfrastructureModel.edmx</DependentUpon>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="BasisSetup.sql" />
+    <Content Include="InfrastructureModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>InfrastructureModel.edmx</DependentUpon>
+      <LastGenOutput>InfrastructureModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="InfrastructureModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>InfrastructureModel.edmx</DependentUpon>
+      <LastGenOutput>InfrastructureModel.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

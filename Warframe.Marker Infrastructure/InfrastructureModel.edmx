@@ -1,0 +1,1168 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Warframe.Market_Infrastructure.DataBaseContextModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Item">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UrlName" Type="nvarchar" MaxLength="100" />
+          <Property Name="Thumb" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Ducats" Type="int" />
+          <Property Name="TradingTax" Type="int" />
+          <Property Name="MasteryLevel" Type="tinyint" />
+          <Property Name="MaxRank" Type="tinyint" />
+          <Property Name="Icon" Type="nvarchar(max)" />
+          <Property Name="IconFormatID" Type="int" />
+          <Property Name="DescriptionID" Type="int" />
+          <Property Name="WikiLinkID" Type="int" />
+          <Property Name="ItemNameID" Type="int" />
+        </EntityType>
+        <EntityType Name="ItemTag">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ItemID" Type="int" Nullable="false" />
+          <Property Name="TagID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LinkedAccounts">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HasSteamProfile" Type="bit" Nullable="false" />
+          <Property Name="HasPatreonProfile" Type="bit" Nullable="false" />
+          <Property Name="HasXboxProfile" Type="bit" Nullable="false" />
+          <Property Name="HasDiscordProfile" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LoginUser">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CheckCode" Type="nvarchar(max)" />
+          <Property Name="Banned" Type="bit" />
+          <Property Name="Anonymous" Type="bit" />
+          <Property Name="HasMail" Type="bit" />
+          <Property Name="Verification" Type="bit" />
+          <Property Name="UnreadMessages" Type="tinyint" />
+          <Property Name="WrittenReviews" Type="tinyint" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="PlatformID" Type="int" />
+          <Property Name="RoleID" Type="int" />
+          <Property Name="LinkedAccountsID" Type="int" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CreationDate" Type="datetimeoffset" Precision="7" Nullable="false" />
+          <Property Name="LastUpdate" Type="datetimeoffset" Precision="7" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="Visible" Type="bit" Nullable="false" />
+          <Property Name="Platinum" Type="int" Nullable="false" />
+          <Property Name="ModRank" Type="tinyint" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="PlatformTypeID" Type="int" Nullable="false" />
+          <Property Name="RegionTypeID" Type="int" Nullable="false" />
+          <Property Name="OrderTypeID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SetItem">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ChildQuantity" Type="tinyint" Nullable="false" />
+          <Property Name="ChildItemID" Type="int" Nullable="false" />
+          <Property Name="ParentItemID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tag">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Text" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Translation">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="En" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Ru" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Ko" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Fr" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Sv" Type="nvarchar" MaxLength="1000" />
+          <Property Name="De" Type="nvarchar" MaxLength="1000" />
+          <Property Name="ZhHant" Type="nvarchar" MaxLength="1000" />
+          <Property Name="ZhHans" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Pt" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Es" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Pl" Type="nvarchar" MaxLength="1000" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="InGameName" Type="nvarchar" MaxLength="1000" />
+          <Property Name="LastSeen" Type="datetimeoffset" Precision="7" />
+          <Property Name="Reputation" Type="int" Nullable="false" />
+          <Property Name="Avatar" Type="nvarchar(max)" />
+          <Property Name="RegionID" Type="int" />
+          <Property Name="StatusID" Type="int" />
+        </EntityType>
+        <EntityType Name="IconFormatType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Type" Type="varchar" MaxLength="4" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OrderType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Type" Type="varchar" MaxLength="4" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PlatformType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Type" Type="varchar" MaxLength="4" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RegionType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Type" Type="varchar" MaxLength="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RoleType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Type" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="StatusType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Type" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Item__Descriptio__300424B4">
+          <End Role="Translation" Type="Self.Translation" Multiplicity="0..1" />
+          <End Role="Item" Type="Self.Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Translation">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Item">
+              <PropertyRef Name="DescriptionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Item__IconFormat__2F10007B">
+          <End Role="IconFormatType" Type="Self.IconFormatType" Multiplicity="0..1" />
+          <End Role="Item" Type="Self.Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IconFormatType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Item">
+              <PropertyRef Name="IconFormatID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Item__ItemNameID__31EC6D26">
+          <End Role="Translation" Type="Self.Translation" Multiplicity="0..1" />
+          <End Role="Item" Type="Self.Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Translation">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Item">
+              <PropertyRef Name="ItemNameID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Item__WikiLinkID__30F848ED">
+          <End Role="Translation" Type="Self.Translation" Multiplicity="0..1" />
+          <End Role="Item" Type="Self.Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Translation">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Item">
+              <PropertyRef Name="WikiLinkID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ItemTag__ItemID__34C8D9D1">
+          <End Role="Item" Type="Self.Item" Multiplicity="1" />
+          <End Role="ItemTag" Type="Self.ItemTag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ItemTag">
+              <PropertyRef Name="ItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ItemTag__TagID__35BCFE0A">
+          <End Role="Tag" Type="Self.Tag" Multiplicity="1" />
+          <End Role="ItemTag" Type="Self.ItemTag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tag">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ItemTag">
+              <PropertyRef Name="TagID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LoginUser__Linke__48CFD27E">
+          <End Role="LinkedAccounts" Type="Self.LinkedAccounts" Multiplicity="0..1" />
+          <End Role="LoginUser" Type="Self.LoginUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LinkedAccounts">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LoginUser">
+              <PropertyRef Name="LinkedAccountsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LoginUser__Platf__46E78A0C">
+          <End Role="PlatformType" Type="Self.PlatformType" Multiplicity="0..1" />
+          <End Role="LoginUser" Type="Self.LoginUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PlatformType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LoginUser">
+              <PropertyRef Name="PlatformID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LoginUser__RoleI__47DBAE45">
+          <End Role="RoleType" Type="Self.RoleType" Multiplicity="0..1" />
+          <End Role="LoginUser" Type="Self.LoginUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RoleType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LoginUser">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LoginUser__UserI__45F365D3">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="LoginUser" Type="Self.LoginUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LoginUser">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Order__OrderType__66603565">
+          <End Role="OrderType" Type="Self.OrderType" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="OrderTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Order__PlatformT__6477ECF3">
+          <End Role="PlatformType" Type="Self.PlatformType" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PlatformType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="PlatformTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Order__RegionTyp__656C112C">
+          <End Role="RegionType" Type="Self.RegionType" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RegionType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="RegionTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Order__UserID__6383C8BA">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SetItem__ChildIt__38996AB5">
+          <End Role="Item" Type="Self.Item" Multiplicity="1" />
+          <End Role="SetItem" Type="Self.SetItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SetItem">
+              <PropertyRef Name="ChildItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SetItem__ParentI__398D8EEE">
+          <End Role="Item" Type="Self.Item" Multiplicity="1" />
+          <End Role="SetItem" Type="Self.SetItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SetItem">
+              <PropertyRef Name="ParentItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__User__RegionID__3C69FB99">
+          <End Role="RegionType" Type="Self.RegionType" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RegionType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="RegionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__User__StatusID__3D5E1FD2">
+          <End Role="StatusType" Type="Self.StatusType" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StatusType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="StatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="WarframeMarket_InfrastructureDataBaseContextModelStoreContainer">
+          <EntitySet Name="Item" EntityType="Self.Item" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ItemTag" EntityType="Self.ItemTag" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LinkedAccounts" EntityType="Self.LinkedAccounts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LoginUser" EntityType="Self.LoginUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SetItem" EntityType="Self.SetItem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tag" EntityType="Self.Tag" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Translation" EntityType="Self.Translation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="IconFormatType" EntityType="Self.IconFormatType" Schema="enum" store:Type="Tables" />
+          <EntitySet Name="OrderType" EntityType="Self.OrderType" Schema="enum" store:Type="Tables" />
+          <EntitySet Name="PlatformType" EntityType="Self.PlatformType" Schema="enum" store:Type="Tables" />
+          <EntitySet Name="RegionType" EntityType="Self.RegionType" Schema="enum" store:Type="Tables" />
+          <EntitySet Name="RoleType" EntityType="Self.RoleType" Schema="enum" store:Type="Tables" />
+          <EntitySet Name="StatusType" EntityType="Self.StatusType" Schema="enum" store:Type="Tables" />
+          <AssociationSet Name="FK__Item__Descriptio__300424B4" Association="Self.FK__Item__Descriptio__300424B4">
+            <End Role="Translation" EntitySet="Translation" />
+            <End Role="Item" EntitySet="Item" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Item__IconFormat__2F10007B" Association="Self.FK__Item__IconFormat__2F10007B">
+            <End Role="IconFormatType" EntitySet="IconFormatType" />
+            <End Role="Item" EntitySet="Item" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Item__ItemNameID__31EC6D26" Association="Self.FK__Item__ItemNameID__31EC6D26">
+            <End Role="Translation" EntitySet="Translation" />
+            <End Role="Item" EntitySet="Item" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Item__WikiLinkID__30F848ED" Association="Self.FK__Item__WikiLinkID__30F848ED">
+            <End Role="Translation" EntitySet="Translation" />
+            <End Role="Item" EntitySet="Item" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ItemTag__ItemID__34C8D9D1" Association="Self.FK__ItemTag__ItemID__34C8D9D1">
+            <End Role="Item" EntitySet="Item" />
+            <End Role="ItemTag" EntitySet="ItemTag" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ItemTag__TagID__35BCFE0A" Association="Self.FK__ItemTag__TagID__35BCFE0A">
+            <End Role="Tag" EntitySet="Tag" />
+            <End Role="ItemTag" EntitySet="ItemTag" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LoginUser__Linke__48CFD27E" Association="Self.FK__LoginUser__Linke__48CFD27E">
+            <End Role="LinkedAccounts" EntitySet="LinkedAccounts" />
+            <End Role="LoginUser" EntitySet="LoginUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LoginUser__Platf__46E78A0C" Association="Self.FK__LoginUser__Platf__46E78A0C">
+            <End Role="PlatformType" EntitySet="PlatformType" />
+            <End Role="LoginUser" EntitySet="LoginUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LoginUser__RoleI__47DBAE45" Association="Self.FK__LoginUser__RoleI__47DBAE45">
+            <End Role="RoleType" EntitySet="RoleType" />
+            <End Role="LoginUser" EntitySet="LoginUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LoginUser__UserI__45F365D3" Association="Self.FK__LoginUser__UserI__45F365D3">
+            <End Role="User" EntitySet="User" />
+            <End Role="LoginUser" EntitySet="LoginUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Order__OrderType__66603565" Association="Self.FK__Order__OrderType__66603565">
+            <End Role="OrderType" EntitySet="OrderType" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Order__PlatformT__6477ECF3" Association="Self.FK__Order__PlatformT__6477ECF3">
+            <End Role="PlatformType" EntitySet="PlatformType" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Order__RegionTyp__656C112C" Association="Self.FK__Order__RegionTyp__656C112C">
+            <End Role="RegionType" EntitySet="RegionType" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Order__UserID__6383C8BA" Association="Self.FK__Order__UserID__6383C8BA">
+            <End Role="User" EntitySet="User" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SetItem__ChildIt__38996AB5" Association="Self.FK__SetItem__ChildIt__38996AB5">
+            <End Role="Item" EntitySet="Item" />
+            <End Role="SetItem" EntitySet="SetItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SetItem__ParentI__398D8EEE" Association="Self.FK__SetItem__ParentI__398D8EEE">
+            <End Role="Item" EntitySet="Item" />
+            <End Role="SetItem" EntitySet="SetItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK__User__RegionID__3C69FB99" Association="Self.FK__User__RegionID__3C69FB99">
+            <End Role="RegionType" EntitySet="RegionType" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK__User__StatusID__3D5E1FD2" Association="Self.FK__User__StatusID__3D5E1FD2">
+            <End Role="StatusType" EntitySet="StatusType" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Warframe.Market_Infrastructure.DataBaseContextModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Item">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UrlName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Thumb" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Ducats" Type="Int32" />
+          <Property Name="TradingTax" Type="Int32" />
+          <Property Name="MasteryLevel" Type="Byte" />
+          <Property Name="MaxRank" Type="Byte" />
+          <Property Name="Icon" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IconFormatID" Type="Int32" />
+          <Property Name="DescriptionID" Type="Int32" />
+          <Property Name="WikiLinkID" Type="Int32" />
+          <Property Name="ItemNameID" Type="Int32" />
+          <NavigationProperty Name="Translation" Relationship="Self.FK__Item__Descriptio__300424B4" FromRole="Item" ToRole="Translation" />
+          <NavigationProperty Name="IconFormatType" Relationship="Self.FK__Item__IconFormat__2F10007B" FromRole="Item" ToRole="IconFormatType" />
+          <NavigationProperty Name="Translation1" Relationship="Self.FK__Item__ItemNameID__31EC6D26" FromRole="Item" ToRole="Translation" />
+          <NavigationProperty Name="Translation2" Relationship="Self.FK__Item__WikiLinkID__30F848ED" FromRole="Item" ToRole="Translation" />
+          <NavigationProperty Name="ItemTag" Relationship="Self.FK__ItemTag__ItemID__34C8D9D1" FromRole="Item" ToRole="ItemTag" />
+          <NavigationProperty Name="SetItem" Relationship="Self.FK__SetItem__ChildIt__38996AB5" FromRole="Item" ToRole="SetItem" />
+          <NavigationProperty Name="SetItem1" Relationship="Self.FK__SetItem__ParentI__398D8EEE" FromRole="Item" ToRole="SetItem" />
+        </EntityType>
+        <EntityType Name="ItemTag">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ItemID" Type="Int32" Nullable="false" />
+          <Property Name="TagID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Item" Relationship="Self.FK__ItemTag__ItemID__34C8D9D1" FromRole="ItemTag" ToRole="Item" />
+          <NavigationProperty Name="Tag" Relationship="Self.FK__ItemTag__TagID__35BCFE0A" FromRole="ItemTag" ToRole="Tag" />
+        </EntityType>
+        <EntityType Name="LinkedAccounts">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HasSteamProfile" Type="Boolean" Nullable="false" />
+          <Property Name="HasPatreonProfile" Type="Boolean" Nullable="false" />
+          <Property Name="HasXboxProfile" Type="Boolean" Nullable="false" />
+          <Property Name="HasDiscordProfile" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="LoginUser" Relationship="Self.FK__LoginUser__Linke__48CFD27E" FromRole="LinkedAccounts" ToRole="LoginUser" />
+        </EntityType>
+        <EntityType Name="LoginUser">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CheckCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Banned" Type="Boolean" />
+          <Property Name="Anonymous" Type="Boolean" />
+          <Property Name="HasMail" Type="Boolean" />
+          <Property Name="Verification" Type="Boolean" />
+          <Property Name="UnreadMessages" Type="Byte" />
+          <Property Name="WrittenReviews" Type="Byte" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="PlatformID" Type="Int32" />
+          <Property Name="RoleID" Type="Int32" />
+          <Property Name="LinkedAccountsID" Type="Int32" />
+          <NavigationProperty Name="LinkedAccounts" Relationship="Self.FK__LoginUser__Linke__48CFD27E" FromRole="LoginUser" ToRole="LinkedAccounts" />
+          <NavigationProperty Name="PlatformType" Relationship="Self.FK__LoginUser__Platf__46E78A0C" FromRole="LoginUser" ToRole="PlatformType" />
+          <NavigationProperty Name="RoleType" Relationship="Self.FK__LoginUser__RoleI__47DBAE45" FromRole="LoginUser" ToRole="RoleType" />
+          <NavigationProperty Name="User" Relationship="Self.FK__LoginUser__UserI__45F365D3" FromRole="LoginUser" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CreationDate" Type="DateTimeOffset" Nullable="false" Precision="7" />
+          <Property Name="LastUpdate" Type="DateTimeOffset" Nullable="false" Precision="7" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="Visible" Type="Boolean" Nullable="false" />
+          <Property Name="Platinum" Type="Int32" Nullable="false" />
+          <Property Name="ModRank" Type="Byte" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="PlatformTypeID" Type="Int32" Nullable="false" />
+          <Property Name="RegionTypeID" Type="Int32" Nullable="false" />
+          <Property Name="OrderTypeID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="OrderType" Relationship="Self.FK__Order__OrderType__66603565" FromRole="Order" ToRole="OrderType" />
+          <NavigationProperty Name="PlatformType" Relationship="Self.FK__Order__PlatformT__6477ECF3" FromRole="Order" ToRole="PlatformType" />
+          <NavigationProperty Name="RegionType" Relationship="Self.FK__Order__RegionTyp__656C112C" FromRole="Order" ToRole="RegionType" />
+          <NavigationProperty Name="User" Relationship="Self.FK__Order__UserID__6383C8BA" FromRole="Order" ToRole="User" />
+        </EntityType>
+        <EntityType Name="SetItem">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ChildQuantity" Type="Byte" Nullable="false" />
+          <Property Name="ChildItemID" Type="Int32" Nullable="false" />
+          <Property Name="ParentItemID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Item" Relationship="Self.FK__SetItem__ChildIt__38996AB5" FromRole="SetItem" ToRole="Item" />
+          <NavigationProperty Name="Item1" Relationship="Self.FK__SetItem__ParentI__398D8EEE" FromRole="SetItem" ToRole="Item" />
+        </EntityType>
+        <EntityType Name="Tag">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Text" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ItemTag" Relationship="Self.FK__ItemTag__TagID__35BCFE0A" FromRole="Tag" ToRole="ItemTag" />
+        </EntityType>
+        <EntityType Name="Translation">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="En" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Ru" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Ko" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Fr" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Sv" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="De" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="ZhHant" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="ZhHans" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Pt" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Es" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Pl" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Item" Relationship="Self.FK__Item__Descriptio__300424B4" FromRole="Translation" ToRole="Item" />
+          <NavigationProperty Name="Item1" Relationship="Self.FK__Item__ItemNameID__31EC6D26" FromRole="Translation" ToRole="Item" />
+          <NavigationProperty Name="Item2" Relationship="Self.FK__Item__WikiLinkID__30F848ED" FromRole="Translation" ToRole="Item" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="InGameName" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="LastSeen" Type="DateTimeOffset" Precision="7" />
+          <Property Name="Reputation" Type="Int32" Nullable="false" />
+          <Property Name="Avatar" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RegionID" Type="Int32" />
+          <Property Name="StatusID" Type="Int32" />
+          <NavigationProperty Name="LoginUser" Relationship="Self.FK__LoginUser__UserI__45F365D3" FromRole="User" ToRole="LoginUser" />
+          <NavigationProperty Name="Order" Relationship="Self.FK__Order__UserID__6383C8BA" FromRole="User" ToRole="Order" />
+          <NavigationProperty Name="RegionType" Relationship="Self.FK__User__RegionID__3C69FB99" FromRole="User" ToRole="RegionType" />
+          <NavigationProperty Name="StatusType" Relationship="Self.FK__User__StatusID__3D5E1FD2" FromRole="User" ToRole="StatusType" />
+        </EntityType>
+        <EntityType Name="IconFormatType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Type" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Item" Relationship="Self.FK__Item__IconFormat__2F10007B" FromRole="IconFormatType" ToRole="Item" />
+        </EntityType>
+        <EntityType Name="OrderType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Type" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Order" Relationship="Self.FK__Order__OrderType__66603565" FromRole="OrderType" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="PlatformType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Type" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="LoginUser" Relationship="Self.FK__LoginUser__Platf__46E78A0C" FromRole="PlatformType" ToRole="LoginUser" />
+          <NavigationProperty Name="Order" Relationship="Self.FK__Order__PlatformT__6477ECF3" FromRole="PlatformType" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="RegionType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Type" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Order" Relationship="Self.FK__Order__RegionTyp__656C112C" FromRole="RegionType" ToRole="Order" />
+          <NavigationProperty Name="User" Relationship="Self.FK__User__RegionID__3C69FB99" FromRole="RegionType" ToRole="User" />
+        </EntityType>
+        <EntityType Name="RoleType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Type" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="LoginUser" Relationship="Self.FK__LoginUser__RoleI__47DBAE45" FromRole="RoleType" ToRole="LoginUser" />
+        </EntityType>
+        <EntityType Name="StatusType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Type" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Self.FK__User__StatusID__3D5E1FD2" FromRole="StatusType" ToRole="User" />
+        </EntityType>
+        <Association Name="FK__Item__Descriptio__300424B4">
+          <End Role="Translation" Type="Self.Translation" Multiplicity="0..1" />
+          <End Role="Item" Type="Self.Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Translation">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Item">
+              <PropertyRef Name="DescriptionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Item__IconFormat__2F10007B">
+          <End Role="IconFormatType" Type="Self.IconFormatType" Multiplicity="0..1" />
+          <End Role="Item" Type="Self.Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IconFormatType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Item">
+              <PropertyRef Name="IconFormatID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Item__ItemNameID__31EC6D26">
+          <End Role="Translation" Type="Self.Translation" Multiplicity="0..1" />
+          <End Role="Item" Type="Self.Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Translation">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Item">
+              <PropertyRef Name="ItemNameID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Item__WikiLinkID__30F848ED">
+          <End Role="Translation" Type="Self.Translation" Multiplicity="0..1" />
+          <End Role="Item" Type="Self.Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Translation">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Item">
+              <PropertyRef Name="WikiLinkID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ItemTag__ItemID__34C8D9D1">
+          <End Role="Item" Type="Self.Item" Multiplicity="1" />
+          <End Role="ItemTag" Type="Self.ItemTag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ItemTag">
+              <PropertyRef Name="ItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SetItem__ChildIt__38996AB5">
+          <End Role="Item" Type="Self.Item" Multiplicity="1" />
+          <End Role="SetItem" Type="Self.SetItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SetItem">
+              <PropertyRef Name="ChildItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SetItem__ParentI__398D8EEE">
+          <End Role="Item" Type="Self.Item" Multiplicity="1" />
+          <End Role="SetItem" Type="Self.SetItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SetItem">
+              <PropertyRef Name="ParentItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ItemTag__TagID__35BCFE0A">
+          <End Role="Tag" Type="Self.Tag" Multiplicity="1" />
+          <End Role="ItemTag" Type="Self.ItemTag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tag">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ItemTag">
+              <PropertyRef Name="TagID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LoginUser__Linke__48CFD27E">
+          <End Role="LinkedAccounts" Type="Self.LinkedAccounts" Multiplicity="0..1" />
+          <End Role="LoginUser" Type="Self.LoginUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LinkedAccounts">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LoginUser">
+              <PropertyRef Name="LinkedAccountsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LoginUser__Platf__46E78A0C">
+          <End Role="PlatformType" Type="Self.PlatformType" Multiplicity="0..1" />
+          <End Role="LoginUser" Type="Self.LoginUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PlatformType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LoginUser">
+              <PropertyRef Name="PlatformID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LoginUser__RoleI__47DBAE45">
+          <End Role="RoleType" Type="Self.RoleType" Multiplicity="0..1" />
+          <End Role="LoginUser" Type="Self.LoginUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RoleType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LoginUser">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LoginUser__UserI__45F365D3">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="LoginUser" Type="Self.LoginUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LoginUser">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Order__OrderType__66603565">
+          <End Role="OrderType" Type="Self.OrderType" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="OrderTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Order__PlatformT__6477ECF3">
+          <End Role="PlatformType" Type="Self.PlatformType" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PlatformType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="PlatformTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Order__RegionTyp__656C112C">
+          <End Role="RegionType" Type="Self.RegionType" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RegionType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="RegionTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Order__UserID__6383C8BA">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__User__RegionID__3C69FB99">
+          <End Role="RegionType" Type="Self.RegionType" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RegionType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="RegionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__User__StatusID__3D5E1FD2">
+          <End Role="StatusType" Type="Self.StatusType" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StatusType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="StatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Item" EntityType="Self.Item" />
+          <EntitySet Name="ItemTag" EntityType="Self.ItemTag" />
+          <EntitySet Name="LinkedAccounts" EntityType="Self.LinkedAccounts" />
+          <EntitySet Name="LoginUser" EntityType="Self.LoginUser" />
+          <EntitySet Name="Order" EntityType="Self.Order" />
+          <EntitySet Name="SetItem" EntityType="Self.SetItem" />
+          <EntitySet Name="Tag" EntityType="Self.Tag" />
+          <EntitySet Name="Translation" EntityType="Self.Translation" />
+          <EntitySet Name="User" EntityType="Self.User" />
+          <EntitySet Name="IconFormatType" EntityType="Self.IconFormatType" />
+          <EntitySet Name="OrderType" EntityType="Self.OrderType" />
+          <EntitySet Name="PlatformType" EntityType="Self.PlatformType" />
+          <EntitySet Name="RegionType" EntityType="Self.RegionType" />
+          <EntitySet Name="RoleType" EntityType="Self.RoleType" />
+          <EntitySet Name="StatusType" EntityType="Self.StatusType" />
+          <AssociationSet Name="FK__Item__Descriptio__300424B4" Association="Self.FK__Item__Descriptio__300424B4">
+            <End Role="Translation" EntitySet="Translation" />
+            <End Role="Item" EntitySet="Item" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Item__IconFormat__2F10007B" Association="Self.FK__Item__IconFormat__2F10007B">
+            <End Role="IconFormatType" EntitySet="IconFormatType" />
+            <End Role="Item" EntitySet="Item" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Item__ItemNameID__31EC6D26" Association="Self.FK__Item__ItemNameID__31EC6D26">
+            <End Role="Translation" EntitySet="Translation" />
+            <End Role="Item" EntitySet="Item" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Item__WikiLinkID__30F848ED" Association="Self.FK__Item__WikiLinkID__30F848ED">
+            <End Role="Translation" EntitySet="Translation" />
+            <End Role="Item" EntitySet="Item" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ItemTag__ItemID__34C8D9D1" Association="Self.FK__ItemTag__ItemID__34C8D9D1">
+            <End Role="Item" EntitySet="Item" />
+            <End Role="ItemTag" EntitySet="ItemTag" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SetItem__ChildIt__38996AB5" Association="Self.FK__SetItem__ChildIt__38996AB5">
+            <End Role="Item" EntitySet="Item" />
+            <End Role="SetItem" EntitySet="SetItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SetItem__ParentI__398D8EEE" Association="Self.FK__SetItem__ParentI__398D8EEE">
+            <End Role="Item" EntitySet="Item" />
+            <End Role="SetItem" EntitySet="SetItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ItemTag__TagID__35BCFE0A" Association="Self.FK__ItemTag__TagID__35BCFE0A">
+            <End Role="Tag" EntitySet="Tag" />
+            <End Role="ItemTag" EntitySet="ItemTag" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LoginUser__Linke__48CFD27E" Association="Self.FK__LoginUser__Linke__48CFD27E">
+            <End Role="LinkedAccounts" EntitySet="LinkedAccounts" />
+            <End Role="LoginUser" EntitySet="LoginUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LoginUser__Platf__46E78A0C" Association="Self.FK__LoginUser__Platf__46E78A0C">
+            <End Role="PlatformType" EntitySet="PlatformType" />
+            <End Role="LoginUser" EntitySet="LoginUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LoginUser__RoleI__47DBAE45" Association="Self.FK__LoginUser__RoleI__47DBAE45">
+            <End Role="RoleType" EntitySet="RoleType" />
+            <End Role="LoginUser" EntitySet="LoginUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LoginUser__UserI__45F365D3" Association="Self.FK__LoginUser__UserI__45F365D3">
+            <End Role="User" EntitySet="User" />
+            <End Role="LoginUser" EntitySet="LoginUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Order__OrderType__66603565" Association="Self.FK__Order__OrderType__66603565">
+            <End Role="OrderType" EntitySet="OrderType" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Order__PlatformT__6477ECF3" Association="Self.FK__Order__PlatformT__6477ECF3">
+            <End Role="PlatformType" EntitySet="PlatformType" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Order__RegionTyp__656C112C" Association="Self.FK__Order__RegionTyp__656C112C">
+            <End Role="RegionType" EntitySet="RegionType" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Order__UserID__6383C8BA" Association="Self.FK__Order__UserID__6383C8BA">
+            <End Role="User" EntitySet="User" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK__User__RegionID__3C69FB99" Association="Self.FK__User__RegionID__3C69FB99">
+            <End Role="RegionType" EntitySet="RegionType" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK__User__StatusID__3D5E1FD2" Association="Self.FK__User__StatusID__3D5E1FD2">
+            <End Role="StatusType" EntitySet="StatusType" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="WarframeMarket_InfrastructureDataBaseContextModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="Item">
+            <EntityTypeMapping TypeName="Warframe.Market_Infrastructure.DataBaseContextModel.Item">
+              <MappingFragment StoreEntitySet="Item">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="UrlName" ColumnName="UrlName" />
+                <ScalarProperty Name="Thumb" ColumnName="Thumb" />
+                <ScalarProperty Name="Ducats" ColumnName="Ducats" />
+                <ScalarProperty Name="TradingTax" ColumnName="TradingTax" />
+                <ScalarProperty Name="MasteryLevel" ColumnName="MasteryLevel" />
+                <ScalarProperty Name="MaxRank" ColumnName="MaxRank" />
+                <ScalarProperty Name="Icon" ColumnName="Icon" />
+                <ScalarProperty Name="IconFormatID" ColumnName="IconFormatID" />
+                <ScalarProperty Name="DescriptionID" ColumnName="DescriptionID" />
+                <ScalarProperty Name="WikiLinkID" ColumnName="WikiLinkID" />
+                <ScalarProperty Name="ItemNameID" ColumnName="ItemNameID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ItemTag">
+            <EntityTypeMapping TypeName="Warframe.Market_Infrastructure.DataBaseContextModel.ItemTag">
+              <MappingFragment StoreEntitySet="ItemTag">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+                <ScalarProperty Name="TagID" ColumnName="TagID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LinkedAccounts">
+            <EntityTypeMapping TypeName="Warframe.Market_Infrastructure.DataBaseContextModel.LinkedAccounts">
+              <MappingFragment StoreEntitySet="LinkedAccounts">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="HasSteamProfile" ColumnName="HasSteamProfile" />
+                <ScalarProperty Name="HasPatreonProfile" ColumnName="HasPatreonProfile" />
+                <ScalarProperty Name="HasXboxProfile" ColumnName="HasXboxProfile" />
+                <ScalarProperty Name="HasDiscordProfile" ColumnName="HasDiscordProfile" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LoginUser">
+            <EntityTypeMapping TypeName="Warframe.Market_Infrastructure.DataBaseContextModel.LoginUser">
+              <MappingFragment StoreEntitySet="LoginUser">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CheckCode" ColumnName="CheckCode" />
+                <ScalarProperty Name="Banned" ColumnName="Banned" />
+                <ScalarProperty Name="Anonymous" ColumnName="Anonymous" />
+                <ScalarProperty Name="HasMail" ColumnName="HasMail" />
+                <ScalarProperty Name="Verification" ColumnName="Verification" />
+                <ScalarProperty Name="UnreadMessages" ColumnName="UnreadMessages" />
+                <ScalarProperty Name="WrittenReviews" ColumnName="WrittenReviews" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="PlatformID" ColumnName="PlatformID" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="LinkedAccountsID" ColumnName="LinkedAccountsID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Order">
+            <EntityTypeMapping TypeName="Warframe.Market_Infrastructure.DataBaseContextModel.Order">
+              <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Visible" ColumnName="Visible" />
+                <ScalarProperty Name="Platinum" ColumnName="Platinum" />
+                <ScalarProperty Name="ModRank" ColumnName="ModRank" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="PlatformTypeID" ColumnName="PlatformTypeID" />
+                <ScalarProperty Name="RegionTypeID" ColumnName="RegionTypeID" />
+                <ScalarProperty Name="OrderTypeID" ColumnName="OrderTypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SetItem">
+            <EntityTypeMapping TypeName="Warframe.Market_Infrastructure.DataBaseContextModel.SetItem">
+              <MappingFragment StoreEntitySet="SetItem">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ChildQuantity" ColumnName="ChildQuantity" />
+                <ScalarProperty Name="ChildItemID" ColumnName="ChildItemID" />
+                <ScalarProperty Name="ParentItemID" ColumnName="ParentItemID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tag">
+            <EntityTypeMapping TypeName="Warframe.Market_Infrastructure.DataBaseContextModel.Tag">
+              <MappingFragment StoreEntitySet="Tag">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Translation">
+            <EntityTypeMapping TypeName="Warframe.Market_Infrastructure.DataBaseContextModel.Translation">
+              <MappingFragment StoreEntitySet="Translation">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="En" ColumnName="En" />
+                <ScalarProperty Name="Ru" ColumnName="Ru" />
+                <ScalarProperty Name="Ko" ColumnName="Ko" />
+                <ScalarProperty Name="Fr" ColumnName="Fr" />
+                <ScalarProperty Name="Sv" ColumnName="Sv" />
+                <ScalarProperty Name="De" ColumnName="De" />
+                <ScalarProperty Name="ZhHant" ColumnName="ZhHant" />
+                <ScalarProperty Name="ZhHans" ColumnName="ZhHans" />
+                <ScalarProperty Name="Pt" ColumnName="Pt" />
+                <ScalarProperty Name="Es" ColumnName="Es" />
+                <ScalarProperty Name="Pl" ColumnName="Pl" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="Warframe.Market_Infrastructure.DataBaseContextModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="InGameName" ColumnName="InGameName" />
+                <ScalarProperty Name="LastSeen" ColumnName="LastSeen" />
+                <ScalarProperty Name="Reputation" ColumnName="Reputation" />
+                <ScalarProperty Name="Avatar" ColumnName="Avatar" />
+                <ScalarProperty Name="RegionID" ColumnName="RegionID" />
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IconFormatType">
+            <EntityTypeMapping TypeName="Warframe.Market_Infrastructure.DataBaseContextModel.IconFormatType">
+              <MappingFragment StoreEntitySet="IconFormatType">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderType">
+            <EntityTypeMapping TypeName="Warframe.Market_Infrastructure.DataBaseContextModel.OrderType">
+              <MappingFragment StoreEntitySet="OrderType">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PlatformType">
+            <EntityTypeMapping TypeName="Warframe.Market_Infrastructure.DataBaseContextModel.PlatformType">
+              <MappingFragment StoreEntitySet="PlatformType">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RegionType">
+            <EntityTypeMapping TypeName="Warframe.Market_Infrastructure.DataBaseContextModel.RegionType">
+              <MappingFragment StoreEntitySet="RegionType">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RoleType">
+            <EntityTypeMapping TypeName="Warframe.Market_Infrastructure.DataBaseContextModel.RoleType">
+              <MappingFragment StoreEntitySet="RoleType">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StatusType">
+            <EntityTypeMapping TypeName="Warframe.Market_Infrastructure.DataBaseContextModel.StatusType">
+              <MappingFragment StoreEntitySet="StatusType">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
