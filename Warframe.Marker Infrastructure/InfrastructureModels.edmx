@@ -69,6 +69,7 @@
           <Property Name="Platinum" Type="int" Nullable="false" />
           <Property Name="ModRank" Type="tinyint" />
           <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="SubTypeTypeID" Type="int" Nullable="false" />
           <Property Name="PlatformTypeID" Type="int" Nullable="false" />
           <Property Name="RegionTypeID" Type="int" Nullable="false" />
           <Property Name="OrderTypeID" Type="int" Nullable="false" />
@@ -159,6 +160,13 @@
           </Key>
           <Property Name="ID" Type="int" Nullable="false" />
           <Property Name="Type" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SubTypeType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Type" Type="varchar" MaxLength="20" Nullable="false" />
         </EntityType>
         <Association Name="FK__Item__Descriptio__300424B4">
           <End Role="Translation" Type="Self.Translation" Multiplicity="0..1" />
@@ -280,7 +288,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Order__OrderType__66603565">
+        <Association Name="FK__Order__OrderType__778AC167">
           <End Role="OrderType" Type="Self.OrderType" Multiplicity="1" />
           <End Role="Order" Type="Self.Order" Multiplicity="*" />
           <ReferentialConstraint>
@@ -292,7 +300,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Order__PlatformT__6477ECF3">
+        <Association Name="FK__Order__PlatformT__75A278F5">
           <End Role="PlatformType" Type="Self.PlatformType" Multiplicity="1" />
           <End Role="Order" Type="Self.Order" Multiplicity="*" />
           <ReferentialConstraint>
@@ -304,7 +312,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Order__RegionTyp__656C112C">
+        <Association Name="FK__Order__RegionTyp__76969D2E">
           <End Role="RegionType" Type="Self.RegionType" Multiplicity="1" />
           <End Role="Order" Type="Self.Order" Multiplicity="*" />
           <ReferentialConstraint>
@@ -316,7 +324,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Order__UserID__6383C8BA">
+        <Association Name="FK__Order__SubTypeTy__74AE54BC">
+          <End Role="SubTypeType" Type="Self.SubTypeType" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubTypeType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="SubTypeTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Order__UserID__73BA3083">
           <End Role="User" Type="Self.User" Multiplicity="1" />
           <End Role="Order" Type="Self.Order" Multiplicity="*" />
           <ReferentialConstraint>
@@ -392,6 +412,7 @@
           <EntitySet Name="RegionType" EntityType="Self.RegionType" Schema="enum" store:Type="Tables" />
           <EntitySet Name="RoleType" EntityType="Self.RoleType" Schema="enum" store:Type="Tables" />
           <EntitySet Name="StatusType" EntityType="Self.StatusType" Schema="enum" store:Type="Tables" />
+          <EntitySet Name="SubTypeType" EntityType="Self.SubTypeType" Schema="enum" store:Type="Tables" />
           <AssociationSet Name="FK__Item__Descriptio__300424B4" Association="Self.FK__Item__Descriptio__300424B4">
             <End Role="Translation" EntitySet="Translation" />
             <End Role="Item" EntitySet="Item" />
@@ -432,19 +453,23 @@
             <End Role="User" EntitySet="User" />
             <End Role="LoginUser" EntitySet="LoginUser" />
           </AssociationSet>
-          <AssociationSet Name="FK__Order__OrderType__66603565" Association="Self.FK__Order__OrderType__66603565">
+          <AssociationSet Name="FK__Order__OrderType__778AC167" Association="Self.FK__Order__OrderType__778AC167">
             <End Role="OrderType" EntitySet="OrderType" />
             <End Role="Order" EntitySet="Order" />
           </AssociationSet>
-          <AssociationSet Name="FK__Order__PlatformT__6477ECF3" Association="Self.FK__Order__PlatformT__6477ECF3">
+          <AssociationSet Name="FK__Order__PlatformT__75A278F5" Association="Self.FK__Order__PlatformT__75A278F5">
             <End Role="PlatformType" EntitySet="PlatformType" />
             <End Role="Order" EntitySet="Order" />
           </AssociationSet>
-          <AssociationSet Name="FK__Order__RegionTyp__656C112C" Association="Self.FK__Order__RegionTyp__656C112C">
+          <AssociationSet Name="FK__Order__RegionTyp__76969D2E" Association="Self.FK__Order__RegionTyp__76969D2E">
             <End Role="RegionType" EntitySet="RegionType" />
             <End Role="Order" EntitySet="Order" />
           </AssociationSet>
-          <AssociationSet Name="FK__Order__UserID__6383C8BA" Association="Self.FK__Order__UserID__6383C8BA">
+          <AssociationSet Name="FK__Order__SubTypeTy__74AE54BC" Association="Self.FK__Order__SubTypeTy__74AE54BC">
+            <End Role="SubTypeType" EntitySet="SubTypeType" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Order__UserID__73BA3083" Association="Self.FK__Order__UserID__73BA3083">
             <End Role="User" EntitySet="User" />
             <End Role="Order" EntitySet="Order" />
           </AssociationSet>
@@ -548,13 +573,15 @@
           <Property Name="Platinum" Type="Int32" Nullable="false" />
           <Property Name="ModRank" Type="Byte" />
           <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="SubTypeTypeID" Type="Int32" Nullable="false" />
           <Property Name="PlatformTypeID" Type="Int32" Nullable="false" />
           <Property Name="RegionTypeID" Type="Int32" Nullable="false" />
           <Property Name="OrderTypeID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="OrderType" Relationship="Self.FK__Order__OrderType__66603565" FromRole="Order" ToRole="OrderType" />
-          <NavigationProperty Name="PlatformType" Relationship="Self.FK__Order__PlatformT__6477ECF3" FromRole="Order" ToRole="PlatformType" />
-          <NavigationProperty Name="RegionType" Relationship="Self.FK__Order__RegionTyp__656C112C" FromRole="Order" ToRole="RegionType" />
-          <NavigationProperty Name="User" Relationship="Self.FK__Order__UserID__6383C8BA" FromRole="Order" ToRole="User" />
+          <NavigationProperty Name="OrderType" Relationship="Self.FK__Order__OrderType__778AC167" FromRole="Order" ToRole="OrderType" />
+          <NavigationProperty Name="PlatformType" Relationship="Self.FK__Order__PlatformT__75A278F5" FromRole="Order" ToRole="PlatformType" />
+          <NavigationProperty Name="RegionType" Relationship="Self.FK__Order__RegionTyp__76969D2E" FromRole="Order" ToRole="RegionType" />
+          <NavigationProperty Name="SubTypeType" Relationship="Self.FK__Order__SubTypeTy__74AE54BC" FromRole="Order" ToRole="SubTypeType" />
+          <NavigationProperty Name="User" Relationship="Self.FK__Order__UserID__73BA3083" FromRole="Order" ToRole="User" />
         </EntityType>
         <EntityType Name="SetItem">
           <Key>
@@ -607,7 +634,7 @@
           <Property Name="RegionID" Type="Int32" />
           <Property Name="StatusID" Type="Int32" />
           <NavigationProperty Name="LoginUser" Relationship="Self.FK__LoginUser__UserI__45F365D3" FromRole="User" ToRole="LoginUser" />
-          <NavigationProperty Name="Order" Relationship="Self.FK__Order__UserID__6383C8BA" FromRole="User" ToRole="Order" />
+          <NavigationProperty Name="Order" Relationship="Self.FK__Order__UserID__73BA3083" FromRole="User" ToRole="Order" />
           <NavigationProperty Name="RegionType" Relationship="Self.FK__User__RegionID__3C69FB99" FromRole="User" ToRole="RegionType" />
           <NavigationProperty Name="StatusType" Relationship="Self.FK__User__StatusID__3D5E1FD2" FromRole="User" ToRole="StatusType" />
         </EntityType>
@@ -625,7 +652,7 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" />
           <Property Name="Type" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Order" Relationship="Self.FK__Order__OrderType__66603565" FromRole="OrderType" ToRole="Order" />
+          <NavigationProperty Name="Order" Relationship="Self.FK__Order__OrderType__778AC167" FromRole="OrderType" ToRole="Order" />
         </EntityType>
         <EntityType Name="PlatformType">
           <Key>
@@ -634,7 +661,7 @@
           <Property Name="ID" Type="Int32" Nullable="false" />
           <Property Name="Type" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="LoginUser" Relationship="Self.FK__LoginUser__Platf__46E78A0C" FromRole="PlatformType" ToRole="LoginUser" />
-          <NavigationProperty Name="Order" Relationship="Self.FK__Order__PlatformT__6477ECF3" FromRole="PlatformType" ToRole="Order" />
+          <NavigationProperty Name="Order" Relationship="Self.FK__Order__PlatformT__75A278F5" FromRole="PlatformType" ToRole="Order" />
         </EntityType>
         <EntityType Name="RegionType">
           <Key>
@@ -642,7 +669,7 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" />
           <Property Name="Type" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Order" Relationship="Self.FK__Order__RegionTyp__656C112C" FromRole="RegionType" ToRole="Order" />
+          <NavigationProperty Name="Order" Relationship="Self.FK__Order__RegionTyp__76969D2E" FromRole="RegionType" ToRole="Order" />
           <NavigationProperty Name="User" Relationship="Self.FK__User__RegionID__3C69FB99" FromRole="RegionType" ToRole="User" />
         </EntityType>
         <EntityType Name="RoleType">
@@ -660,6 +687,14 @@
           <Property Name="ID" Type="Int32" Nullable="false" />
           <Property Name="Type" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="User" Relationship="Self.FK__User__StatusID__3D5E1FD2" FromRole="StatusType" ToRole="User" />
+        </EntityType>
+        <EntityType Name="SubTypeType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Type" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Order" Relationship="Self.FK__Order__SubTypeTy__74AE54BC" FromRole="SubTypeType" ToRole="Order" />
         </EntityType>
         <Association Name="FK__Item__Descriptio__300424B4">
           <End Role="Translation" Type="Self.Translation" Multiplicity="0..1" />
@@ -805,7 +840,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Order__OrderType__66603565">
+        <Association Name="FK__Order__OrderType__778AC167">
           <End Role="OrderType" Type="Self.OrderType" Multiplicity="1" />
           <End Role="Order" Type="Self.Order" Multiplicity="*" />
           <ReferentialConstraint>
@@ -817,7 +852,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Order__PlatformT__6477ECF3">
+        <Association Name="FK__Order__PlatformT__75A278F5">
           <End Role="PlatformType" Type="Self.PlatformType" Multiplicity="1" />
           <End Role="Order" Type="Self.Order" Multiplicity="*" />
           <ReferentialConstraint>
@@ -829,7 +864,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Order__RegionTyp__656C112C">
+        <Association Name="FK__Order__RegionTyp__76969D2E">
           <End Role="RegionType" Type="Self.RegionType" Multiplicity="1" />
           <End Role="Order" Type="Self.Order" Multiplicity="*" />
           <ReferentialConstraint>
@@ -841,7 +876,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Order__UserID__6383C8BA">
+        <Association Name="FK__Order__SubTypeTy__74AE54BC">
+          <End Role="SubTypeType" Type="Self.SubTypeType" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubTypeType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="SubTypeTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Order__UserID__73BA3083">
           <End Role="User" Type="Self.User" Multiplicity="1" />
           <End Role="Order" Type="Self.Order" Multiplicity="*" />
           <ReferentialConstraint>
@@ -877,7 +924,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="EntityContext" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Item" EntityType="Self.Item" />
           <EntitySet Name="ItemTag" EntityType="Self.ItemTag" />
           <EntitySet Name="LinkedAccounts" EntityType="Self.LinkedAccounts" />
@@ -893,6 +940,7 @@
           <EntitySet Name="RegionType" EntityType="Self.RegionType" />
           <EntitySet Name="RoleType" EntityType="Self.RoleType" />
           <EntitySet Name="StatusType" EntityType="Self.StatusType" />
+          <EntitySet Name="SubTypeType" EntityType="Self.SubTypeType" />
           <AssociationSet Name="FK__Item__Descriptio__300424B4" Association="Self.FK__Item__Descriptio__300424B4">
             <End Role="Translation" EntitySet="Translation" />
             <End Role="Item" EntitySet="Item" />
@@ -941,19 +989,23 @@
             <End Role="User" EntitySet="User" />
             <End Role="LoginUser" EntitySet="LoginUser" />
           </AssociationSet>
-          <AssociationSet Name="FK__Order__OrderType__66603565" Association="Self.FK__Order__OrderType__66603565">
+          <AssociationSet Name="FK__Order__OrderType__778AC167" Association="Self.FK__Order__OrderType__778AC167">
             <End Role="OrderType" EntitySet="OrderType" />
             <End Role="Order" EntitySet="Order" />
           </AssociationSet>
-          <AssociationSet Name="FK__Order__PlatformT__6477ECF3" Association="Self.FK__Order__PlatformT__6477ECF3">
+          <AssociationSet Name="FK__Order__PlatformT__75A278F5" Association="Self.FK__Order__PlatformT__75A278F5">
             <End Role="PlatformType" EntitySet="PlatformType" />
             <End Role="Order" EntitySet="Order" />
           </AssociationSet>
-          <AssociationSet Name="FK__Order__RegionTyp__656C112C" Association="Self.FK__Order__RegionTyp__656C112C">
+          <AssociationSet Name="FK__Order__RegionTyp__76969D2E" Association="Self.FK__Order__RegionTyp__76969D2E">
             <End Role="RegionType" EntitySet="RegionType" />
             <End Role="Order" EntitySet="Order" />
           </AssociationSet>
-          <AssociationSet Name="FK__Order__UserID__6383C8BA" Association="Self.FK__Order__UserID__6383C8BA">
+          <AssociationSet Name="FK__Order__SubTypeTy__74AE54BC" Association="Self.FK__Order__SubTypeTy__74AE54BC">
+            <End Role="SubTypeType" EntitySet="SubTypeType" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Order__UserID__73BA3083" Association="Self.FK__Order__UserID__73BA3083">
             <End Role="User" EntitySet="User" />
             <End Role="Order" EntitySet="Order" />
           </AssociationSet>
@@ -971,7 +1023,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="WarframeMarket_InfrastructureDataBaseContextModelStoreContainer" CdmEntityContainer="Entities">
+        <EntityContainerMapping StorageEntityContainer="WarframeMarket_InfrastructureDataBaseContextModelStoreContainer" CdmEntityContainer="EntityContext">
           <EntitySetMapping Name="Item">
             <EntityTypeMapping TypeName="Warframe.Market_Infrastructure.DataBaseContextModel.Item">
               <MappingFragment StoreEntitySet="Item">
@@ -1039,6 +1091,7 @@
                 <ScalarProperty Name="Platinum" ColumnName="Platinum" />
                 <ScalarProperty Name="ModRank" ColumnName="ModRank" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="SubTypeTypeID" ColumnName="SubTypeTypeID" />
                 <ScalarProperty Name="PlatformTypeID" ColumnName="PlatformTypeID" />
                 <ScalarProperty Name="RegionTypeID" ColumnName="RegionTypeID" />
                 <ScalarProperty Name="OrderTypeID" ColumnName="OrderTypeID" />
@@ -1137,6 +1190,14 @@
           <EntitySetMapping Name="StatusType">
             <EntityTypeMapping TypeName="Warframe.Market_Infrastructure.DataBaseContextModel.StatusType">
               <MappingFragment StoreEntitySet="StatusType">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SubTypeType">
+            <EntityTypeMapping TypeName="Warframe.Market_Infrastructure.DataBaseContextModel.SubTypeType">
+              <MappingFragment StoreEntitySet="SubTypeType">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
               </MappingFragment>

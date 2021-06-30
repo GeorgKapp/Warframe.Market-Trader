@@ -13,10 +13,10 @@ namespace Warframe.Market_Infrastructure
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class Entities : DbContext
+    public partial class EntityContext : DbContext
     {
-        public Entities()
-            : base("name=Entities")
+        public EntityContext()
+            : base("name=EntityContext")
         {
         }
     
@@ -40,5 +40,6 @@ namespace Warframe.Market_Infrastructure
         public virtual DbSet<RegionType> RegionType { get; set; }
         public virtual DbSet<RoleType> RoleType { get; set; }
         public virtual DbSet<StatusType> StatusType { get; set; }
+        public virtual DbSet<SubTypeType> SubTypeType { get; set; }
     }
 }

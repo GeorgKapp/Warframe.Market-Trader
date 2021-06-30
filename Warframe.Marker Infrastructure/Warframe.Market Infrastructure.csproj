@@ -69,65 +69,68 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IconFormatType.cs">
-      <DependentUpon>InfrastructureModel.tt</DependentUpon>
+      <DependentUpon>InfrastructureModels.tt</DependentUpon>
     </Compile>
-    <Compile Include="InfrastructureModel.Context.cs">
+    <Compile Include="InfrastructureModels.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>InfrastructureModel.Context.tt</DependentUpon>
+      <DependentUpon>InfrastructureModels.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="InfrastructureModel.cs">
+    <Compile Include="InfrastructureModels.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>InfrastructureModel.tt</DependentUpon>
+      <DependentUpon>InfrastructureModels.tt</DependentUpon>
     </Compile>
-    <Compile Include="InfrastructureModel.Designer.cs">
+    <Compile Include="InfrastructureModels.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>InfrastructureModel.edmx</DependentUpon>
+      <DependentUpon>InfrastructureModels.edmx</DependentUpon>
     </Compile>
     <Compile Include="Item.cs">
-      <DependentUpon>InfrastructureModel.tt</DependentUpon>
+      <DependentUpon>InfrastructureModels.tt</DependentUpon>
     </Compile>
     <Compile Include="ItemTag.cs">
-      <DependentUpon>InfrastructureModel.tt</DependentUpon>
+      <DependentUpon>InfrastructureModels.tt</DependentUpon>
     </Compile>
     <Compile Include="LinkedAccounts.cs">
-      <DependentUpon>InfrastructureModel.tt</DependentUpon>
+      <DependentUpon>InfrastructureModels.tt</DependentUpon>
     </Compile>
     <Compile Include="LoginUser.cs">
-      <DependentUpon>InfrastructureModel.tt</DependentUpon>
+      <DependentUpon>InfrastructureModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Order.cs">
-      <DependentUpon>InfrastructureModel.tt</DependentUpon>
+      <DependentUpon>InfrastructureModels.tt</DependentUpon>
     </Compile>
     <Compile Include="OrderType.cs">
-      <DependentUpon>InfrastructureModel.tt</DependentUpon>
+      <DependentUpon>InfrastructureModels.tt</DependentUpon>
     </Compile>
     <Compile Include="PlatformType.cs">
-      <DependentUpon>InfrastructureModel.tt</DependentUpon>
+      <DependentUpon>InfrastructureModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegionType.cs">
-      <DependentUpon>InfrastructureModel.tt</DependentUpon>
+      <DependentUpon>InfrastructureModels.tt</DependentUpon>
     </Compile>
     <Compile Include="RoleType.cs">
-      <DependentUpon>InfrastructureModel.tt</DependentUpon>
+      <DependentUpon>InfrastructureModels.tt</DependentUpon>
     </Compile>
     <Compile Include="SetItem.cs">
-      <DependentUpon>InfrastructureModel.tt</DependentUpon>
+      <DependentUpon>InfrastructureModels.tt</DependentUpon>
     </Compile>
     <Compile Include="StatusType.cs">
-      <DependentUpon>InfrastructureModel.tt</DependentUpon>
+      <DependentUpon>InfrastructureModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SubTypeType.cs">
+      <DependentUpon>InfrastructureModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Tag.cs">
-      <DependentUpon>InfrastructureModel.tt</DependentUpon>
+      <DependentUpon>InfrastructureModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Translation.cs">
-      <DependentUpon>InfrastructureModel.tt</DependentUpon>
+      <DependentUpon>InfrastructureModels.tt</DependentUpon>
     </Compile>
     <Compile Include="User.cs">
-      <DependentUpon>InfrastructureModel.tt</DependentUpon>
+      <DependentUpon>InfrastructureModels.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -144,26 +147,26 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <EntityDeploy Include="InfrastructureModel.edmx">
+    <EntityDeploy Include="InfrastructureModels.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>InfrastructureModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>InfrastructureModels.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="InfrastructureModel.edmx.diagram">
-      <DependentUpon>InfrastructureModel.edmx</DependentUpon>
+    <None Include="InfrastructureModels.edmx.diagram">
+      <DependentUpon>InfrastructureModels.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="BasisSetup.sql" />
-    <Content Include="InfrastructureModel.Context.tt">
+    <Content Include="InfrastructureModels.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>InfrastructureModel.edmx</DependentUpon>
-      <LastGenOutput>InfrastructureModel.Context.cs</LastGenOutput>
+      <DependentUpon>InfrastructureModels.edmx</DependentUpon>
+      <LastGenOutput>InfrastructureModels.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="InfrastructureModel.tt">
+    <Content Include="InfrastructureModels.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>InfrastructureModel.edmx</DependentUpon>
-      <LastGenOutput>InfrastructureModel.cs</LastGenOutput>
+      <DependentUpon>InfrastructureModels.edmx</DependentUpon>
+      <LastGenOutput>InfrastructureModels.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>

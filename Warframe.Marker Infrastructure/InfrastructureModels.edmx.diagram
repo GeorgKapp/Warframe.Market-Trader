@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6a29862dc1ad46f983ddfac18d063d5d" Name="Diagram1">
+        <EntityTypeShape EntityType="Warframe.Market_Infrastructure.DataBaseContextModel.Item" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Warframe.Market_Infrastructure.DataBaseContextModel.ItemTag" Width="1.5" PointX="5.25" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Warframe.Market_Infrastructure.DataBaseContextModel.LinkedAccounts" Width="1.5" PointX="7.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Warframe.Market_Infrastructure.DataBaseContextModel.LoginUser" Width="1.5" PointX="10" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Warframe.Market_Infrastructure.DataBaseContextModel.Order" Width="1.5" PointX="13" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Warframe.Market_Infrastructure.DataBaseContextModel.SetItem" Width="1.5" PointX="5.25" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Warframe.Market_Infrastructure.DataBaseContextModel.Tag" Width="1.5" PointX="3" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Warframe.Market_Infrastructure.DataBaseContextModel.Translation" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Warframe.Market_Infrastructure.DataBaseContextModel.User" Width="1.5" PointX="7.75" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Warframe.Market_Infrastructure.DataBaseContextModel.IconFormatType" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Warframe.Market_Infrastructure.DataBaseContextModel.OrderType" Width="1.5" PointX="10.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Warframe.Market_Infrastructure.DataBaseContextModel.PlatformType" Width="1.5" PointX="7.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Warframe.Market_Infrastructure.DataBaseContextModel.RegionType" Width="1.5" PointX="5.5" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Warframe.Market_Infrastructure.DataBaseContextModel.RoleType" Width="1.5" PointX="7.75" PointY="14" IsExpanded="true" />
+        <EntityTypeShape EntityType="Warframe.Market_Infrastructure.DataBaseContextModel.StatusType" Width="1.5" PointX="5.5" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Warframe.Market_Infrastructure.DataBaseContextModel.SubTypeType" Width="1.5" PointX="10.75" PointY="9.25" IsExpanded="true" />
+        <AssociationConnector Association="Warframe.Market_Infrastructure.DataBaseContextModel.FK__Item__Descriptio__300424B4" ManuallyRouted="false" />
+        <AssociationConnector Association="Warframe.Market_Infrastructure.DataBaseContextModel.FK__Item__IconFormat__2F10007B" ManuallyRouted="false" />
+        <AssociationConnector Association="Warframe.Market_Infrastructure.DataBaseContextModel.FK__Item__ItemNameID__31EC6D26" ManuallyRouted="false" />
+        <AssociationConnector Association="Warframe.Market_Infrastructure.DataBaseContextModel.FK__Item__WikiLinkID__30F848ED" ManuallyRouted="false" />
+        <AssociationConnector Association="Warframe.Market_Infrastructure.DataBaseContextModel.FK__ItemTag__ItemID__34C8D9D1" ManuallyRouted="false" />
+        <AssociationConnector Association="Warframe.Market_Infrastructure.DataBaseContextModel.FK__SetItem__ChildIt__38996AB5" ManuallyRouted="false" />
+        <AssociationConnector Association="Warframe.Market_Infrastructure.DataBaseContextModel.FK__SetItem__ParentI__398D8EEE" ManuallyRouted="false" />
+        <AssociationConnector Association="Warframe.Market_Infrastructure.DataBaseContextModel.FK__ItemTag__TagID__35BCFE0A" ManuallyRouted="false" />
+        <AssociationConnector Association="Warframe.Market_Infrastructure.DataBaseContextModel.FK__LoginUser__Linke__48CFD27E" ManuallyRouted="false" />
+        <AssociationConnector Association="Warframe.Market_Infrastructure.DataBaseContextModel.FK__LoginUser__Platf__46E78A0C" ManuallyRouted="false" />
+        <AssociationConnector Association="Warframe.Market_Infrastructure.DataBaseContextModel.FK__LoginUser__RoleI__47DBAE45" ManuallyRouted="false" />
+        <AssociationConnector Association="Warframe.Market_Infrastructure.DataBaseContextModel.FK__LoginUser__UserI__45F365D3" ManuallyRouted="false" />
+        <AssociationConnector Association="Warframe.Market_Infrastructure.DataBaseContextModel.FK__Order__OrderType__778AC167" ManuallyRouted="false" />
+        <AssociationConnector Association="Warframe.Market_Infrastructure.DataBaseContextModel.FK__Order__PlatformT__75A278F5" ManuallyRouted="false" />
+        <AssociationConnector Association="Warframe.Market_Infrastructure.DataBaseContextModel.FK__Order__RegionTyp__76969D2E" ManuallyRouted="false" />
+        <AssociationConnector Association="Warframe.Market_Infrastructure.DataBaseContextModel.FK__Order__SubTypeTy__74AE54BC" ManuallyRouted="false" />
+        <AssociationConnector Association="Warframe.Market_Infrastructure.DataBaseContextModel.FK__Order__UserID__73BA3083" ManuallyRouted="false" />
+        <AssociationConnector Association="Warframe.Market_Infrastructure.DataBaseContextModel.FK__User__RegionID__3C69FB99" ManuallyRouted="false" />
+        <AssociationConnector Association="Warframe.Market_Infrastructure.DataBaseContextModel.FK__User__StatusID__3D5E1FD2" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

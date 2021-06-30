@@ -22,6 +22,7 @@ namespace Warframe.Market_Infrastructure
         public int Platinum { get; set; }
         public Nullable<byte> ModRank { get; set; }
         public int UserID { get; set; }
+        public int SubTypeTypeID { get; set; }
         public int PlatformTypeID { get; set; }
         public int RegionTypeID { get; set; }
         public int OrderTypeID { get; set; }
@@ -29,6 +30,7 @@ namespace Warframe.Market_Infrastructure
         public virtual OrderType OrderType { get; set; }
         public virtual PlatformType PlatformType { get; set; }
         public virtual RegionType RegionType { get; set; }
+        public virtual SubTypeType SubTypeType { get; set; }
         public virtual User User { get; set; }
     }
 }

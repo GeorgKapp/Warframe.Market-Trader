@@ -39,6 +39,11 @@ create table [enum].[RoleType] (
     Type varchar(10) not null,
 );
 
+create table [enum].[SubTypeType] (
+	ID int not null primary key,
+    Type varchar(20) not null,
+);
+
 -- Create Content Tables
 
 create table [dbo].[LinkedAccounts] (
@@ -118,6 +123,7 @@ create table [dbo].[Order] (
 	Platinum int not null,
 	ModRank tinyint,
 	UserID int not null foreign key references [dbo].[User](ID),
+	SubTypeTypeID int not null foreign key references [enum].[SubTypeType](ID),
 	PlatformTypeID int not null foreign key references [enum].[PlatformType](ID),
 	RegionTypeID int not null foreign key references [enum].[RegionType](ID),
 	OrderTypeID int not null foreign key references [enum].[OrderType](ID),
@@ -162,5 +168,10 @@ insert into [enum].[RoleType] (ID, Type) values (1, 'Anonymous')
 insert into [enum].[RoleType] (ID, Type) values (2, 'User')
 insert into [enum].[RoleType] (ID, Type) values (3, 'Moderator')
 insert into [enum].[RoleType] (ID, Type) values (4, 'Admin')
+
+insert into [enum].[SubTypeType] (ID, Type) values (1, 'Intact')
+insert into [enum].[SubTypeType] (ID, Type) values (2, 'Exceptional')
+insert into [enum].[SubTypeType] (ID, Type) values (3, 'Flawless')
+insert into [enum].[SubTypeType] (ID, Type) values (4, 'Radiant')
 
 Go
