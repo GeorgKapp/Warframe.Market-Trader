@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Brotli;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
@@ -94,6 +95,12 @@ namespace Warframe.Market_Api.Api.Clients.Implementation
             {
                 switch (compressionType)
                 {
+                    case "br":
+                        using (BrotliStream decompressor = new BrotliStream(input, CompressionMode.Decompress))
+                        {
+                            await decompressor.CopyToAsync(output);
+                        }
+                        break;
                     case "deflate":
                         using (DeflateStream decompressor = new DeflateStream(input, CompressionMode.Decompress))
                         {
