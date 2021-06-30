@@ -30,13 +30,13 @@ namespace Warframe.Market_Api.Api.Clients.Implementation
 
         #region Send Methods
 
-        public async Task<T> GetAsync<T>(string requestUrl) 
-            where T : new() 
-            => await SendAsync<T>(requestUrl, HttpMethod.Get);
+        public async Task<TResponse> GetAsync<TResponse>(string requestUrl) 
+            where TResponse : new() 
+            => await SendAsync<TResponse>(requestUrl, HttpMethod.Get);
 
-        public async Task<T> DeleteAsync<T>(string requestUrl) 
-            where T : new()
-            => await SendAsync<T>(requestUrl, HttpMethod.Delete);
+        public async Task<TResponse> DeleteAsync<TResponse>(string requestUrl) 
+            where TResponse : new()
+            => await SendAsync<TResponse>(requestUrl, HttpMethod.Delete);
 
         public async Task<TResponse> PostAsync<TRequest, TResponse>(string requestUrl, TRequest requestContent)
             where TRequest : new()

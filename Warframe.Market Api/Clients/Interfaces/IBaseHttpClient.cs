@@ -8,20 +8,20 @@ namespace Warframe.Market_Api.Api.Clients.Interfaces
         /// <summary>
         /// Get Request that returns T Result
         /// </summary>
-        /// <typeparam name="T">>the object that will be deserialized from the http result</typeparam>
+        /// <typeparam name="TResponse">the object that will be deserialized from the http result</typeparam>
         /// <param name="requestUrl">the url that will be used for the get request</param>
         /// <returns></returns>
-        public Task<T> GetAsync<T>(string requestUrl)
-           where T : new();
+        public Task<TResponse> GetAsync<TResponse>(string requestUrl)
+           where TResponse : new();
 
         /// <summary>
         /// Delete Request that returns T Result
         /// </summary>
-        /// <typeparam name="T">>the object that will be deserialized from the http result</typeparam>
+        /// <typeparam name="TResponse">>the object that will be deserialized from the http result</typeparam>
         /// <param name="requestUrl">the url that will be used for the delete request</param>
         /// <returns></returns>
-        public Task<T> DeleteAsync<T>(string requestUrl)
-            where T : new();
+        public Task<TResponse> DeleteAsync<TResponse>(string requestUrl)
+            where TResponse : new();
 
         /// <summary>
         /// Post Request that returns TResponse Result based on the send TRequest type
