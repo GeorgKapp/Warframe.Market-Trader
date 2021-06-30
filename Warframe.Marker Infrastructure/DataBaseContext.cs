@@ -15,7 +15,8 @@ namespace Warframe.Market_Infrastructure
 
         #region Class Table Section
         public DbSet<Item> Item { get; set; }
-
+        public DbSet<Translation> Translation { get; set; }
+        public DbSet<Tag> Tag { get; set; }
         #endregion
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

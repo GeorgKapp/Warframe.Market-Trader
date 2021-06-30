@@ -75,6 +75,14 @@
     <Compile Include="Migrations\202106301244122_CreateItemTable.designer.cs">
       <DependentUpon>202106301244122_CreateItemTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202106301250377_AddTextPropertyToTranlsation.cs" />
+    <Compile Include="Migrations\202106301250377_AddTextPropertyToTranlsation.designer.cs">
+      <DependentUpon>202106301250377_AddTextPropertyToTranlsation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202106301259355_AddExplicitTableStructure.cs" />
+    <Compile Include="Migrations\202106301259355_AddExplicitTableStructure.designer.cs">
+      <DependentUpon>202106301259355_AddExplicitTableStructure.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Enums\IconFormat.cs" />
     <Compile Include="Models\Enums\IconFormatEnum.cs" />
@@ -109,6 +117,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202106301244122_CreateItemTable.resx">
       <DependentUpon>202106301244122_CreateItemTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202106301250377_AddTextPropertyToTranlsation.resx">
+      <DependentUpon>202106301250377_AddTextPropertyToTranlsation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202106301259355_AddExplicitTableStructure.resx">
+      <DependentUpon>202106301259355_AddExplicitTableStructure.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
