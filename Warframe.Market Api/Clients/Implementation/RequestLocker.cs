@@ -55,9 +55,8 @@ namespace Warframe.Market_Api.Clients.Implementation
 		private void QueueAndDequeueExcess(DateTime date)
 		{
 			if (_lockQueue.Count == RequestLimit)
-			{
 				_lockQueue.Dequeue();
-			}
+
 			_lockQueue.Enqueue(date);
 		}
 
