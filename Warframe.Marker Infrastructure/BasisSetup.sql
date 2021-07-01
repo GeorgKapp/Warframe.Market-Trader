@@ -5,8 +5,10 @@ Go
 
 use [Warframe.Market_Infrastructure.DataBaseContext];
 Go
-CREATE SCHEMA [enum]
+create schema [enum]
 Go
+
+
 -- Create Enum Tables
 
 create table [enum].[PlatformType] (
@@ -43,6 +45,7 @@ create table [enum].[SubTypeType] (
 	ID int not null primary key,
     Type varchar(20) not null,
 );
+
 
 -- Create Content Tables
 
