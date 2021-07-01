@@ -35,21 +35,22 @@ namespace Warframe.Market_Api.Clients.Implementation
 
 			var stackTime = _lockQueue.ElementAt(0);
 			var difference = requestTime - stackTime;
-			var timetoWait = TimeSpan.FromSeconds(0);
+			var timetoWait = GetWaitTime(difference);
 
+			await Task.Delay(timetoWait);
+		}
+
+		private TimeSpan GetWaitTime(TimeSpan difference)
+        {
 			switch (UnitOfTime)
 			{
 				case TimeUnit.Second:
-					timetoWait = difference.TotalSeconds < 1 ? TimeSpan.FromSeconds(1).Subtract(difference) : TimeSpan.FromSeconds(0);
-					break;
+					return difference.TotalSeconds < 1 ? TimeSpan.FromSeconds(1).Subtract(difference) : TimeSpan.FromSeconds(0);
 				case TimeUnit.Minute:
-					timetoWait = difference.TotalMinutes < 1 ? TimeSpan.FromMinutes(1).Subtract(difference) : TimeSpan.FromSeconds(0);
-					break;
+					return difference.TotalMinutes < 1 ? TimeSpan.FromMinutes(1).Subtract(difference) : TimeSpan.FromSeconds(0);
 				default:
 					throw new NotImplementedException("Unit of time was not implemented");
 			}
-
-			await Task.Delay(timetoWait);
 		}
 
 		private void QueueAndDequeueExcess(DateTime date)
