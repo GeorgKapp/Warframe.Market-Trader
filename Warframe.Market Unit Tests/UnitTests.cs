@@ -6,7 +6,7 @@ using Warframe.Market_Api.Api.Clients.Interfaces;
 using Warframe.Market_Api.Api.Data;
 using Warframe.Market_Api.JsonData.Content;
 
-namespace Warframe.Market_Api_Unit_Tests
+namespace Warframe.Market_Unit_Tests
 {
     [TestClass]
     public class UnitTests

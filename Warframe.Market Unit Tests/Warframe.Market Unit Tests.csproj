@@ -8,8 +8,8 @@
     <ProjectGuid>{2CF4DE3B-C7FB-4EBE-9EA5-D209C36ED244}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Warframe.Market_Api_Unit_Tests</RootNamespace>
-    <AssemblyName>Warframe.Market Api Unit Tests</AssemblyName>
+    <RootNamespace>Warframe.Market_Unit_Tests</RootNamespace>
+    <AssemblyName>Warframe.Market Unit Tests</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>

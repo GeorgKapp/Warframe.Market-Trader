@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Warframe.Market Infrastruct
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Warframe.Market DomainServices", "Warframe.Market DomainServices\Warframe.Market DomainServices.csproj", "{BBC063CA-F109-426F-B409-9FFEA1AC53C8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Warframe.Market Api Unit Tests", "Warframe.Market Api Unit Tests\Warframe.Market Api Unit Tests.csproj", "{2CF4DE3B-C7FB-4EBE-9EA5-D209C36ED244}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Warframe.Market Unit Tests", "Warframe.Market Unit Tests\Warframe.Market Unit Tests.csproj", "{2CF4DE3B-C7FB-4EBE-9EA5-D209C36ED244}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Warframe.Market Api", "Warframe.Market Api\Warframe.Market Api.csproj", "{16782002-7816-4000-9AD8-DD8739C265CE}"
 EndProject

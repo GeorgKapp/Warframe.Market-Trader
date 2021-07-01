@@ -35,6 +35,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=10.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.10.1.1\lib\net461\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -52,7 +55,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Base\AMappingService.cs" />
     <Compile Include="Base\IEnumRepository.cs" />
+    <Compile Include="Base\IMappingService.cs" />
     <Compile Include="Exceptions\DataInconsistencyException.cs" />
     <Compile Include="Exceptions\EntityNotFoundException.cs" />
     <Compile Include="Implementation\LinkedAccountsRepository.cs" />
@@ -69,6 +74,8 @@
     <Compile Include="Interfaces\IOrderTypeRepository.cs" />
     <Compile Include="Interfaces\IIconFormatRepository.cs" />
     <Compile Include="Interfaces\IRegionRepository.cs" />
+    <Compile Include="Mapping\Services\LinkedAccountsMappingService.cs" />
+    <Compile Include="Mapping\Profiles\LinkedAccountsMappingProfile.cs" />
     <Compile Include="Utilities\EnumExtensions.cs" />
     <Compile Include="Interfaces\IRoleRepository.cs" />
     <Compile Include="Implementation\RoleRepository.cs" />

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Warframe.Market_Api_Unit_Tests
+namespace Warframe.Market_Unit_Tests
 {
     public static class AsyncHelpers
     {
