@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Warframe.Market_Api.Api.Clients.Interfaces;
+using Warframe.Market_Api.Clients.Implementation;
 using Warframe.Market_Api.Converter;
 
 namespace Warframe.Market_Api.Api.Clients.Implementation
@@ -16,6 +17,8 @@ namespace Warframe.Market_Api.Api.Clients.Implementation
     {
         private HttpClient _channel;
         private Dictionary<string, string> _headerDictionary;
+        private RequestLocker _requestLocker;
+
         public BaseHttpClient()
         {
             _channel = new HttpClient();
@@ -26,6 +29,20 @@ namespace Warframe.Market_Api.Api.Clients.Implementation
         {
             _channel = new HttpClient();
             _headerDictionary = headerDictionary;
+        }
+
+        public BaseHttpClient(Dictionary<string, string> headerDictionary, RequestLocker requestLocker)
+        {
+            _channel = new HttpClient();
+            _headerDictionary = headerDictionary;
+            _requestLocker = requestLocker;
+        }
+
+        public BaseHttpClient(RequestLocker requestLocker)
+        {
+            _channel = new HttpClient();
+            _headerDictionary = new Dictionary<string, string>();
+            _requestLocker = requestLocker;
         }
 
         #region Send Methods
@@ -142,6 +159,9 @@ namespace Warframe.Market_Api.Api.Clients.Implementation
 
         private async Task<HttpContent> SendRequestAsync(string url, HttpMethod method, string jsonString = null)
         {
+            //limits amount of requests one can do to mitigate statuscode 429
+            await _requestLocker?.ReleaseAsync();
+
             var request = !string.IsNullOrEmpty(jsonString) 
                 ? ConfigureRequest(url, method, new StringContent(jsonString, Encoding.UTF8, "application/json"))
                 : ConfigureRequest(url, method);

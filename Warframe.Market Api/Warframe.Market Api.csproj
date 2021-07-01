@@ -61,6 +61,7 @@
     <Compile Include="Clients\Data\RequestResult.cs" />
     <Compile Include="Clients\Implementation\ApiClient.cs" />
     <Compile Include="Clients\Implementation\BaseHttpClient.cs" />
+    <Compile Include="Clients\Implementation\RequestLocker.cs" />
     <Compile Include="Clients\Interfaces\IApiClient.cs" />
     <Compile Include="Clients\Interfaces\IBaseHttpClient.cs" />
     <Compile Include="Converter\JsonConverter.cs" />

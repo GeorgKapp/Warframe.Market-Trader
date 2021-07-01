@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Warframe.Market_Api.Api.Clients.Interfaces;
 using Warframe.Market_Api.Api.Data;
+using Warframe.Market_Api.Clients.Implementation;
 using Warframe.Market_Api.Extensions;
 using Warframe.Market_Api.JsonData.Content;
 using Warframe.Market_Api.JsonData.Enums;
@@ -25,7 +26,7 @@ namespace Warframe.Market_Api.Api.Clients.Implementation
             _headerDictionary.Add("platform", Platform.Pc.GetEnumMemberValue());
             _headerDictionary.Add("auth_type", AuthType.Cookie.GetEnumMemberValue());
 
-            _baseHttpClient = new BaseHttpClient(_headerDictionary);
+            _baseHttpClient = new BaseHttpClient(_headerDictionary, new RequestLocker(RequestLocker.TimeUnit.Second, 3));
         }
 
         #region Login/Logout

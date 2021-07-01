@@ -9,7 +9,7 @@ using Warframe.Market_Api.JsonData.Content;
 namespace Warframe.Market_Unit_Tests
 {
     [TestClass]
-    public class UnitTests
+    public class ApiUnitTests
     {
         private static IApiClient _client;
         private int _clientWaitTime = 5000;
@@ -19,12 +19,6 @@ namespace Warframe.Market_Unit_Tests
         private const string AxiA6RelicLink = "axi_n6_relic";
         private const string CompanionRivenModVeiledLink = "companion_weapon_riven_mod_(veiled)";
         private const string LegendaryFusionCoreLink = "legendary_fusion_core";
-
-        [TestInitialize()]
-        public void TestSetup()
-        {
-            Thread.Sleep(_clientWaitTime);
-        }
 
         [ClassInitialize]
         public static void InitializeSetup(TestContext context)
