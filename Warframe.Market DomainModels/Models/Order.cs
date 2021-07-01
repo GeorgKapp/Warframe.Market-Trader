@@ -1,10 +1,15 @@
 ﻿using System;
+using Warframe.Market_DomainModels.Abstractions;
 using Warframe.Market_DomainModels.Enums;
 
 namespace Warframe.Market_DomainModels.Models
 {
-    public class Order
+    public class Order : AEntity
     {
+        public Order() { }
+        public Order(int id) : base(id) { }
+
+        public int ID { get; private set; }
         public DateTimeOffset CreationDate { get; set; }
         public DateTimeOffset LastUpdate { get; set; }
         public int Quantity { get; set; }

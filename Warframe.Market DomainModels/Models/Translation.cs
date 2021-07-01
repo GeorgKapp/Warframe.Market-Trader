@@ -1,7 +1,12 @@
-﻿namespace Warframe.Market_DomainModels.Models
+﻿using Warframe.Market_DomainModels.Abstractions;
+
+namespace Warframe.Market_DomainModels.Models
 {
-    public class Translation
+    public class Translation : AEntity
     {
+        public Translation() { }
+        public Translation(int id) : base(id) { }
+
         public string En { get; set; }
         public string Ru { get; set; }
         public string Ko { get; set; }

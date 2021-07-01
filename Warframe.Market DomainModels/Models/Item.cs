@@ -1,10 +1,14 @@
 ﻿using System.Collections.Generic;
+using Warframe.Market_DomainModels.Abstractions;
 using Warframe.Market_DomainModels.Enums;
 
 namespace Warframe.Market_DomainModels.Models
 {
-    public class Item
+    public class Item : AEntity
     {
+        public Item() { }
+        public Item(int id) : base(id) { }
+
         public string UrlName { get; set; }
         public string Thumb { get; set; }
         public int? Ducats { get; set; }

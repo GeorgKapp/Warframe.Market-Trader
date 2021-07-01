@@ -1,9 +1,13 @@
-﻿using Warframe.Market_DomainModels.Enums;
+﻿using Warframe.Market_DomainModels.Abstractions;
+using Warframe.Market_DomainModels.Enums;
 
 namespace Warframe.Market_DomainModels.Models
 {
-    public class LoginUser
+    public class LoginUser : AEntity
     {
+        public LoginUser() { }
+        public LoginUser(int id) : base(id) { }
+
         public string CheckCode { get; set; }
         public bool? Banned { get; set; }
         public bool? Anonymous { get; set; }

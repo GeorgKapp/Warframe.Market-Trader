@@ -1,10 +1,14 @@
 ﻿using System;
+using Warframe.Market_DomainModels.Abstractions;
 using Warframe.Market_DomainModels.Enums;
 
 namespace Warframe.Market_DomainModels.Models
 {
-    public class User
+    public class User : AEntity
     {
+        public User() { }
+        public User(int id) : base(id) { }
+
         public string InGameName { get; set; }
         public DateTimeOffset? LastSeen { get; set; }
         public int Reputation { get; set; }
