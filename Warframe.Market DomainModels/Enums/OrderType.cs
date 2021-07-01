@@ -2,7 +2,7 @@
 {
     public enum OrderType
     {
-        Sell,
-        Buy
+        Sell = 1,
+        Buy = 2
     }
 }

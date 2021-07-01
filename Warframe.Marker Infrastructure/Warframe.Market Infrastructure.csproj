@@ -108,6 +108,7 @@
       <DependentUpon>InfrastructureModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReadOnlyEntityContext.cs" />
     <Compile Include="RegionType.cs">
       <DependentUpon>InfrastructureModels.tt</DependentUpon>
     </Compile>

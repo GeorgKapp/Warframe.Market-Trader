@@ -2,7 +2,7 @@
 {
     public enum IconFormat
     {
-        Land,
-        Port
+        Land = 1,
+        Port = 2
     }
 }

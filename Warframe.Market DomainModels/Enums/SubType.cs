@@ -2,9 +2,9 @@
 {
     public enum SubType
     {
-        Intact,
-        Exceptional,
-        Flawless,
-        Radiant
+        Intact = 1,
+        Exceptional = 2,
+        Flawless = 3,
+        Radiant = 4
     }
 }
