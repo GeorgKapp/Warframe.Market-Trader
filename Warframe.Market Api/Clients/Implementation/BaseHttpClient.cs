@@ -162,19 +162,17 @@ namespace Warframe.Market_Api.Api.Clients.Implementation
             //limits amount of requests one can do to mitigate statuscode 429
             await _requestLocker?.ReleaseAsync();
 
-            var request = !string.IsNullOrEmpty(jsonString) 
+            var request = !string.IsNullOrEmpty(jsonString)
                 ? ConfigureRequest(url, method, new StringContent(jsonString, Encoding.UTF8, "application/json"))
                 : ConfigureRequest(url, method);
 
-            foreach(var keyvaluePair in _headerDictionary)
+            foreach (var keyvaluePair in _headerDictionary)
                 request.Headers.TryAddWithoutValidation(keyvaluePair.Key, keyvaluePair.Value);
 
-            using (var response = await _channel.SendAsync(request))
-            {
-                response.EnsureSuccessStatusCode();
-                request.Dispose();
-                return response.Content;
-            }
+            var response = await _channel.SendAsync(request);
+            response.EnsureSuccessStatusCode();
+            request.Dispose();
+            return response.Content;
         }
     }
 }

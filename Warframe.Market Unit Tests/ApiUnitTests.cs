@@ -12,7 +12,6 @@ namespace Warframe.Market_Unit_Tests
     public class ApiUnitTests
     {
         private static IApiClient _client;
-        private int _clientWaitTime = 5000;
 
         private const string AshPrimeSetLink = "ash_prime_set";
         private const string GladiatorMightModLink = "gladiator_might";
