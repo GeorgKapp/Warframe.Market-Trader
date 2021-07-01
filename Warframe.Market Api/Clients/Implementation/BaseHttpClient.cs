@@ -169,10 +169,12 @@ namespace Warframe.Market_Api.Api.Clients.Implementation
             foreach(var keyvaluePair in _headerDictionary)
                 request.Headers.TryAddWithoutValidation(keyvaluePair.Key, keyvaluePair.Value);
 
-            var response = await _channel.SendAsync(request);
-            response.EnsureSuccessStatusCode();
-            request.Dispose();
-            return response.Content;
+            using (var response = await _channel.SendAsync(request))
+            {
+                response.EnsureSuccessStatusCode();
+                request.Dispose();
+                return response.Content;
+            }
         }
     }
 }
