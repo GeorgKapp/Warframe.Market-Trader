@@ -70,7 +70,7 @@ namespace Warframe.Market_Api.Api.Clients.Implementation
         {
             using (var responseContent = await SendRequestAsync(requestUrl, httpMethod))
             {
-                return await GetResponseContentAsync<T>(responseContent);
+                return await GetResponseContentAsync<T>(responseContent.Content);
             }
         }
 
@@ -81,7 +81,7 @@ namespace Warframe.Market_Api.Api.Clients.Implementation
             var jsonString = JsonConverter.ToJson(requestContent);
             using (var responseContent = await SendRequestAsync(requestUrl, httpMethod, jsonString))
             {
-                return await GetResponseContentAsync<TResponse>(responseContent);
+                return await GetResponseContentAsync<TResponse>(responseContent.Content);
             }
         }
 
@@ -157,7 +157,7 @@ namespace Warframe.Market_Api.Api.Clients.Implementation
             };
         }
 
-        private async Task<HttpContent> SendRequestAsync(string url, HttpMethod method, string jsonString = null)
+        private async Task<HttpResponseMessage> SendRequestAsync(string url, HttpMethod method, string jsonString = null)
         {
             //limits amount of requests one can do to mitigate statuscode 429
             await _requestLocker?.ReleaseAsync();
@@ -172,7 +172,7 @@ namespace Warframe.Market_Api.Api.Clients.Implementation
             var response = await _channel.SendAsync(request);
             response.EnsureSuccessStatusCode();
             request.Dispose();
-            return response.Content;
+            return response;
         }
     }
 }
