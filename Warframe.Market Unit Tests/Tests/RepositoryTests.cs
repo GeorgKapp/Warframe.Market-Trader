@@ -222,9 +222,7 @@ namespace Warframe.Market_Unit_Tests
 
         private bool CheckIfEnumIdAndValueMatch<TEnum>(int id, TEnum enumValue) where TEnum : Enum
         {
-            var compareEnum = (TEnum)(object)id;
-            var istrue = EqualityComparer<TEnum>.Default.Equals(compareEnum, enumValue);
-            return istrue;
+            return EqualityComparer<TEnum>.Default.Equals((TEnum)(object)id, enumValue);
         }
 
         private bool CheckIfEnumValuesArePresent<TEnum>(IEnumerable<TEnum> resultList) where TEnum : Enum
