@@ -5,6 +5,7 @@ using System.Linq;
 using Warframe.Market_DomainModels.Enums;
 using Warframe.Market_Infrastructure.DbContextScope;
 using Warframe.Market_Infrastructure_Repositories.Repositories.Exceptions;
+using Warframe.Market_Infrastructure_Repositories.Repositories.Implementation.ClassRepositories;
 using Warframe.Market_Infrastructure_Repositories.Repositories.Implementation.EnumRepositories;
 
 namespace Warframe.Market_Unit_Tests
@@ -217,6 +218,26 @@ namespace Warframe.Market_Unit_Tests
             {
                 var results = repos.GetAll();
                 Assert.IsTrue(CheckIfEnumValuesArePresent(results));
+            }
+        }
+
+        [TestMethod("LinkedAccounts Create()")]
+
+        public void Test15LinkedAccountsCreate()
+        {
+            var repos = new LinkedAccountsRepository(_ambientDbContextLocator);
+            using (var dbContextScope = _dbContextScopeFactory.Create())
+            {
+                var newAccount = new Market_DomainModels.Models.LinkedAccounts
+                {
+                    HasSteamProfile = true,
+                    HasDiscordProfile = false,
+                    HasPatreonProfile = true,
+                    HasXboxProfile = true
+                };
+                repos.Create(ref newAccount);
+                var result = repos.Get(newAccount.ID);
+                _ = "";
             }
         }
 

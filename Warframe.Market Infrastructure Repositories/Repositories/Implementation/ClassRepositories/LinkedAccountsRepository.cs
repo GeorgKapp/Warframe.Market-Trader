@@ -1,50 +1,38 @@
-﻿using System;
+﻿using AutoMapper;
+using System;
+using System.Data.Entity;
 using System.Linq;
-using Warframe.Market_DomainModels.Models;
+using Warframe.Market_Infrastructure;
+using Warframe.Market_Infrastructure.DbContextScope;
+using Warframe.Market_Infrastructure_Repositories.Mapping.Profiles;
+using Warframe.Market_Infrastructure_Repositories.Repositories.Exceptions;
 using Warframe.Market_Infrastructure_Repositories.Repositories.Interfaces.ClassRepositories;
 
 namespace Warframe.Market_Infrastructure_Repositories.Repositories.Implementation.ClassRepositories
 {
     public class LinkedAccountsRepository : ILinkedAccountsRepository
     {
-        //IDbContextFactory _dbContextFactory;
-        //public LinkedAccountsRepository(IDbContextFactory dbContextFactory)
-        //{
-        //    _dbContextFactory = dbContextFactory ?? throw new ArgumentNullException(nameof(dbContextFactory));
-        //}
+        private readonly IAmbientDbContextLocator _ambientDbContextLocator;
+        internal static IMapper Mapper { get; } = new MapperConfiguration(
+            cfg => cfg.AddProfile<LinkedAccountsMappingProfile>())
+                .CreateMapper();
 
-        //public void Create(Market_DomainModels.Models.LinkedAccounts entity)
-        //{
-        //    throw new System.NotImplementedException();
-        //}
+        private DbContext DbContext => _ambientDbContextLocator.GetDbContextOrThrow<EntityContext>();
 
-        //public void Delete(int entityID)
-        //{
-        //    throw new System.NotImplementedException();
-        //}
-
-        //public Market_DomainModels.Models.LinkedAccounts Get(int entityID)
-        //{
-        //    throw new System.NotImplementedException();
-        //}
-
-        //public IQueryable<Market_DomainModels.Models.LinkedAccounts> GetAll()
-        //{
-        //    using (var context = _dbContextFactory.CreateReadOnly())
-        //    {
-        //        //var result = context.Set<Market_Infrastructure.LinkedAccounts>().Select(p => p.ApplyTo());
-        //        return null;
-        //    }
-        //}
-
-        //public void Update(Market_DomainModels.Models.LinkedAccounts entity)
-        //{
-        //    throw new System.NotImplementedException();
-        //}
-
-        public void Create(LinkedAccounts entity)
+        public LinkedAccountsRepository(IAmbientDbContextLocator ambientDbContextLocator)
         {
-            throw new NotImplementedException();
+            _ambientDbContextLocator = ambientDbContextLocator ?? throw new ArgumentNullException(nameof(ambientDbContextLocator));
+        }
+
+        public void Create(ref Market_DomainModels.Models.LinkedAccounts entity)
+        {
+            var mappedEntityObject = Mapper.Map<Market_DomainModels.Models.LinkedAccounts, LinkedAccounts>(entity);
+            var createdEntityObject = DbContext.Set<LinkedAccounts>().Add(mappedEntityObject);
+
+            DbContext.SaveChanges();
+
+            entity = new Market_DomainModels.Models.LinkedAccounts(createdEntityObject.ID);
+            entity = Mapper.Map<LinkedAccounts, Market_DomainModels.Models.LinkedAccounts>(createdEntityObject);
         }
 
         public void Delete(int entityID)
@@ -52,19 +40,30 @@ namespace Warframe.Market_Infrastructure_Repositories.Repositories.Implementatio
             throw new NotImplementedException();
         }
 
-        public LinkedAccounts Get(int entityID)
+        public Market_DomainModels.Models.LinkedAccounts Get(int entityID)
+        {
+            var searchedEntity = 
+                DbContext.Set<LinkedAccounts>().SingleOrDefault(predicate => predicate.ID == entityID)
+                ?? throw new EntityNotFoundException(nameof(LinkedAccounts), entityID);
+
+            var result = new Market_DomainModels.Models.LinkedAccounts(entityID);
+            result = Mapper.Map<LinkedAccounts, Market_DomainModels.Models.LinkedAccounts>(searchedEntity);
+            return result;
+        }
+
+        public IQueryable<Market_DomainModels.Models.LinkedAccounts> GetAll()
         {
             throw new NotImplementedException();
         }
 
-        public IQueryable<LinkedAccounts> GetAll()
+        public void Update(ref Market_DomainModels.Models.LinkedAccounts entity)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(LinkedAccounts entity)
+        public bool Exists(int entityID)
         {
-            throw new NotImplementedException();
+            return DbContext.Set<LinkedAccounts>().Any(e => e.ID == entityID);
         }
     }
 }

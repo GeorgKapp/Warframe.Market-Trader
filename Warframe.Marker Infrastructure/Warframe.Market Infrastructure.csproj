@@ -69,6 +69,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DbContextScope\Enums\DbContextScopeOption.cs" />
+    <Compile Include="DbContextScope\Extensions\AmbientDbContextLocatorExtensions.cs" />
     <Compile Include="DbContextScope\Implementation\AmbientContextSuppressor.cs" />
     <Compile Include="DbContextScope\Implementation\AmbientDbContextLocator.cs" />
     <Compile Include="DbContextScope\Implementation\DbContextCollection.cs" />
