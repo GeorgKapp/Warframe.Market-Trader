@@ -2,7 +2,7 @@
 
 namespace Warframe.Market_DomainModels.Models
 {
-    public class Translation : AEntity
+    public class Translation : ADomainModel
     {
         public Translation() { }
         public Translation(int id) : base(id) { }

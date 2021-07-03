@@ -3,7 +3,7 @@ using Warframe.Market_DomainModels.Enums;
 
 namespace Warframe.Market_DomainModels.Models
 {
-    public class LoginUser : AEntity
+    public class LoginUser : ADomainModel
     {
         public LoginUser() { }
         public LoginUser(int id) : base(id) { }

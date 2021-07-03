@@ -1,9 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Warframe.Market_Api.Clients.Implementation;
 using static Warframe.Market_Api.Clients.Implementation.RequestLocker;

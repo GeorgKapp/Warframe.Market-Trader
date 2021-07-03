@@ -2,7 +2,7 @@
 
 namespace Warframe.Market_DomainModels.Models
 {
-    public class SetItem : AEntity
+    public class SetItem : ADomainModel
     {
         public SetItem() { }
         public SetItem(int id) : base(id) { }

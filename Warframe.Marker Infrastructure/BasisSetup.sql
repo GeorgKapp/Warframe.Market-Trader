@@ -28,7 +28,7 @@ create table [enum].[OrderType] (
 
 create table [enum].[RegionType] (
     ID int not null primary key,
-    Type varchar(2) not null,
+    Type varchar(10) not null,
 );
 
 create table [enum].[StatusType] (
@@ -162,6 +162,11 @@ insert into [enum].[RegionType] (ID, Type) values (3, 'Fr')
 insert into [enum].[RegionType] (ID, Type) values (4, 'Ko')
 insert into [enum].[RegionType] (ID, Type) values (5, 'Ru')
 insert into [enum].[RegionType] (ID, Type) values (6, 'Sv')
+insert into [enum].[RegionType] (ID, Type) values (7, 'ZhHant')
+insert into [enum].[RegionType] (ID, Type) values (8, 'ZhHans')
+insert into [enum].[RegionType] (ID, Type) values (9, 'Pt')
+insert into [enum].[RegionType] (ID, Type) values (10, 'Es')
+insert into [enum].[RegionType] (ID, Type) values (11, 'Pl')
 						
 insert into [enum].[StatusType] (ID, Type) values (1, 'Ingame')
 insert into [enum].[StatusType] (ID, Type) values (2, 'Offline')

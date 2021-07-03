@@ -3,7 +3,7 @@ using Warframe.Market_DomainModels.Abstractions;
 
 namespace Warframe.Market_DomainModels.Models
 {
-    public class Tag : AEntity
+    public class Tag : ADomainModel
     {
         public Tag() { }
         public Tag(int id) : base(id) { }

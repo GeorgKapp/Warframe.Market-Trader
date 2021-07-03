@@ -2,7 +2,7 @@
 
 namespace Warframe.Market_DomainModels.Models
 {
-    public class LinkedAccounts : AEntity
+    public class LinkedAccounts : ADomainModel
     {
         public LinkedAccounts() { }
         public LinkedAccounts(int id) : base(id) { }

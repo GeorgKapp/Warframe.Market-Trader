@@ -55,31 +55,32 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Base\AMappingService.cs" />
-    <Compile Include="Base\IEnumRepository.cs" />
-    <Compile Include="Base\IMappingService.cs" />
-    <Compile Include="Exceptions\DataInconsistencyException.cs" />
-    <Compile Include="Exceptions\EntityNotFoundException.cs" />
-    <Compile Include="Implementation\LinkedAccountsRepository.cs" />
-    <Compile Include="Implementation\SubTypeRepository.cs" />
-    <Compile Include="Implementation\StatusRepository.cs" />
-    <Compile Include="Implementation\RegionRepository.cs" />
-    <Compile Include="Implementation\PlatformRepository.cs" />
-    <Compile Include="Implementation\IconFormatRepository.cs" />
-    <Compile Include="Implementation\OrderTypeRepository.cs" />
-    <Compile Include="Interfaces\ILinkedAccountsRepository.cs" />
-    <Compile Include="Interfaces\ISubTypeRepository.cs" />
-    <Compile Include="Interfaces\IStatusRepository.cs" />
-    <Compile Include="Interfaces\IPlatformRepository.cs" />
-    <Compile Include="Interfaces\IOrderTypeRepository.cs" />
-    <Compile Include="Interfaces\IIconFormatRepository.cs" />
-    <Compile Include="Interfaces\IRegionRepository.cs" />
+    <Compile Include="Repositories\Abstractions\AEnumDomainModelRepository.cs" />
+    <Compile Include="Repositories\Interfaces\Base\IEnumDomainModelRepository.cs" />
+    <Compile Include="Mapping\Abstractions\AMappingService.cs" />
+    <Compile Include="Mapping\Interfaces\IMappingService.cs" />
+    <Compile Include="Repositories\Exceptions\DataInconsistencyException.cs" />
+    <Compile Include="Repositories\Exceptions\EntityNotFoundException.cs" />
+    <Compile Include="Repositories\Implementation\EnumRepositories\RoleRepository.cs" />
+    <Compile Include="Repositories\Implementation\ClassRepositories\LinkedAccountsRepository.cs" />
+    <Compile Include="Repositories\Implementation\EnumRepositories\SubTypeRepository.cs" />
+    <Compile Include="Repositories\Implementation\EnumRepositories\StatusRepository.cs" />
+    <Compile Include="Repositories\Implementation\EnumRepositories\RegionRepository.cs" />
+    <Compile Include="Repositories\Implementation\EnumRepositories\PlatformRepository.cs" />
+    <Compile Include="Repositories\Implementation\EnumRepositories\IconFormatRepository.cs" />
+    <Compile Include="Repositories\Implementation\EnumRepositories\OrderTypeRepository.cs" />
+    <Compile Include="Repositories\Interfaces\ClassRepositories\ILinkedAccountsRepository.cs" />
+    <Compile Include="Repositories\Interfaces\EnumRepositories\ISubTypeRepository.cs" />
+    <Compile Include="Repositories\Interfaces\EnumRepositories\IStatusRepository.cs" />
+    <Compile Include="Repositories\Interfaces\EnumRepositories\IPlatformRepository.cs" />
+    <Compile Include="Repositories\Interfaces\EnumRepositories\IOrderTypeRepository.cs" />
+    <Compile Include="Repositories\Interfaces\EnumRepositories\IIconFormatRepository.cs" />
+    <Compile Include="Repositories\Interfaces\EnumRepositories\IRegionRepository.cs" />
     <Compile Include="Mapping\Services\LinkedAccountsMappingService.cs" />
     <Compile Include="Mapping\Profiles\LinkedAccountsMappingProfile.cs" />
     <Compile Include="Utilities\EnumExtensions.cs" />
-    <Compile Include="Interfaces\IRoleRepository.cs" />
-    <Compile Include="Implementation\RoleRepository.cs" />
-    <Compile Include="Base\IClassRepository.cs" />
+    <Compile Include="Repositories\Interfaces\EnumRepositories\IRoleRepository.cs" />
+    <Compile Include="Repositories\Interfaces\Base\IClassRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -96,6 +97,7 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

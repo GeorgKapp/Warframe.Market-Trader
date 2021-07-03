@@ -4,7 +4,7 @@ using Warframe.Market_DomainModels.Enums;
 
 namespace Warframe.Market_DomainModels.Models
 {
-    public class User : AEntity
+    public class User : ADomainModel
     {
         public User() { }
         public User(int id) : base(id) { }
