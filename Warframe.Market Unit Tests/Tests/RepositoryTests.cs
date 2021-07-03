@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using Warframe.Market_DomainModels.Enums;
 using Warframe.Market_Infrastructure.DbContextScope;
@@ -226,7 +227,7 @@ namespace Warframe.Market_Unit_Tests
         public void Test15LinkedAccountsCreate()
         {
             var repos = new LinkedAccountsRepository(_ambientDbContextLocator);
-            using (var dbContextScope = _dbContextScopeFactory.Create())
+            using (var dbContextScope = _dbContextScopeFactory.CreateWithTransaction(IsolationLevel.ReadCommitted))
             {
                 var newAccount = new Market_DomainModels.Models.LinkedAccounts
                 {
@@ -235,9 +236,17 @@ namespace Warframe.Market_Unit_Tests
                     HasPatreonProfile = true,
                     HasXboxProfile = true
                 };
+
                 repos.Create(ref newAccount);
-                var result = repos.Get(newAccount.ID);
-                _ = "";
+                var getResult = repos.Get(newAccount.ID);
+
+                getResult.HasSteamProfile = false;
+                repos.Update(ref getResult);
+                Assert.IsFalse(getResult.HasSteamProfile);
+                Assert.IsTrue(getResult.HasXboxProfile);
+
+                repos.Delete(newAccount.ID);
+                Assert.ThrowsException<EntityNotFoundException>(() => repos.Get(newAccount.ID));
             }
         }
 
