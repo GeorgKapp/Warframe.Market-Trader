@@ -68,21 +68,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entity Modifications\Abstractions\AEntityEnumModel.cs" />
-    <Compile Include="Entity Modifications\Abstractions\AEntityModel.cs" />
-    <Compile Include="Entity Modifications\ClassModels\LinkedAccounts.cs" />
-    <Compile Include="Entity Modifications\ClassModels\LoginUser.cs" />
-    <Compile Include="Entity Modifications\ClassModels\Order.cs" />
-    <Compile Include="Entity Modifications\ClassModels\Tag.cs" />
-    <Compile Include="Entity Modifications\ClassModels\Translation.cs" />
-    <Compile Include="Entity Modifications\ClassModels\User.cs" />
-    <Compile Include="Entity Modifications\EnumModels\OrderType.cs" />
-    <Compile Include="Entity Modifications\EnumModels\PlatformType.cs" />
-    <Compile Include="Entity Modifications\EnumModels\RegionType.cs" />
-    <Compile Include="Entity Modifications\EnumModels\RoleType.cs" />
-    <Compile Include="Entity Modifications\ClassModels\SetItem.cs" />
-    <Compile Include="Entity Modifications\EnumModels\StatusType.cs" />
-    <Compile Include="Entity Modifications\EnumModels\SubTypeType.cs" />
     <Compile Include="IconFormatType.cs">
       <DependentUpon>InfrastructureModels.tt</DependentUpon>
     </Compile>
@@ -101,8 +86,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>InfrastructureModels.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Entity Modifications\Interfaces\IEntityEnumModel.cs" />
-    <Compile Include="Entity Modifications\Interfaces\IEntityModel.cs" />
     <Compile Include="Item.cs">
       <DependentUpon>InfrastructureModels.tt</DependentUpon>
     </Compile>
@@ -121,9 +104,6 @@
     <Compile Include="OrderType.cs">
       <DependentUpon>InfrastructureModels.tt</DependentUpon>
     </Compile>
-    <Compile Include="Entity Modifications\EnumModels\IconFormatType.cs" />
-    <Compile Include="Entity Modifications\ClassModels\Item.cs" />
-    <Compile Include="Entity Modifications\ClassModels\ItemTag.cs" />
     <Compile Include="PlatformType.cs">
       <DependentUpon>InfrastructureModels.tt</DependentUpon>
     </Compile>

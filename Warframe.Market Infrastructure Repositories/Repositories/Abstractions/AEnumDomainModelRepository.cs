@@ -29,7 +29,8 @@ namespace Warframe.Market_Infrastructure_Repositories.Repositories.Abstractions
                 .SingleOrDefault(predicate => predicate.ID == entityID)
                 ?? throw new EntityNotFoundException(typeof(TEntity).FullName, entityID);
 
-            return foundEntity.Type.ParseEnum<TDomainEnum>();
+            var type = foundEntity.Type;
+            return (((dynamic)foundEntity).Type as string).ParseEnum<TDomainEnum>();
         }
 
         public virtual IEnumerable<TDomainEnum> GetAll()
