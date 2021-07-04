@@ -46,7 +46,8 @@ namespace Warframe.Market_Infrastructure_Repositories.Repositories.Implementatio
         public Market_DomainModels.Models.LinkedAccounts Get(int entityID)
         {
             var searchedEntity = 
-                DbContext.Set<LinkedAccounts>().SingleOrDefault(predicate => predicate.ID == entityID)
+                DbContext.Set<LinkedAccounts>()
+                .SingleOrDefault(predicate => predicate.ID == entityID)
                 ?? throw new EntityNotFoundException(nameof(LinkedAccounts), entityID);
 
             return DomainModelMapper.Map<Market_DomainModels.Models.LinkedAccounts>(searchedEntity);
