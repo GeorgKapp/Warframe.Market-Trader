@@ -10,7 +10,6 @@ using Warframe.Market_Infrastructure.DbContextScope;
 using Warframe.Market_Infrastructure_Repositories.Mapping.Profiles;
 using Warframe.Market_Infrastructure_Repositories.Repositories.Exceptions;
 using Warframe.Market_Infrastructure_Repositories.Repositories.Interfaces.ClassRepositories;
-using Warframe.Market_Infrastructure_Repositories.Utilities;
 
 namespace Warframe.Market_Infrastructure_Repositories.Repositories.Implementation.ClassRepositories
 {
@@ -62,15 +61,12 @@ namespace Warframe.Market_Infrastructure_Repositories.Repositories.Implementatio
 
         public IEnumerable<Market_DomainModels.Models.LinkedAccounts> Get(Expression<Func<Market_DomainModels.Models.LinkedAccounts, bool>> predicate)
         {
-
             var results = new List<Market_DomainModels.Models.LinkedAccounts>();
-
             var mappedPredicate = Mapper.Map<Expression<Func<LinkedAccounts, bool>>>(predicate);
+
             foreach (var entity in DbContext.Set<LinkedAccounts>().Where(mappedPredicate))
             {
-                var domainModel = new Market_DomainModels.Models.LinkedAccounts(entity.ID);
-                Mapper.Map(entity, domainModel);
-                results.Add(domainModel);
+                results.Add(Mapper.Map<Market_DomainModels.Models.LinkedAccounts>(entity));
             }
             return results;
         }
@@ -78,11 +74,10 @@ namespace Warframe.Market_Infrastructure_Repositories.Repositories.Implementatio
         public IEnumerable<Market_DomainModels.Models.LinkedAccounts> GetAll()
         {
             var results = new List<Market_DomainModels.Models.LinkedAccounts>();
+
             foreach (var entity in DbContext.Set<LinkedAccounts>())
             {
-                var domainModel = new Market_DomainModels.Models.LinkedAccounts(entity.ID);
-                Mapper.Map(entity, domainModel);
-                results.Add(domainModel);
+                results.Add(Mapper.Map<Market_DomainModels.Models.LinkedAccounts>(entity));
             }
             return results;
         }
