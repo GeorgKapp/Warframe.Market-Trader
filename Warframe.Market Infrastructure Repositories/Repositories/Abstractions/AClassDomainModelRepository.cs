@@ -3,51 +3,91 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
+using Warframe.Market_DbContextScope;
 using Warframe.Market_DomainModels.Abstractions;
+using Warframe.Market_Infrastructure;
+using Warframe.Market_Infrastructure_Repositories.Mapping;
+using Warframe.Market_Infrastructure_Repositories.Repositories.Exceptions;
 using Warframe.Market_Infrastructure_Repositories.Repositories.Interfaces.Base;
 
 namespace Warframe.Market_Infrastructure_Repositories.Repositories.Abstractions
 {
-    class AClassDomainModelRepository<TEntity, TClass, TContext> : IClassDomainModelRepository<TEntity, TClass>
-        where TEntity : class
-        where TClass : ADomainModel
+    public abstract class AClassDomainModelRepository<TEntity, TDomain, TContext> : IClassDomainModelRepository<TEntity, TDomain>
+        where TEntity : AEntityModel
+        where TDomain : ADomainModel
         where TContext : DbContext
     {
-        public void Create(ref TClass entity)
+
+        private readonly IAmbientDbContextLocator _ambientDbContextLocator;
+        private DbContext DbContext => _ambientDbContextLocator.GetDbContextOrThrow<TContext>();
+        public AClassDomainModelRepository(IAmbientDbContextLocator ambientDbContextLocator)
         {
-            throw new NotImplementedException();
+            _ambientDbContextLocator = ambientDbContextLocator ?? throw new ArgumentNullException(nameof(ambientDbContextLocator));
         }
 
-        public void Delete(int entityID)
+        public virtual void Create(ref TDomain entity)
         {
-            throw new NotImplementedException();
+            var mappedEntityObject = DomainModelMapper.Map<TDomain, TEntity>(entity);
+            mappedEntityObject.ID = 0;
+            DbContext.Set<TEntity>().Add(mappedEntityObject);
+
+            DbContext.SaveChanges();
+            DomainModelMapper.Map(mappedEntityObject, entity);
         }
 
-        public bool Exists(int entityID)
+        public virtual void Delete(int entityID)
         {
-            throw new NotImplementedException();
+            var entity = DbContext.Set<TEntity>()
+                .Where(predicate => predicate.ID == entityID)
+                .SingleOrDefault()
+                ?? throw new EntityNotFoundException(typeof(TEntity).FullName, entityID);
+
+            DbContext.Entry(entity).State = EntityState.Deleted;
+            DbContext.SaveChanges();
         }
 
-        public TClass Get(int entityID)
+        public virtual bool Exists(int entityID)
         {
-            throw new NotImplementedException();
+            return DbContext.Set<TEntity>()
+                .Any(predicate => predicate.ID == entityID);
         }
 
-        public IEnumerable<TClass> Get(Expression<Func<TClass, bool>> predicate)
+        public virtual TDomain Get(int entityID)
         {
-            throw new NotImplementedException();
+            var foundEntity = DbContext.Set<TEntity>()
+                .SingleOrDefault(predicate => predicate.ID == entityID)
+                ?? throw new EntityNotFoundException(typeof(TEntity).FullName, entityID);
+
+            return DomainModelMapper.Map<TDomain>(foundEntity);
         }
 
-        public IEnumerable<TClass> GetAll()
+        public virtual IEnumerable<TDomain> Get(Expression<Func<TDomain, bool>> predicate)
         {
-            throw new NotImplementedException();
+            var mappedPredicate = DomainModelMapper.Map<Expression<Func<TEntity, bool>>>(predicate);
+
+            return DbContext.Set<TEntity>()
+                .Where(mappedPredicate)
+                .Select(entity => DomainModelMapper.Map<TDomain>(entity));
         }
 
-        public void Update(ref TClass entity)
+        public virtual IEnumerable<TDomain> GetAll()
         {
-            throw new NotImplementedException();
+            return DbContext.Set<TEntity>()
+                .Select(entity => DomainModelMapper.Map<TDomain>(entity));
+        }
+
+        public virtual void Update(ref TDomain entity)
+        {
+            var entityId = entity.ID;
+
+            var searchedEntity =
+                DbContext.Set<TEntity>()
+                .SingleOrDefault(predicate => predicate.ID == entityId)
+                ?? throw new EntityNotFoundException(typeof(TEntity).FullName, entity.ID);
+
+            DomainModelMapper.Map(entity, searchedEntity);
+            DbContext.SaveChanges();
+            DomainModelMapper.Map(searchedEntity, entity);
         }
     }
 }

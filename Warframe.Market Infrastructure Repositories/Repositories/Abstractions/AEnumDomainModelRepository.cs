@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using Warframe.Market_DbContextScope;
+using Warframe.Market_Infrastructure;
 using Warframe.Market_Infrastructure_Repositories.Repositories.Exceptions;
 using Warframe.Market_Infrastructure_Repositories.Repositories.Interfaces.Base;
 using Warframe.Market_Infrastructure_Repositories.Utilities;
 
 namespace Warframe.Market_Infrastructure_Repositories.Repositories.Abstractions
 {
-    public abstract class AEnumDomainModelRepository<TEntity, TEnum, TContext> : IEnumDomainModelRepository<TEntity, TEnum>
-        where TEntity : class
-        where TEnum : Enum
+    public abstract class AEnumDomainModelRepository<TEntity, TDomainEnum, TContext> : IEnumDomainModelRepository<TEntity, TDomainEnum>
+        where TEntity : AEntityEnumModel
+        where TDomainEnum : Enum
         where TContext : DbContext
     {
         private readonly IAmbientDbContextLocator _ambientDbContextLocator;
@@ -22,38 +23,19 @@ namespace Warframe.Market_Infrastructure_Repositories.Repositories.Abstractions
             _ambientDbContextLocator = ambientDbContextLocator ?? throw new ArgumentNullException(nameof(ambientDbContextLocator));
         }
 
-        public TEnum Get(int entityID)
+        public virtual TDomainEnum Get(int entityID)
         {
-            var entitities = DbContext.Set<TEntity>();
-            var foundEntiteis = new List<TEntity>();
-            foreach(var entity in entitities)
-            {
-                if((entity as dynamic).ID == entityID)
-                {
-                    foundEntiteis.Add(entity);
-                }
-            }
+            var foundEntity = DbContext.Set<TEntity>()
+                .SingleOrDefault(predicate => predicate.ID == entityID)
+                ?? throw new EntityNotFoundException(typeof(TEntity).FullName, entityID);
 
-            int entityCount = foundEntiteis.Count();
-
-            if (entityCount == 0)
-                throw new EntityNotFoundException(typeof(TEnum).FullName, entityID);
-
-            if (entityCount > 1)
-                throw DataInconsistencyException.MultipleEntities(typeof(TEnum).FullName, entityID);
-
-            return foundEntiteis.Select(p => ((p as dynamic).Type as string).ParseEnum<TEnum>()).First();
+            return foundEntity.Type.ParseEnum<TDomainEnum>();
         }
 
-        public IEnumerable<TEnum> GetAll()
+        public virtual IEnumerable<TDomainEnum> GetAll()
         {
-            //yield return seems buggy
-            List<TEnum> results = new List<TEnum>();
-            foreach (var entity in DbContext.Set<TEntity>())
-                results.Add((TEnum)(((entity as dynamic).Type as string).ParseEnum<TEnum>() as Enum));
-
-            return results;
-
+            return DbContext.Set<TEntity>()
+                .Select(predicate => predicate.Type.ParseEnum<TDomainEnum>());
         }
     }
 }
