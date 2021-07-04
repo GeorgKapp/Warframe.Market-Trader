@@ -274,6 +274,37 @@ namespace Warframe.Market_Unit_Tests
             }
         }
 
+        [TestMethod("Order Create, Update, Delete")]
+        public void Test17OrderCreate()
+        {
+            var repos = new OrderRepository(_ambientDbContextLocator);
+            using (var dbContextScope = _dbContextScopeFactory.CreateWithTransaction(IsolationLevel.ReadCommitted))
+            {
+                var newOrder = new Market_DomainModels.Models.Order
+                {
+                    User = new Market_DomainModels.Models.User(1),
+                    SubType = SubType.Radiant,
+                    CreationDate = DateTimeOffset.UtcNow,
+                    LastUpdate = DateTimeOffset.UtcNow,
+                    ModRank = null,
+                    Platform = Platform.Pc,
+                    OrderType = OrderType.Buy,
+                    Platinum = 100,
+                    Quantity = 3,
+                    Region = Region.En,
+                    Visible = true
+                };
+
+                repos.Create(ref newOrder);
+                var getResult = repos.Get(newOrder.ID);
+                var hasFoundOnlyOneByPredicate = repos.Get(predicate => predicate.ID == newOrder.ID).SingleOrDefault()?.ID == newOrder.ID;
+                Assert.IsTrue(hasFoundOnlyOneByPredicate);
+                repos.Update(ref getResult);
+                repos.Delete(newOrder.ID);
+                Assert.ThrowsException<EntityNotFoundException>(() => repos.Get(newOrder.ID));
+            }
+        }
+
         private bool CheckIfEnumIdAndValueMatch<TEnum>(int id, TEnum enumValue) where TEnum : Enum
         {
             return EqualityComparer<TEnum>.Default.Equals((TEnum)(object)id, enumValue);

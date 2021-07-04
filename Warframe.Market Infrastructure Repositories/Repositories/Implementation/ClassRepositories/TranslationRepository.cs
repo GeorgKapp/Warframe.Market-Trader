@@ -11,21 +11,21 @@ using Warframe.Market_Infrastructure_Repositories.Repositories.Interfaces.ClassR
 
 namespace Warframe.Market_Infrastructure_Repositories.Repositories.Implementation.ClassRepositories
 {
-    public class UserRepository : IUserRepository
+    public class TranslationRepository : ITranslationRepository
     {
         private readonly IAmbientDbContextLocator _ambientDbContextLocator;
         private DbContext DbContext => _ambientDbContextLocator.GetDbContextOrThrow<EntityContext>();
 
-        public UserRepository(IAmbientDbContextLocator ambientDbContextLocator)
+        public TranslationRepository(IAmbientDbContextLocator ambientDbContextLocator)
         {
             _ambientDbContextLocator = ambientDbContextLocator ?? throw new ArgumentNullException(nameof(ambientDbContextLocator));
         }
 
-        public void Create(ref Market_DomainModels.Models.User entity)
+        public void Create(ref Market_DomainModels.Models.Translation entity)
         {
-            var mappedEntityObject = DomainModelMapper.Map<Market_DomainModels.Models.User, User>(entity);
+            var mappedEntityObject = DomainModelMapper.Map<Market_DomainModels.Models.Translation, Translation>(entity);
             mappedEntityObject.ID = 0;
-            DbContext.Set<User>().Add(mappedEntityObject);
+            DbContext.Set<Translation>().Add(mappedEntityObject);
 
             DbContext.SaveChanges();
             DomainModelMapper.Map(mappedEntityObject, entity);
@@ -33,10 +33,10 @@ namespace Warframe.Market_Infrastructure_Repositories.Repositories.Implementatio
 
         public void Delete(int entityID)
         {
-            var entity = DbContext.Set<User>()
+            var entity = DbContext.Set<Translation>()
                 .Where(predicate => predicate.ID == entityID)
                 .SingleOrDefault()
-                ?? throw new EntityNotFoundException(nameof(User), entityID);
+                ?? throw new EntityNotFoundException(nameof(Translation), entityID);
 
             DbContext.Entry(entity).State = EntityState.Deleted;
             DbContext.SaveChanges();
@@ -44,44 +44,44 @@ namespace Warframe.Market_Infrastructure_Repositories.Repositories.Implementatio
 
         public bool Exists(int entityID)
         {
-            return DbContext.Set<User>().Any(e => e.ID == entityID);
+            return DbContext.Set<Translation>().Any(e => e.ID == entityID);
         }
 
-        public Market_DomainModels.Models.User Get(int entityID)
+        public Market_DomainModels.Models.Translation Get(int entityID)
         {
             var searchedEntity =
-                DbContext.Set<User>()
+                DbContext.Set<Translation>()
                 .SingleOrDefault(predicate => predicate.ID == entityID)
-                ?? throw new EntityNotFoundException(nameof(User), entityID);
+                ?? throw new EntityNotFoundException(nameof(Translation), entityID);
 
-            return DomainModelMapper.Map<Market_DomainModels.Models.User>(searchedEntity);
+            return DomainModelMapper.Map<Market_DomainModels.Models.Translation>(searchedEntity);
         }
 
-        public IEnumerable<Market_DomainModels.Models.User> Get(Expression<Func<Market_DomainModels.Models.User, bool>> predicate)
+        public IEnumerable<Market_DomainModels.Models.Translation> Get(Expression<Func<Market_DomainModels.Models.Translation, bool>> predicate)
         {
-            var mappedPredicate = DomainModelMapper.Map<Expression<Func<User, bool>>>(predicate);
+            var mappedPredicate = DomainModelMapper.Map<Expression<Func<Translation, bool>>>(predicate);
 
-            return DbContext.Set<User>().Where(mappedPredicate)
+            return DbContext.Set<Translation>().Where(mappedPredicate)
                 .ToList()
-                .Select(predicate => DomainModelMapper.Map<Market_DomainModels.Models.User>(predicate));
+                .Select(predicate => DomainModelMapper.Map<Market_DomainModels.Models.Translation>(predicate));
         }
 
 
-        public IEnumerable<Market_DomainModels.Models.User> GetAll()
+        public IEnumerable<Market_DomainModels.Models.Translation> GetAll()
         {
-            return DbContext.Set<User>()
+            return DbContext.Set<Translation>()
                 .ToList()
-                .Select(predicate => DomainModelMapper.Map<Market_DomainModels.Models.User>(predicate));
+                .Select(predicate => DomainModelMapper.Map<Market_DomainModels.Models.Translation>(predicate));
         }
 
-        public void Update(ref Market_DomainModels.Models.User entity)
+        public void Update(ref Market_DomainModels.Models.Translation entity)
         {
             var entityId = entity.ID;
 
             var searchedEntity =
-                DbContext.Set<User>()
+                DbContext.Set<Translation>()
                 .SingleOrDefault(predicate => predicate.ID == entityId)
-                ?? throw new EntityNotFoundException(nameof(User), entity.ID);
+                ?? throw new EntityNotFoundException(nameof(Translation), entity.ID);
 
             DomainModelMapper.Map(entity, searchedEntity);
             DbContext.SaveChanges();

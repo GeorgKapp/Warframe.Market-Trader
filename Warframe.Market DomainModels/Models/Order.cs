@@ -15,7 +15,6 @@ namespace Warframe.Market_DomainModels.Models
         public bool Visible { get; set; }
         public int Platinum { get; set; }
         public byte? ModRank { get; set; }
-        public int UserID { get; set; }
         public OrderType OrderType { get; set; }
         public Platform Platform { get; set; }
         public Region Region { get; set; }

@@ -59,6 +59,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Mapping\DomainModelMapper.cs" />
+    <Compile Include="Mapping\Profiles\ClassProfiles\OrderMappingProfile.cs" />
+    <Compile Include="Mapping\Profiles\ClassProfiles\TagMappingProfile.cs" />
+    <Compile Include="Mapping\Profiles\ClassProfiles\TranslationMappingProfile.cs" />
     <Compile Include="Mapping\Profiles\EnumProfiles\SubTypeMappingProfile.cs" />
     <Compile Include="Mapping\Profiles\EnumProfiles\StatusMappingProfile.cs" />
     <Compile Include="Mapping\Profiles\EnumProfiles\RoleMappingProfile.cs" />
@@ -67,6 +70,9 @@
     <Compile Include="Mapping\Profiles\EnumProfiles\PlatformMappingProfile.cs" />
     <Compile Include="Mapping\Profiles\EnumProfiles\RegionMappingProfile.cs" />
     <Compile Include="Mapping\Profiles\ClassProfiles\UserMappingProfile.cs" />
+    <Compile Include="Repositories\Implementation\ClassRepositories\OrderRepository.cs" />
+    <Compile Include="Repositories\Implementation\ClassRepositories\TagRepository.cs" />
+    <Compile Include="Repositories\Implementation\ClassRepositories\TranslationRepository.cs" />
     <Compile Include="Repositories\Implementation\ClassRepositories\UserRepository.cs" />
     <Compile Include="Repositories\Interfaces\Base\IEnumDomainModelRepository.cs" />
     <Compile Include="Repositories\Exceptions\DataInconsistencyException.cs" />
@@ -80,7 +86,10 @@
     <Compile Include="Repositories\Implementation\EnumRepositories\IconFormatRepository.cs" />
     <Compile Include="Repositories\Implementation\EnumRepositories\OrderTypeRepository.cs" />
     <Compile Include="Repositories\Interfaces\ClassRepositories\ILinkedAccountsRepository.cs" />
+    <Compile Include="Repositories\Interfaces\ClassRepositories\ITagRepository.cs" />
+    <Compile Include="Repositories\Interfaces\ClassRepositories\ITranslationRepository.cs" />
     <Compile Include="Repositories\Interfaces\ClassRepositories\IUserRepository.cs" />
+    <Compile Include="Repositories\Interfaces\ClassRepositories\IOrderRepository.cs" />
     <Compile Include="Repositories\Interfaces\EnumRepositories\ISubTypeRepository.cs" />
     <Compile Include="Repositories\Interfaces\EnumRepositories\IStatusRepository.cs" />
     <Compile Include="Repositories\Interfaces\EnumRepositories\IPlatformRepository.cs" />
