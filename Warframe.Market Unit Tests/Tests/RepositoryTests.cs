@@ -250,6 +250,29 @@ namespace Warframe.Market_Unit_Tests
             }
         }
 
+        [TestMethod("User Get 1")]
+        public void Test16LinkedAccountsCreate()
+        {
+            var repos = new UserRepository(_ambientDbContextLocator);
+            using (var dbContextScope = _dbContextScopeFactory.Create())
+            {
+                var getResult = repos.Get(1);
+                var createObject = new Market_DomainModels.Models.User
+                {
+                    Status = Status.Ingame,
+                    Region = Region.En,
+                    LastSeen = DateTimeOffset.Now,
+                    InGameName = "Ivoken3",
+                    Reputation = 37,
+                    Avatar = "1231231231"
+                };
+
+                repos.Create(ref createObject);
+                dbContextScope.SaveChanges();
+                _ = "";
+            }
+        }
+
         private bool CheckIfEnumIdAndValueMatch<TEnum>(int id, TEnum enumValue) where TEnum : Enum
         {
             return EqualityComparer<TEnum>.Default.Equals((TEnum)(object)id, enumValue);

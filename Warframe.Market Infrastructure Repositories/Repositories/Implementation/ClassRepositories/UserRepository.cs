@@ -1,13 +1,11 @@
-﻿using AutoMapper;
-using AutoMapper.Extensions.ExpressionMapping;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
 using Warframe.Market_Infrastructure;
 using Warframe.Market_Infrastructure.DbContextScope;
-using Warframe.Market_Infrastructure_Repositories.Mapping.Profiles;
+using Warframe.Market_Infrastructure_Repositories.Mapping;
 using Warframe.Market_Infrastructure_Repositories.Repositories.Exceptions;
 using Warframe.Market_Infrastructure_Repositories.Repositories.Interfaces.ClassRepositories;
 
@@ -16,13 +14,6 @@ namespace Warframe.Market_Infrastructure_Repositories.Repositories.Implementatio
     public class UserRepository : IUserRepository
     {
         private readonly IAmbientDbContextLocator _ambientDbContextLocator;
-        internal static IMapper Mapper { get; } = new MapperConfiguration(
-             config =>
-             {
-                 config.AddExpressionMapping();
-                 config.AddProfile<UserMappingProfile>();
-             }).CreateMapper();
-
         private DbContext DbContext => _ambientDbContextLocator.GetDbContextOrThrow<EntityContext>();
 
         public UserRepository(IAmbientDbContextLocator ambientDbContextLocator)
@@ -32,13 +23,12 @@ namespace Warframe.Market_Infrastructure_Repositories.Repositories.Implementatio
 
         public void Create(ref Market_DomainModels.Models.User entity)
         {
-            var mappedEntityObject = Mapper.Map<Market_DomainModels.Models.User, User>(entity);
-            var createdEntityObject = DbContext.Set<User>().Add(mappedEntityObject);
+            var mappedEntityObject = DomainModelMapper.Map<Market_DomainModels.Models.User, User>(entity);
+            mappedEntityObject.ID = 0;
+            DbContext.Set<User>().Add(mappedEntityObject);
 
             DbContext.SaveChanges();
-
-            entity = new Market_DomainModels.Models.User(createdEntityObject.ID);
-            Mapper.Map(createdEntityObject, entity);
+            DomainModelMapper.Map(mappedEntityObject, entity);
         }
 
         public void Delete(int entityID)
@@ -61,21 +51,17 @@ namespace Warframe.Market_Infrastructure_Repositories.Repositories.Implementatio
                 DbContext.Set<User>().SingleOrDefault(predicate => predicate.ID == entityID)
                 ?? throw new EntityNotFoundException(nameof(User), entityID);
 
-            var result = new Market_DomainModels.Models.User(entityID);
-            Mapper.Map(searchedEntity, result);
-            return result;
+            return DomainModelMapper.Map<Market_DomainModels.Models.User>(searchedEntity);
         }
 
         public IEnumerable<Market_DomainModels.Models.User> Get(Expression<Func<Market_DomainModels.Models.User, bool>> predicate)
         {
             var results = new List<Market_DomainModels.Models.User>();
+            var mappedPredicate = DomainModelMapper.Map<Expression<Func<User, bool>>>(predicate);
 
-            var mappedPredicate = Mapper.Map<Expression<Func<User, bool>>>(predicate);
             foreach (var entity in DbContext.Set<User>().Where(mappedPredicate))
             {
-                var domainModel = new Market_DomainModels.Models.User(entity.ID);
-                Mapper.Map(entity, domainModel);
-                results.Add(domainModel);
+                results.Add(DomainModelMapper.Map<Market_DomainModels.Models.User>(entity));
             }
             return results;
         }
@@ -86,9 +72,7 @@ namespace Warframe.Market_Infrastructure_Repositories.Repositories.Implementatio
             var results = new List<Market_DomainModels.Models.User>();
             foreach (var entity in DbContext.Set<User>())
             {
-                var domainModel = new Market_DomainModels.Models.User(entity.ID);
-                Mapper.Map(entity, domainModel);
-                results.Add(domainModel);
+                results.Add(DomainModelMapper.Map<Market_DomainModels.Models.User>(entity));
             }
             return results;
         }
@@ -101,10 +85,9 @@ namespace Warframe.Market_Infrastructure_Repositories.Repositories.Implementatio
                 DbContext.Set<User>().SingleOrDefault(predicate => predicate.ID == entityId)
                 ?? throw new EntityNotFoundException(nameof(User), entity.ID);
 
-            Mapper.Map(entity, searchedEntity);
+            DomainModelMapper.Map(entity, searchedEntity);
             DbContext.SaveChanges();
-            Mapper.Map(searchedEntity, entity);
+            DomainModelMapper.Map(searchedEntity, entity);
         }
-
     }
 }

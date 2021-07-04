@@ -1,8 +1,6 @@
 ﻿using AutoMapper;
-using System;
-using System.Linq.Expressions;
 
-namespace Warframe.Market_Infrastructure_Repositories.Mapping.Profiles
+namespace Warframe.Market_Infrastructure_Repositories.Mapping.Profiles.ClassProfiles
 {
     public class LinkedAccountsMappingProfile : Profile
     {

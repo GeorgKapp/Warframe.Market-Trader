@@ -59,7 +59,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Mapping\DomainModelMapper.cs" />
-    <Compile Include="Mapping\Profiles\UserMappingProfile.cs" />
+    <Compile Include="Mapping\Profiles\EnumProfiles\SubTypeMappingProfile.cs" />
+    <Compile Include="Mapping\Profiles\EnumProfiles\StatusMappingProfile.cs" />
+    <Compile Include="Mapping\Profiles\EnumProfiles\RoleMappingProfile.cs" />
+    <Compile Include="Mapping\Profiles\EnumProfiles\OrderTypeMappingProfile.cs" />
+    <Compile Include="Mapping\Profiles\EnumProfiles\IconFormatMappingProfile.cs" />
+    <Compile Include="Mapping\Profiles\EnumProfiles\PlatformMappingProfile.cs" />
+    <Compile Include="Mapping\Profiles\EnumProfiles\RegionMappingProfile.cs" />
+    <Compile Include="Mapping\Profiles\ClassProfiles\UserMappingProfile.cs" />
     <Compile Include="Repositories\Abstractions\AClassDomainModelRepository.cs" />
     <Compile Include="Repositories\Abstractions\AEnumDomainModelRepository.cs" />
     <Compile Include="Repositories\Implementation\ClassRepositories\UserRepository.cs" />
@@ -82,7 +89,7 @@
     <Compile Include="Repositories\Interfaces\EnumRepositories\IOrderTypeRepository.cs" />
     <Compile Include="Repositories\Interfaces\EnumRepositories\IIconFormatRepository.cs" />
     <Compile Include="Repositories\Interfaces\EnumRepositories\IRegionRepository.cs" />
-    <Compile Include="Mapping\Profiles\LinkedAccountsMappingProfile.cs" />
+    <Compile Include="Mapping\Profiles\ClassProfiles\LinkedAccountsMappingProfile.cs" />
     <Compile Include="Utilities\EnumExtensions.cs" />
     <Compile Include="Repositories\Interfaces\EnumRepositories\IRoleRepository.cs" />
     <Compile Include="Repositories\Interfaces\Base\IClassDomainModelRepository.cs" />

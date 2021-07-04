@@ -1,7 +1,8 @@
 ﻿using AutoMapper;
 using AutoMapper.Extensions.ExpressionMapping;
 using System;
-using Warframe.Market_Infrastructure_Repositories.Mapping.Profiles;
+using Warframe.Market_Infrastructure_Repositories.Mapping.Profiles.ClassProfiles;
+using Warframe.Market_Infrastructure_Repositories.Mapping.Profiles.EnumProfiles;
 
 namespace Warframe.Market_Infrastructure_Repositories.Mapping
 {
@@ -15,6 +16,13 @@ namespace Warframe.Market_Infrastructure_Repositories.Mapping
             config =>
             {
                 config.AddExpressionMapping();
+                config.AddProfile<IconFormatMappingProfile>();
+                config.AddProfile<OrderTypeMappingProfile>();
+                config.AddProfile<PlatformMappingProfile>();
+                config.AddProfile<RegionMappingProfile>();
+                config.AddProfile<RoleMappingProfile>();
+                config.AddProfile<StatusMappingProfile>();
+                config.AddProfile<SubTypeMappingProfile>();
 
                 config.AddProfile<LinkedAccountsMappingProfile>();
                 config.AddProfile<UserMappingProfile>();
@@ -22,7 +30,70 @@ namespace Warframe.Market_Infrastructure_Repositories.Mapping
             }).CreateMapper();
         }
 
-        
+        //
+        // Summary:
+        //     Execute a mapping from the source object to a new destination object. The source
+        //     type is inferred from the source object.
+        //
+        // Parameters:
+        //   source:
+        //     Source object to map from
+        //
+        // Type parameters:
+        //   TDestination:
+        //     Destination type to create
+        //
+        // Returns:
+        //     Mapped destination object
+        public static TDestination Map<TDestination>(object source)
+            => _mapper.Map<TDestination>(source);
+
+
+        //
+        // Summary:
+        //     Execute a mapping from the source object to a new destination object.
+        //
+        // Parameters:
+        //   source:
+        //     Source object to map from
+        //
+        // Type parameters:
+        //   TSource:
+        //     Source type to use, regardless of the runtime type
+        //
+        //   TDestination:
+        //     Destination type to create
+        //
+        // Returns:
+        //     Mapped destination object
+        public static TDestination Map<TSource, TDestination>(TSource source)
+            => _mapper.Map<TSource, TDestination>(source);
+
+
+        //
+        // Summary:
+        //     Execute a mapping from the source object to the existing destination object.
+        //
+        // Parameters:
+        //   source:
+        //     Source object to map from
+        //
+        //   destination:
+        //     Destination object to map into
+        //
+        // Type parameters:
+        //   TSource:
+        //     Source type to use
+        //
+        //   TDestination:
+        //     Destination type
+        //
+        // Returns:
+        //     The mapped destination object, same instance as the destination object
+        public static TDestination Map<TSource, TDestination>(TSource source, TDestination destination)
+        => _mapper.Map(source, destination);
+
+
         //
         // Summary:
         //     Execute a mapping from the source object to a new destination object with supplied
