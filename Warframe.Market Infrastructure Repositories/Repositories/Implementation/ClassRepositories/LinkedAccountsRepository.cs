@@ -16,7 +16,7 @@ namespace Warframe.Market_Infrastructure_Repositories.Repositories.Implementatio
     {
         private readonly IAmbientDbContextLocator _ambientDbContextLocator;
         internal static IMapper Mapper { get; } = new MapperConfiguration(
-            cfg => cfg.AddProfile<LinkedAccountsMappingProfile>())
+            config => config.AddProfile<LinkedAccountsMappingProfile>())
                 .CreateMapper();
 
         private DbContext DbContext => _ambientDbContextLocator.GetDbContextOrThrow<EntityContext>();
@@ -57,15 +57,16 @@ namespace Warframe.Market_Infrastructure_Repositories.Repositories.Implementatio
             return result;
         }
 
-        public Market_DomainModels.Models.LinkedAccounts Get(Expression<Func<LinkedAccounts, bool>> predicate)
+        public IEnumerable<Market_DomainModels.Models.LinkedAccounts> Get(Expression<Func<LinkedAccounts, bool>> predicate)
         {
-            var searchedEntity =
-                DbContext.Set<LinkedAccounts>().SingleOrDefault(predicate)
-                ?? throw new EntityNotFoundException(nameof(LinkedAccounts), predicate.ToString());
-
-            var result = new Market_DomainModels.Models.LinkedAccounts(searchedEntity.ID);
-            Mapper.Map(searchedEntity, result);
-            return result;
+            var results = new List<Market_DomainModels.Models.LinkedAccounts>();
+            foreach (var entity in DbContext.Set<LinkedAccounts>().Where(predicate))
+            {
+                var domainModel = new Market_DomainModels.Models.LinkedAccounts(entity.ID);
+                Mapper.Map(entity, domainModel);
+                results.Add(domainModel);
+            }
+            return results;
         }
         
         public IEnumerable<Market_DomainModels.Models.LinkedAccounts> GetAll()

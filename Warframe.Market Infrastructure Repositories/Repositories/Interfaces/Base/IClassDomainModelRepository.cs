@@ -12,7 +12,7 @@ namespace Warframe.Market_Infrastructure_Repositories.Repositories.Interfaces.Ba
         void Delete (int entityID);
         bool Exists(int entityID);
         TDomainModel Get (int entityID);
-        TDomainModel Get(Expression<Func<TEntityModel, bool>> predicate);
+        IEnumerable<TDomainModel> Get(Expression<Func<TEntityModel, bool>> predicate);
         IEnumerable<TDomainModel> GetAll();
     }
 }

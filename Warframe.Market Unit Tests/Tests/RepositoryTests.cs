@@ -222,8 +222,7 @@ namespace Warframe.Market_Unit_Tests
             }
         }
 
-        [TestMethod("LinkedAccounts Create()")]
-
+        [TestMethod("LinkedAccounts Create, Update, Delete")]
         public void Test15LinkedAccountsCreate()
         {
             var repos = new LinkedAccountsRepository(_ambientDbContextLocator);
@@ -239,7 +238,8 @@ namespace Warframe.Market_Unit_Tests
 
                 repos.Create(ref newAccount);
                 var getResult = repos.Get(newAccount.ID);
-
+                var hasFoundOnlyOneByPredicate = repos.Get(predicate => predicate.ID == newAccount.ID).SingleOrDefault() != null;
+                Assert.IsTrue(hasFoundOnlyOneByPredicate);
                 getResult.HasSteamProfile = false;
                 repos.Update(ref getResult);
                 Assert.IsFalse(getResult.HasSteamProfile);
