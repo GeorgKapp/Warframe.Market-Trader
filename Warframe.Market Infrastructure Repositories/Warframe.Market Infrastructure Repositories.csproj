@@ -38,6 +38,9 @@
     <Reference Include="AutoMapper, Version=10.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
       <HintPath>..\packages\AutoMapper.10.1.1\lib\net461\AutoMapper.dll</HintPath>
     </Reference>
+    <Reference Include="AutoMapper.Extensions.ExpressionMapping, Version=4.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.Extensions.ExpressionMapping.4.1.1\lib\net461\AutoMapper.Extensions.ExpressionMapping.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -55,10 +58,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Mapping\DomainModelMapper.cs" />
+    <Compile Include="Mapping\Profiles\UserMappingProfile.cs" />
+    <Compile Include="Repositories\Abstractions\AClassDomainModelRepository.cs" />
     <Compile Include="Repositories\Abstractions\AEnumDomainModelRepository.cs" />
+    <Compile Include="Repositories\Implementation\ClassRepositories\UserRepository.cs" />
     <Compile Include="Repositories\Interfaces\Base\IEnumDomainModelRepository.cs" />
-    <Compile Include="Mapping\Abstractions\AMappingService.cs" />
-    <Compile Include="Mapping\Interfaces\IMappingService.cs" />
     <Compile Include="Repositories\Exceptions\DataInconsistencyException.cs" />
     <Compile Include="Repositories\Exceptions\EntityNotFoundException.cs" />
     <Compile Include="Repositories\Implementation\EnumRepositories\RoleRepository.cs" />
@@ -70,6 +75,7 @@
     <Compile Include="Repositories\Implementation\EnumRepositories\IconFormatRepository.cs" />
     <Compile Include="Repositories\Implementation\EnumRepositories\OrderTypeRepository.cs" />
     <Compile Include="Repositories\Interfaces\ClassRepositories\ILinkedAccountsRepository.cs" />
+    <Compile Include="Repositories\Interfaces\ClassRepositories\IUserRepository.cs" />
     <Compile Include="Repositories\Interfaces\EnumRepositories\ISubTypeRepository.cs" />
     <Compile Include="Repositories\Interfaces\EnumRepositories\IStatusRepository.cs" />
     <Compile Include="Repositories\Interfaces\EnumRepositories\IPlatformRepository.cs" />
@@ -96,9 +102,7 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Mapping\Services\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

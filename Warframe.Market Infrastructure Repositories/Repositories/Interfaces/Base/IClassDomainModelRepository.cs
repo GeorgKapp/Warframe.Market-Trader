@@ -5,14 +5,16 @@ using Warframe.Market_DomainModels.Abstractions;
 
 namespace Warframe.Market_Infrastructure_Repositories.Repositories.Interfaces.Base
 {
-    public interface IClassDomainModelRepository<TDomainModel, TEntityModel> where TDomainModel : ADomainModel
+    public interface IClassDomainModelRepository<TEntity, TClass> 
+        where TEntity : class
+        where TClass : ADomainModel
     {
-        void Create (ref TDomainModel entity);
-        void Update (ref TDomainModel entity);
+        void Create (ref TClass entity);
+        void Update (ref TClass entity);
         void Delete (int entityID);
         bool Exists(int entityID);
-        TDomainModel Get (int entityID);
-        IEnumerable<TDomainModel> Get(Expression<Func<TEntityModel, bool>> predicate);
-        IEnumerable<TDomainModel> GetAll();
+        TClass Get (int entityID);
+        IEnumerable<TClass> Get(Expression<Func<TClass, bool>> predicate);
+        IEnumerable<TClass> GetAll();
     }
 }

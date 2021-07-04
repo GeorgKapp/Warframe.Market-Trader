@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using AutoMapper.Extensions.ExpressionMapping;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -9,6 +10,7 @@ using Warframe.Market_Infrastructure.DbContextScope;
 using Warframe.Market_Infrastructure_Repositories.Mapping.Profiles;
 using Warframe.Market_Infrastructure_Repositories.Repositories.Exceptions;
 using Warframe.Market_Infrastructure_Repositories.Repositories.Interfaces.ClassRepositories;
+using Warframe.Market_Infrastructure_Repositories.Utilities;
 
 namespace Warframe.Market_Infrastructure_Repositories.Repositories.Implementation.ClassRepositories
 {
@@ -16,8 +18,12 @@ namespace Warframe.Market_Infrastructure_Repositories.Repositories.Implementatio
     {
         private readonly IAmbientDbContextLocator _ambientDbContextLocator;
         internal static IMapper Mapper { get; } = new MapperConfiguration(
-            config => config.AddProfile<LinkedAccountsMappingProfile>())
-                .CreateMapper();
+
+            config =>
+            {
+                config.AddExpressionMapping();
+                config.AddProfile<LinkedAccountsMappingProfile>();
+            }).CreateMapper();
 
         private DbContext DbContext => _ambientDbContextLocator.GetDbContextOrThrow<EntityContext>();
 
@@ -57,10 +63,13 @@ namespace Warframe.Market_Infrastructure_Repositories.Repositories.Implementatio
             return result;
         }
 
-        public IEnumerable<Market_DomainModels.Models.LinkedAccounts> Get(Expression<Func<LinkedAccounts, bool>> predicate)
+        public IEnumerable<Market_DomainModels.Models.LinkedAccounts> Get(Expression<Func<Market_DomainModels.Models.LinkedAccounts, bool>> predicate)
         {
+
             var results = new List<Market_DomainModels.Models.LinkedAccounts>();
-            foreach (var entity in DbContext.Set<LinkedAccounts>().Where(predicate))
+
+            var mappedPredicate = Mapper.Map<Expression<Func<LinkedAccounts, bool>>>(predicate);
+            foreach (var entity in DbContext.Set<LinkedAccounts>().Where(mappedPredicate))
             {
                 var domainModel = new Market_DomainModels.Models.LinkedAccounts(entity.ID);
                 Mapper.Map(entity, domainModel);

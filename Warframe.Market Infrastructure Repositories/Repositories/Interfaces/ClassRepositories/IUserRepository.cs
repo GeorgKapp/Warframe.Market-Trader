@@ -3,6 +3,5 @@ using Warframe.Market_Infrastructure_Repositories.Repositories.Interfaces.Base;
 
 namespace Warframe.Market_Infrastructure_Repositories.Repositories.Interfaces.ClassRepositories
 {
-    public interface ILinkedAccountsRepository : IClassDomainModelRepository<LinkedAccounts, Market_DomainModels.Models.LinkedAccounts> { }
- 
+    public interface IUserRepository : IClassDomainModelRepository<User, Market_DomainModels.Models.User> { }
 }
