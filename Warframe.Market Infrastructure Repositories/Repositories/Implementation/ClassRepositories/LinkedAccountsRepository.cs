@@ -34,7 +34,9 @@ namespace Warframe.Market_Infrastructure_Repositories.Repositories.Implementatio
 
         public void Delete(int entityID)
         {
-            var entity = DbContext.Set<LinkedAccounts>().Where(predicate => predicate.ID == entityID).SingleOrDefault()
+            var entity = DbContext.Set<LinkedAccounts>()
+                .Where(predicate => predicate.ID == entityID)
+                .SingleOrDefault()
                 ?? throw new EntityNotFoundException(nameof(LinkedAccounts), entityID);
 
             DbContext.Entry(entity).State = EntityState.Deleted;
@@ -52,25 +54,18 @@ namespace Warframe.Market_Infrastructure_Repositories.Repositories.Implementatio
 
         public IEnumerable<Market_DomainModels.Models.LinkedAccounts> Get(Expression<Func<Market_DomainModels.Models.LinkedAccounts, bool>> predicate)
         {
-            var results = new List<Market_DomainModels.Models.LinkedAccounts>();
             var mappedPredicate = DomainModelMapper.Map<Expression<Func<LinkedAccounts, bool>>>(predicate);
 
-            foreach (var entity in DbContext.Set<LinkedAccounts>().Where(mappedPredicate))
-            {
-                results.Add(DomainModelMapper.Map<Market_DomainModels.Models.LinkedAccounts>(entity));
-            }
-            return results;
+            return DbContext.Set<LinkedAccounts>().Where(mappedPredicate)
+                .ToList()
+                .Select(predicate => DomainModelMapper.Map<Market_DomainModels.Models.LinkedAccounts>(predicate));
         }
         
         public IEnumerable<Market_DomainModels.Models.LinkedAccounts> GetAll()
         {
-            var results = new List<Market_DomainModels.Models.LinkedAccounts>();
-
-            foreach (var entity in DbContext.Set<LinkedAccounts>())
-            {
-                results.Add(DomainModelMapper.Map<Market_DomainModels.Models.LinkedAccounts>(entity));
-            }
-            return results;
+            return DbContext.Set<LinkedAccounts>()
+                .ToList()
+                .Select(predicate => DomainModelMapper.Map<Market_DomainModels.Models.LinkedAccounts>(predicate));
         }
 
         public void Update(ref Market_DomainModels.Models.LinkedAccounts entity)
