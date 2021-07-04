@@ -32,7 +32,8 @@ namespace Warframe.Market_Infrastructure_Repositories.Repositories.Implementatio
 
         public IEnumerable<IconFormat> GetAll()
         {
-            return DbContext.Set<IconFormatType>().ToList()
+            return DbContext.Set<IconFormatType>()
+                .ToList()
                 .Select(predicate => predicate.Type.ParseEnum<IconFormat>());
         }
     }

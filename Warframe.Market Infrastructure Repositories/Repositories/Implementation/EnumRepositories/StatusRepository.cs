@@ -32,7 +32,8 @@ namespace Warframe.Market_Infrastructure_Repositories.Repositories.Implementatio
 
         public IEnumerable<Status> GetAll()
         {
-            return DbContext.Set<StatusType>().ToList()
+            return DbContext.Set<StatusType>()
+                .ToList()
                 .Select(predicate => predicate.Type.ParseEnum<Status>());
         }
     }
