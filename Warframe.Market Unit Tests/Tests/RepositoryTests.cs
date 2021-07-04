@@ -3,8 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using Warframe.Market_DbContextScope;
 using Warframe.Market_DomainModels.Enums;
-using Warframe.Market_Infrastructure.DbContextScope;
 using Warframe.Market_Infrastructure_Repositories.Repositories.Exceptions;
 using Warframe.Market_Infrastructure_Repositories.Repositories.Implementation.ClassRepositories;
 using Warframe.Market_Infrastructure_Repositories.Repositories.Implementation.EnumRepositories;
@@ -259,7 +259,7 @@ namespace Warframe.Market_Unit_Tests
                 var getResult = repos.Get(1);
                 var createObject = new Market_DomainModels.Models.User
                 {
-                    Status = Status.Ingame,
+                    Status = null,
                     Region = Region.En,
                     LastSeen = DateTimeOffset.Now,
                     InGameName = "Ivoken3",
@@ -268,6 +268,7 @@ namespace Warframe.Market_Unit_Tests
                 };
 
                 repos.Create(ref createObject);
+                var reposResponse2 = repos.Get(createObject.ID);
                 dbContextScope.SaveChanges();
                 _ = "";
             }

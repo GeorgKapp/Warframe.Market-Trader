@@ -10,7 +10,7 @@ using System.Collections;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Warframe.Market_Infrastructure.DbContextScope
+namespace Warframe.Market_DbContextScope
 {
     /// <summary>
     /// Creates and manages the DbContext instances used by this code block. 

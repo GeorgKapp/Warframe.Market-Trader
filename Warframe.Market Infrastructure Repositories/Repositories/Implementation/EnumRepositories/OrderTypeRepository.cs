@@ -1,5 +1,5 @@
-﻿using Warframe.Market_Infrastructure;
-using Warframe.Market_Infrastructure.DbContextScope;
+﻿using Warframe.Market_DbContextScope;
+using Warframe.Market_Infrastructure;
 using Warframe.Market_Infrastructure_Repositories.Repositories.Abstractions;
 using Warframe.Market_Infrastructure_Repositories.Repositories.Interfaces.EnumRepositories;
 

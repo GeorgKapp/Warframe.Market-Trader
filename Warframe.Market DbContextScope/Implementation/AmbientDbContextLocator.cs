@@ -7,7 +7,7 @@
  */
 using System.Data.Entity;
 
-namespace Warframe.Market_Infrastructure.DbContextScope
+namespace Warframe.Market_DbContextScope
 {
     public class AmbientDbContextLocator : IAmbientDbContextLocator
     {

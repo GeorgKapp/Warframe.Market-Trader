@@ -13,7 +13,7 @@ using System.Runtime.ExceptionServices;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Warframe.Market_Infrastructure.DbContextScope
+namespace Warframe.Market_DbContextScope
 {
     /// <summary>
     /// As its name suggests, DbContextCollection maintains a collection of DbContext instances.

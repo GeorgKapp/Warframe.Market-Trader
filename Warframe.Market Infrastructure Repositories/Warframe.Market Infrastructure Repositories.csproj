@@ -100,6 +100,10 @@
       <Project>{530b5829-2a47-44f6-aec8-0cfd46b3dbfe}</Project>
       <Name>Warframe.Market Infrastructure</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Warframe.Market DbContextScope\Warframe.Market DbContextScope.csproj">
+      <Project>{b99ec32d-b790-4da1-8b56-062d1c65ab3f}</Project>
+      <Name>Warframe.Market DbContextScope</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Warframe.Market DomainModels\Warframe.Market DomainModels.csproj">
       <Project>{b7d70e21-e5ed-41b0-a1e1-7895f901266e}</Project>
       <Name>Warframe.Market DomainModels</Name>

@@ -1,14 +1,11 @@
-﻿using AutoMapper;
-using AutoMapper.Extensions.ExpressionMapping;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
+using Warframe.Market_DbContextScope;
 using Warframe.Market_Infrastructure;
-using Warframe.Market_Infrastructure.DbContextScope;
 using Warframe.Market_Infrastructure_Repositories.Mapping;
-using Warframe.Market_Infrastructure_Repositories.Mapping.Profiles;
 using Warframe.Market_Infrastructure_Repositories.Repositories.Exceptions;
 using Warframe.Market_Infrastructure_Repositories.Repositories.Interfaces.ClassRepositories;
 

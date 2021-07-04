@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Data.Entity;
 
-namespace Warframe.Market_Infrastructure.DbContextScope
+namespace Warframe.Market_DbContextScope
 {
     public static class AmbientDbContextLocatorExtensions
     {

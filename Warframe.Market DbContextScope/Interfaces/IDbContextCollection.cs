@@ -8,7 +8,7 @@
 using System;
 using System.Data.Entity;
 
-namespace Warframe.Market_Infrastructure.DbContextScope
+namespace Warframe.Market_DbContextScope
 {
     /// <summary>
     /// Maintains a list of lazily-created DbContext instances.

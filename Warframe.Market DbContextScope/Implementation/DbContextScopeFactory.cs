@@ -8,7 +8,7 @@
 using System;
 using System.Data;
 
-namespace Warframe.Market_Infrastructure.DbContextScope
+namespace Warframe.Market_DbContextScope
 {
     public class DbContextScopeFactory : IDbContextScopeFactory
     {

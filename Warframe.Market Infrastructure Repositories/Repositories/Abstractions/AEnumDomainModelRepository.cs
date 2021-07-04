@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using Warframe.Market_Infrastructure.DbContextScope;
+using Warframe.Market_DbContextScope;
 using Warframe.Market_Infrastructure_Repositories.Repositories.Exceptions;
 using Warframe.Market_Infrastructure_Repositories.Repositories.Interfaces.Base;
 using Warframe.Market_Infrastructure_Repositories.Utilities;

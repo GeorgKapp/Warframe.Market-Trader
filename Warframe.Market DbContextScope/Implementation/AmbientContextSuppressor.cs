@@ -7,7 +7,7 @@
  */
 using System;
 
-namespace Warframe.Market_Infrastructure.DbContextScope
+namespace Warframe.Market_DbContextScope
 {
     public class AmbientContextSuppressor : IDisposable
     {

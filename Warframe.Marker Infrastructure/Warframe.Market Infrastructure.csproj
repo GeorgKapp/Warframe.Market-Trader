@@ -68,20 +68,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DbContextScope\Enums\DbContextScopeOption.cs" />
-    <Compile Include="DbContextScope\Extensions\AmbientDbContextLocatorExtensions.cs" />
-    <Compile Include="DbContextScope\Implementation\AmbientContextSuppressor.cs" />
-    <Compile Include="DbContextScope\Implementation\AmbientDbContextLocator.cs" />
-    <Compile Include="DbContextScope\Implementation\DbContextCollection.cs" />
-    <Compile Include="DbContextScope\Implementation\DbContextReadOnlyScope.cs" />
-    <Compile Include="DbContextScope\Implementation\DbContextScope.cs" />
-    <Compile Include="DbContextScope\Implementation\DbContextScopeFactory.cs" />
-    <Compile Include="DbContextScope\Interfaces\IAmbientDbContextLocator.cs" />
-    <Compile Include="DbContextScope\Interfaces\IDbContextCollection.cs" />
-    <Compile Include="DbContextScope\Interfaces\IDbContextFactory.cs" />
-    <Compile Include="DbContextScope\Interfaces\IDbContextReadOnlyScope.cs" />
-    <Compile Include="DbContextScope\Interfaces\IDbContextScope.cs" />
-    <Compile Include="DbContextScope\Interfaces\IDbContextScopeFactory.cs" />
     <Compile Include="IconFormatType.cs">
       <DependentUpon>InfrastructureModels.tt</DependentUpon>
     </Compile>

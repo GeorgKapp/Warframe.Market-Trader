@@ -7,7 +7,7 @@
  */
 using System;
 
-namespace Warframe.Market_Infrastructure.DbContextScope
+namespace Warframe.Market_DbContextScope
 {
     /// <summary>
     /// A read-only DbContextScope. Refer to the comments for IDbContextScope

@@ -16,13 +16,13 @@ namespace Warframe.Market_Infrastructure_Repositories.Mapping
             config =>
             {
                 config.AddExpressionMapping();
-                config.AddProfile<IconFormatMappingProfile>();
-                config.AddProfile<OrderTypeMappingProfile>();
-                config.AddProfile<PlatformMappingProfile>();
-                config.AddProfile<RegionMappingProfile>();
-                config.AddProfile<RoleMappingProfile>();
-                config.AddProfile<StatusMappingProfile>();
-                config.AddProfile<SubTypeMappingProfile>();
+                //config.AddProfile<IconFormatMappingProfile>();
+                //config.AddProfile<OrderTypeMappingProfile>();
+                //config.AddProfile<PlatformMappingProfile>();
+                //config.AddProfile<RegionMappingProfile>();
+                //config.AddProfile<RoleMappingProfile>();
+                //config.AddProfile<StatusMappingProfile>();
+                //config.AddProfile<SubTypeMappingProfile>();
 
                 config.AddProfile<LinkedAccountsMappingProfile>();
                 config.AddProfile<UserMappingProfile>();
