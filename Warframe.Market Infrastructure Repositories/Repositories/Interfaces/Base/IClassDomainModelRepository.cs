@@ -7,7 +7,7 @@ using Warframe.Market_Infrastructure;
 namespace Warframe.Market_Infrastructure_Repositories.Repositories.Interfaces.Base
 {
     public interface IClassDomainModelRepository<TEntity, TDomain> 
-        where TEntity : AEntityModel
+        where TEntity : class
         where TDomain : ADomainModel
     {
         void Create (ref TDomain entity);

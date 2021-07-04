@@ -67,8 +67,6 @@
     <Compile Include="Mapping\Profiles\EnumProfiles\PlatformMappingProfile.cs" />
     <Compile Include="Mapping\Profiles\EnumProfiles\RegionMappingProfile.cs" />
     <Compile Include="Mapping\Profiles\ClassProfiles\UserMappingProfile.cs" />
-    <Compile Include="Repositories\Abstractions\AClassDomainModelRepository.cs" />
-    <Compile Include="Repositories\Abstractions\AEnumDomainModelRepository.cs" />
     <Compile Include="Repositories\Implementation\ClassRepositories\UserRepository.cs" />
     <Compile Include="Repositories\Interfaces\Base\IEnumDomainModelRepository.cs" />
     <Compile Include="Repositories\Exceptions\DataInconsistencyException.cs" />

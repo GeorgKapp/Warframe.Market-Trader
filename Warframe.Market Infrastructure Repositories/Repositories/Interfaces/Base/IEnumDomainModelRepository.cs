@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Warframe.Market_Infrastructure;
 
 namespace Warframe.Market_Infrastructure_Repositories.Repositories.Interfaces.Base
 {
@@ -8,21 +7,20 @@ namespace Warframe.Market_Infrastructure_Repositories.Repositories.Interfaces.Ba
     /// Provides access to enum schema entities from the dabase as enumeration
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public interface IEnumDomainModelRepository<TEntity, TDomainEnum>
-        where TEntity : AEntityEnumModel
-        where TDomainEnum : Enum
+    public interface IEnumDomainModelRepository<TEnum>
+        where TEnum : Enum
     {
         /// <summary>
         /// Returns the enum corresponding to the "ID" property of the enum entitity
         /// </summary>
         /// <param name="entityID"></param>
         /// <returns></returns>
-        TDomainEnum Get(int entityID);
+        TEnum Get(int entityID);
 
         /// <summary>
         /// Returns all enumerations of the enum entity
         /// </summary>
         /// <returns></returns>
-        IEnumerable<TDomainEnum> GetAll();
+        IEnumerable<TEnum> GetAll();
     }
 }
