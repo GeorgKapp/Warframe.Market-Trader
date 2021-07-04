@@ -238,6 +238,8 @@ namespace Warframe.Market_Unit_Tests
 
                 repos.Create(ref newAccount);
                 var getResult = repos.Get(newAccount.ID);
+                var createdAccountShouldFailObject = newAccount;
+                repos.Create(ref createdAccountShouldFailObject);
                 var hasFoundOnlyOneByPredicate = repos.Get(predicate => predicate.ID == newAccount.ID).SingleOrDefault()?.ID == newAccount.ID;
                 Assert.IsTrue(hasFoundOnlyOneByPredicate);
                 getResult.HasSteamProfile = false;

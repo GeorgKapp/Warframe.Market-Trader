@@ -35,12 +35,11 @@ namespace Warframe.Market_Infrastructure_Repositories.Repositories.Implementatio
         public void Create(ref Market_DomainModels.Models.LinkedAccounts entity)
         {
             var mappedEntityObject = Mapper.Map<Market_DomainModels.Models.LinkedAccounts, LinkedAccounts>(entity);
-            var createdEntityObject = DbContext.Set<LinkedAccounts>().Add(mappedEntityObject);
+            mappedEntityObject.ID = 0;
+            DbContext.Set<LinkedAccounts>().Add(mappedEntityObject);
 
             DbContext.SaveChanges();
-
-            entity = new Market_DomainModels.Models.LinkedAccounts(createdEntityObject.ID);
-            Mapper.Map(createdEntityObject, entity);
+            Mapper.Map(mappedEntityObject, entity);
         }
 
         public void Delete(int entityID)
@@ -58,9 +57,7 @@ namespace Warframe.Market_Infrastructure_Repositories.Repositories.Implementatio
                 DbContext.Set<LinkedAccounts>().SingleOrDefault(predicate => predicate.ID == entityID)
                 ?? throw new EntityNotFoundException(nameof(LinkedAccounts), entityID);
 
-            var result = new Market_DomainModels.Models.LinkedAccounts(entityID);
-            Mapper.Map(searchedEntity, result);
-            return result;
+            return Mapper.Map<Market_DomainModels.Models.LinkedAccounts>(searchedEntity);
         }
 
         public IEnumerable<Market_DomainModels.Models.LinkedAccounts> Get(Expression<Func<Market_DomainModels.Models.LinkedAccounts, bool>> predicate)
