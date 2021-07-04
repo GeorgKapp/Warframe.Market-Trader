@@ -250,7 +250,7 @@ namespace Warframe.Market_Unit_Tests
             }
         }
 
-        [TestMethod("User Get 1")]
+        [TestMethod("User Get 1 / Create")]
         public void Test16LinkedAccountsCreate()
         {
             var repos = new UserRepository(_ambientDbContextLocator);
