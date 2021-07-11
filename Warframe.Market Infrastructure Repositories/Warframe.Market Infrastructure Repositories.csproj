@@ -61,6 +61,7 @@
     <Compile Include="Mapping\ModelMapper.cs" />
     <Compile Include="Mapping\Profiles\ClassProfiles\LoginUserMappingProfile.cs" />
     <Compile Include="Mapping\Profiles\ClassProfiles\OrderMappingProfile.cs" />
+    <Compile Include="Mapping\Profiles\ClassProfiles\ItemTagMappingProfile.cs" />
     <Compile Include="Mapping\Profiles\ClassProfiles\TagMappingProfile.cs" />
     <Compile Include="Mapping\Profiles\ClassProfiles\TranslationMappingProfile.cs" />
     <Compile Include="Mapping\Profiles\ClassProfiles\SetItemMappingProfile.cs" />
@@ -72,12 +73,15 @@
     <Compile Include="Mapping\Profiles\EnumProfiles\PlatformMappingProfile.cs" />
     <Compile Include="Mapping\Profiles\EnumProfiles\RegionMappingProfile.cs" />
     <Compile Include="Mapping\Profiles\ClassProfiles\UserMappingProfile.cs" />
+    <Compile Include="Repositories\DomainModelRepositories\Implementation\ClassRepositories\ItemTagDomainRepository.cs" />
     <Compile Include="Repositories\DomainModelRepositories\Implementation\ClassRepositories\SetItemDomainRepository.cs" />
     <Compile Include="Repositories\DomainModelRepositories\Implementation\ClassRepositories\LoginUserDomainRepository.cs" />
     <Compile Include="Repositories\DomainModelRepositories\Interfaces\Base\IComplexClassDomainRepository.cs" />
     <Compile Include="Repositories\DomainModelRepositories\Interfaces\ClassRepositories\IItemDomainRepository.cs" />
+    <Compile Include="Repositories\DomainModelRepositories\Interfaces\ClassRepositories\IItemTagDomainRepository.cs" />
     <Compile Include="Repositories\DomainModelRepositories\Interfaces\ClassRepositories\ISetItemDomainRepository.cs" />
     <Compile Include="Repositories\DomainModelRepositories\Interfaces\ClassRepositories\ILoginUserDomainRepository.cs" />
+    <Compile Include="Repositories\EntityModelRepositories\Implementation\ItemTagEntityRepository.cs" />
     <Compile Include="Repositories\EntityModelRepositories\Implementation\LoginUserEntityRepository.cs" />
     <Compile Include="Repositories\EntityModelRepositories\Implementation\LinkedAccountsEntityRepository.cs" />
     <Compile Include="Repositories\EntityModelRepositories\Implementation\ItemEntityRepository.cs" />
@@ -88,6 +92,7 @@
     <Compile Include="Repositories\EntityModelRepositories\Implementation\UserEntityRepository.cs" />
     <Compile Include="Repositories\EntityModelRepositories\Interfaces\Base\IReadonlyEntityRepository.cs" />
     <Compile Include="Repositories\EntityModelRepositories\Interfaces\Base\IEntityRepository.cs" />
+    <Compile Include="Repositories\EntityModelRepositories\Interfaces\RepositoryInterfaces\IItemTagEntityRepository.cs" />
     <Compile Include="Repositories\EntityModelRepositories\Interfaces\RepositoryInterfaces\ITagEntityRepository.cs" />
     <Compile Include="Repositories\EntityModelRepositories\Interfaces\RepositoryInterfaces\ITranslationEntityRepository.cs" />
     <Compile Include="Repositories\EntityModelRepositories\Interfaces\RepositoryInterfaces\ISetItemEntityRepository.cs" />

@@ -50,6 +50,7 @@
     <Compile Include="Enums\SubType.cs" />
     <Compile Include="Abstractions\ADomainModel.cs" />
     <Compile Include="Models\Item.cs" />
+    <Compile Include="Models\ItemTag.cs" />
     <Compile Include="Models\LinkedAccounts.cs" />
     <Compile Include="Models\LoginUser.cs" />
     <Compile Include="Models\Order.cs" />

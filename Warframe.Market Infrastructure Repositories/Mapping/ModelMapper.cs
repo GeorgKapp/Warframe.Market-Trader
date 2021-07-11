@@ -13,6 +13,7 @@ namespace Warframe.Market_Infrastructure_Repositories.Mapping
             config =>
             {
                 config.AddExpressionMapping();
+                config.AddProfile<ItemTagMappingProfile>();
                 config.AddProfile<SetItemMappingProfile>();
                 config.AddProfile<LoginUserMappingProfile>();
                 config.AddProfile<OrderMappingProfile>();
