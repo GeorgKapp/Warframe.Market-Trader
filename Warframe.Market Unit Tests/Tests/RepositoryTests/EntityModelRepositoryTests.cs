@@ -4,7 +4,7 @@ using Warframe.Market_DomainModels.Enums;
 using Warframe.Market_Infrastructure;
 using Warframe.Market_Infrastructure_Repositories.Repositories.EntityModelRepositories.Implementation;
 
-namespace Warframe.Market_Unit_Tests.Tests
+namespace Warframe.Market_Unit_Tests
 {
     [TestCategory("Entity Model Repository Tests")]
     [TestClass]

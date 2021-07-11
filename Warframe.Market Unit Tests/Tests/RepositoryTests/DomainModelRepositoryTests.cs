@@ -9,7 +9,7 @@ using Warframe.Market_Infrastructure_Repositories.Repositories.Exceptions;
 using Warframe.Market_Infrastructure_Repositories.Repositories.Implementation.ClassRepositories;
 using Warframe.Market_Infrastructure_Repositories.Repositories.Interfaces.ClassRepositories;
 
-namespace Warframe.Market_Unit_Tests.Tests.RepositoryTests
+namespace Warframe.Market_Unit_Tests
 {
     [TestCategory("Domain Model Repository Tests")]
     [TestClass]
@@ -29,7 +29,7 @@ namespace Warframe.Market_Unit_Tests.Tests.RepositoryTests
             _orderRepository = new OrderRepository(new EntityOrderRepository(_ambientDbContextLocator));
         }
 
-        [TestMethod("LinkedAccounts Create, Update, Delete")]
+        [TestMethod("1. LinkedAccounts Create, Update, Delete")]
         public void Test1LinkedAccountsTests()
         {
             using (var dbContextScope = _dbContextScopeFactory.CreateWithTransaction(IsolationLevel.ReadCommitted))
@@ -56,7 +56,7 @@ namespace Warframe.Market_Unit_Tests.Tests.RepositoryTests
             }
         }
 
-        [TestMethod("User Get 1 / Create")]
+        [TestMethod("2. User Get 1 / Create")]
         public void Test2UserTests()
         {
             using (var dbContextScope = _dbContextScopeFactory.Create())
@@ -79,7 +79,7 @@ namespace Warframe.Market_Unit_Tests.Tests.RepositoryTests
             }
         }
 
-        [TestMethod("Order Create, Update, Delete")]
+        [TestMethod("3. Order Create, Update, Delete")]
         public void Test3OrderTests()
         {
             using (var dbContextScope = _dbContextScopeFactory.Create())
