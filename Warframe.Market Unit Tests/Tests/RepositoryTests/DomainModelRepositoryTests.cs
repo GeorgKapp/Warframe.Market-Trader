@@ -7,7 +7,6 @@ using Warframe.Market_DomainModels.Enums;
 using Warframe.Market_Infrastructure_Repositories.Repositories.EntityModelRepositories.Implementation;
 using Warframe.Market_Infrastructure_Repositories.Repositories.Exceptions;
 using Warframe.Market_Infrastructure_Repositories.Repositories.Implementation.ClassRepositories;
-using Warframe.Market_Infrastructure_Repositories.Repositories.Interfaces.ClassRepositories;
 
 namespace Warframe.Market_Unit_Tests
 {
@@ -49,7 +48,7 @@ namespace Warframe.Market_Unit_Tests
         public void Test2UserTests()
         {
             var repos = new UserDomainRepository(new UserEntityRepository(_ambientDbContextLocator));
-            using (var dbContextScope = _dbContextScopeFactory.Create())
+            using (var dbContextScope = _dbContextScopeFactory.CreateWithTransaction(IsolationLevel.ReadCommitted))
             {
                 var getResult = repos.Get(1);
                 var createObject = new Market_DomainModels.Models.User
@@ -64,8 +63,8 @@ namespace Warframe.Market_Unit_Tests
 
                 repos.Create(ref createObject);
                 var reposResponse2 = repos.Get(createObject.ID);
-                dbContextScope.SaveChanges();
-                _ = "";
+                Assert.IsTrue(reposResponse2.ID == createObject.ID);
+                repos.Delete(reposResponse2.ID);
             }
         }
 
@@ -74,7 +73,7 @@ namespace Warframe.Market_Unit_Tests
         {
             var userentityrepos = new UserEntityRepository(_ambientDbContextLocator);
             var repos = new OrderDomainRepository(new OrderEntityRepository(_ambientDbContextLocator), userentityrepos);
-            using (var dbContextScope = _dbContextScopeFactory.Create())
+            using (var dbContextScope = _dbContextScopeFactory.CreateWithTransaction(IsolationLevel.ReadCommitted))
             {
                 var createdEntity = new Warframe.Market_DomainModels.Models.Order
                 {
@@ -95,7 +94,35 @@ namespace Warframe.Market_Unit_Tests
                 repos.Update(ref createdEntity);
                 var userCount2 = userentityrepos.GetAll().Count();
                 Assert.IsTrue(userCount == userCount2);
-                _ = "";
+            }
+        }
+
+        [TestMethod("4. Item")]
+        public void Test4ItemTests()
+        {
+            var userentityrepos = new UserEntityRepository(_ambientDbContextLocator);
+            var repos = new OrderDomainRepository(new OrderEntityRepository(_ambientDbContextLocator), userentityrepos);
+            using (var dbContextScope = _dbContextScopeFactory.CreateWithTransaction(IsolationLevel.ReadCommitted))
+            {
+                var createdEntity = new Warframe.Market_DomainModels.Models.Order
+                {
+                    Quantity = 1,
+                    Region = Region.De,
+                    SubType = SubType.Flawless,
+                    CreationDate = System.DateTimeOffset.Now,
+                    OrderType = Market_DomainModels.Enums.OrderType.Buy,
+                    Platform = Platform.Pc,
+                    ModRank = null,
+                    Platinum = 1000,
+                    LastUpdate = System.DateTimeOffset.Now
+                };
+
+                repos.Create(ref createdEntity, 4);
+                var userCount = userentityrepos.GetAll().Count();
+                createdEntity.Region = Region.Pl;
+                repos.Update(ref createdEntity);
+                var userCount2 = userentityrepos.GetAll().Count();
+                Assert.IsTrue(userCount == userCount2);
             }
         }
     }

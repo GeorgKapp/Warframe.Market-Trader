@@ -1,4 +1,5 @@
-﻿using Warframe.Market_Infrastructure;
+﻿using System.Collections.Generic;
+using Warframe.Market_Infrastructure;
 using Warframe.Market_Infrastructure_Repositories.Repositories.Interfaces.Base;
 
 namespace Warframe.Market_Infrastructure_Repositories.Repositories.Interfaces.ClassRepositories

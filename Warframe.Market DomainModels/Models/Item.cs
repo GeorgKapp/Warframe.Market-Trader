@@ -20,7 +20,7 @@ namespace Warframe.Market_DomainModels.Models
         public IconFormat? IconFormat { get; set; }
         public Translation WikiLink { get; private set; }
         public Translation ItemName { get; private set; }
-        public ICollection<Tag> Tags { get; private set; }
+        public ICollection<ItemTag> Tags { get; private set; }
         public ICollection<SetItem> ChildItems { get; private set; }
         public ICollection<SetItem> ParentItems { get; private set; }
     }
