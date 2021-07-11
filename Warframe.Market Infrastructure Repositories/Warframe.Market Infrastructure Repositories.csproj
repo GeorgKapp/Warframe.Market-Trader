@@ -59,6 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Mapping\ModelMapper.cs" />
+    <Compile Include="Mapping\Profiles\ClassProfiles\LoginUserMappingProfile.cs" />
     <Compile Include="Mapping\Profiles\ClassProfiles\OrderMappingProfile.cs" />
     <Compile Include="Mapping\Profiles\ClassProfiles\TagMappingProfile.cs" />
     <Compile Include="Mapping\Profiles\ClassProfiles\TranslationMappingProfile.cs" />
@@ -70,6 +71,8 @@
     <Compile Include="Mapping\Profiles\EnumProfiles\PlatformMappingProfile.cs" />
     <Compile Include="Mapping\Profiles\EnumProfiles\RegionMappingProfile.cs" />
     <Compile Include="Mapping\Profiles\ClassProfiles\UserMappingProfile.cs" />
+    <Compile Include="Repositories\DomainModelRepositories\Implementation\ClassRepositories\LoginUserDomainRepository.cs" />
+    <Compile Include="Repositories\DomainModelRepositories\Interfaces\ClassRepositories\ILoginUserDomainRepository.cs" />
     <Compile Include="Repositories\EntityModelRepositories\Implementation\LoginUserEntityRepository.cs" />
     <Compile Include="Repositories\EntityModelRepositories\Implementation\LinkedAccountsEntityRepository.cs" />
     <Compile Include="Repositories\EntityModelRepositories\Implementation\ItemEntityRepository.cs" />

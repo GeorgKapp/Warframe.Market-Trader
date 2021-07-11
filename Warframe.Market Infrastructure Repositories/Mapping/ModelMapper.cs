@@ -22,6 +22,7 @@ namespace Warframe.Market_Infrastructure_Repositories.Mapping
                 //config.AddProfile<StatusMappingProfile>();
                 //config.AddProfile<SubTypeMappingProfile>();
 
+                config.AddProfile<LoginUserMappingProfile>();
                 config.AddProfile<OrderMappingProfile>();
                 config.AddProfile<TagMappingProfile>();
                 config.AddProfile<TranslationMappingProfile>();
