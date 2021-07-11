@@ -1,17 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
+﻿using Warframe.Market_Infrastructure;
+using Warframe.Market_Infrastructure_Repositories.Repositories.Interfaces.Base;
 
 namespace Warframe.Market_Infrastructure_Repositories.Repositories.Interfaces.ClassRepositories
 {
-    public interface IOrderDomainRepository
+    public interface IOrderDomainRepository : IComplexClassDomainRepository<Order, Market_DomainModels.Models.Order>
     {
         void Create(ref Market_DomainModels.Models.Order entity, int userId);
-        void Update(ref Market_DomainModels.Models.Order entity);
-        void Delete(int entityID);
-        bool Exists(int entityID);
-        Market_DomainModels.Models.Order Get(int entityID);
-        IEnumerable<Market_DomainModels.Models.Order> Get(Expression<Func<Market_DomainModels.Models.Order, bool>> predicate);
-        IEnumerable<Market_DomainModels.Models.Order> GetAll();
     }
 }

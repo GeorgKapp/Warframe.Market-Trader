@@ -1,17 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
+﻿using Warframe.Market_Infrastructure;
+using Warframe.Market_Infrastructure_Repositories.Repositories.Interfaces.Base;
 
 namespace Warframe.Market_Infrastructure_Repositories.Repositories.Interfaces.ClassRepositories
 {
-    public interface ILoginUserDomainRepository
+    public interface ILoginUserDomainRepository : IComplexClassDomainRepository<LoginUser, Market_DomainModels.Models.LoginUser>
     {
         void Create(ref Market_DomainModels.Models.LoginUser entity, int userId, int linkedAccountId);
-        void Update(ref Market_DomainModels.Models.LoginUser entity);
-        void Delete(int entityID);
-        bool Exists(int entityID);
-        Market_DomainModels.Models.LoginUser Get(int entityID);
-        IEnumerable<Market_DomainModels.Models.LoginUser> Get(Expression<Func<Market_DomainModels.Models.LoginUser, bool>> predicate);
-        IEnumerable<Market_DomainModels.Models.LoginUser> GetAll();
     }
 }
