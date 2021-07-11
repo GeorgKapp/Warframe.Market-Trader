@@ -16,11 +16,11 @@ namespace Warframe.Market_DomainModels.Models
         public byte? MasteryLevel { get; set; }
         public byte? MaxRank { get; set; }
         public string Icon { get; set; }
-        public Translation Description { get; }
+        public Translation Description { get; private set; }
         public IconFormat? IconFormat { get; set; }
-        public Translation WikiLink { get;}
-        public Translation ItemName { get; }
-        public ICollection<Tag> Tags { get; }
-        public ICollection<SetItem> SetItems { get; }
+        public Translation WikiLink { get; private set; }
+        public Translation ItemName { get; private set; }
+        public ICollection<Tag> Tags { get; private set; }
+        public ICollection<SetItem> SetItems { get; private set; }
     }
 }

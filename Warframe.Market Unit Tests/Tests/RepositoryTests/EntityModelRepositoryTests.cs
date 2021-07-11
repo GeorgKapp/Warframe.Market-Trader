@@ -6,7 +6,6 @@ using Warframe.Market_Infrastructure_Repositories.Repositories.EntityModelReposi
 
 namespace Warframe.Market_Unit_Tests
 {
-    [TestCategory("Entity Model Repository Tests")]
     [TestClass]
     public class EntityModelRepositoryTests
     {
@@ -47,6 +46,7 @@ namespace Warframe.Market_Unit_Tests
             using (var dbContextScope = _dbContextScopeFactory.CreateReadOnly())
             {
                 var gottenentity = repos.Get(1006);
+
                 //var entity = repos.Get(4);
                 //entity.LastSeen = DateTimeOffset.Now;
                 //repos.Update(ref entity);

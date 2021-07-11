@@ -1,6 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
-using System.Threading;
 using Warframe.Market_Api.Api.Clients.Implementation;
 using Warframe.Market_Api.Api.Clients.Interfaces;
 using Warframe.Market_Api.Api.Data;
@@ -8,7 +7,6 @@ using Warframe.Market_Api.JsonData.Content;
 
 namespace Warframe.Market_Unit_Tests
 {
-    [TestCategory("Api Unit Tests")]
     [TestClass]
     public class ApiUnitTests
     {
@@ -33,11 +31,11 @@ namespace Warframe.Market_Unit_Tests
             Assert.IsTrue(result.IsSuccess);
         }
 
-        [TestMethod("2. Recieving of Item Information")]
         [DataRow(AshPrimeSetLink)]
         [DataRow(GladiatorMightModLink)]
         [DataRow(AxiA6RelicLink)]
         [DataRow(CompanionRivenModVeiledLink)]
+        [TestMethod("2. Recieving of Item Information")]
         public void Test2ItemInformationAsync(string value)
         {
             var itemResult = GetItemInformation(value);
@@ -52,11 +50,11 @@ namespace Warframe.Market_Unit_Tests
             Assert.IsTrue(itemsResult.Result.Info.Items.Length > 0);
         }
 
-        [TestMethod("4. Getting Orders For Item")]
         [DataRow(AshPrimeSetLink)]
         [DataRow(GladiatorMightModLink)]
         [DataRow(AxiA6RelicLink)]
         [DataRow(CompanionRivenModVeiledLink)]
+        [TestMethod("4. Getting Orders For Item")]
         public void Test4GettingOrdersForItem(string value)
         {
             var itemOrdersResult = GetItemOrders(value);
@@ -64,8 +62,9 @@ namespace Warframe.Market_Unit_Tests
             Assert.IsTrue(itemOrdersResult.Result.Info.Orders.Length > 0);
         }
 
-        [TestMethod("5. Create Order on profile")]
+
         [DataRow(LegendaryFusionCoreLink)]
+        [TestMethod("5. Create Order on profile")]
         public void Test5CreateOrder(string value)
         {
             var itemInformationResult = GetItemInformation(value);
@@ -97,8 +96,9 @@ namespace Warframe.Market_Unit_Tests
         }
 
 
-        [TestMethod("7. Upgrade Order on profile")]
+
         [DataRow(LegendaryFusionCoreLink)]
+        [TestMethod("7. Upgrade Order on profile")]
         public void Test7UpgradeOrder(string value)
         {
             var orderResult = GetProfileOrders();
@@ -118,8 +118,8 @@ namespace Warframe.Market_Unit_Tests
             Assert.IsTrue(updateResult.IsSuccess);
         }
 
-        [TestMethod("8. Delete Order on profile")]
         [DataRow(LegendaryFusionCoreLink)]
+        [TestMethod("8. Delete Order on profile")]
         public void Test8DeleteOrder(string value)
         {
             var orderResult = GetProfileOrders();

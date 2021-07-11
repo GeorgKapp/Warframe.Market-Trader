@@ -15,9 +15,9 @@ namespace Warframe.Market_DomainModels.Models
         public bool? Verification { get; set; }
         public byte? UnreadMessages { get; set; }
         public byte? WrittenReviews { get; set; }
-        public LinkedAccounts LinkedAccounts { get; }
+        public LinkedAccounts LinkedAccounts { get; private set; }
         public Platform? Platform { get; set; }
         public Role? Role { get; set; }
-        public  User User { get; }
+        public  User User { get; private set; }
     }
 }

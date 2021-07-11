@@ -11,27 +11,16 @@ using Warframe.Market_Infrastructure_Repositories.Repositories.Interfaces.ClassR
 
 namespace Warframe.Market_Unit_Tests
 {
-    [TestCategory("Domain Model Repository Tests")]
     [TestClass]
     public class DomainModelRepositoryTests
     {
         IDbContextScopeFactory _dbContextScopeFactory = new DbContextScopeFactory();
         IAmbientDbContextLocator _ambientDbContextLocator = new AmbientDbContextLocator();
-        ILinkedAccountsRepository _linkedAccountsRepository;
-        IUserRepository _userRepository;
-        IOrderRepository _orderRepository;
 
-        [ClassInitialize]
-        public void ClassInitialize(TestContext context)
-        {
-            _linkedAccountsRepository = new LinkedAccountsRepository(new EntityLinkedAccountsRepository(_ambientDbContextLocator));
-            _userRepository = new UserRepository(new EntityUserRepository(_ambientDbContextLocator));
-            _orderRepository = new OrderRepository(new EntityOrderRepository(_ambientDbContextLocator));
-        }
-
-        [TestMethod("1. LinkedAccounts Create, Update, Delete")]
+        [TestMethod("1. LinkedAccounts")]
         public void Test1LinkedAccountsTests()
         {
+            var repos = new LinkedAccountsRepository(new EntityLinkedAccountsRepository(_ambientDbContextLocator));
             using (var dbContextScope = _dbContextScopeFactory.CreateWithTransaction(IsolationLevel.ReadCommitted))
             {
                 var newAccount = new Market_DomainModels.Models.LinkedAccounts
@@ -42,26 +31,27 @@ namespace Warframe.Market_Unit_Tests
                     HasXboxProfile = true
                 };
 
-                _linkedAccountsRepository.Create(ref newAccount);
-                var getResult = _linkedAccountsRepository.Get(newAccount.ID);
-                var hasFoundOnlyOneByPredicate = _linkedAccountsRepository.Get(predicate => predicate.ID == newAccount.ID).SingleOrDefault()?.ID == newAccount.ID;
+                repos.Create(ref newAccount);
+                var getResult = repos.Get(newAccount.ID);
+                var hasFoundOnlyOneByPredicate = repos.Get(predicate => predicate.ID == newAccount.ID).SingleOrDefault()?.ID == newAccount.ID;
                 Assert.IsTrue(hasFoundOnlyOneByPredicate);
                 getResult.HasSteamProfile = false;
-                _linkedAccountsRepository.Update(ref getResult);
+                repos.Update(ref getResult);
                 Assert.IsFalse(getResult.HasSteamProfile);
                 Assert.IsTrue(getResult.HasXboxProfile);
 
-                _linkedAccountsRepository.Delete(newAccount.ID);
-                Assert.ThrowsException<EntityNotFoundException>(() => _linkedAccountsRepository.Get(newAccount.ID));
+                repos.Delete(newAccount.ID);
+                Assert.ThrowsException<EntityNotFoundException>(() => repos.Get(newAccount.ID));
             }
         }
 
-        [TestMethod("2. User Get 1 / Create")]
+        [TestMethod("2. User")]
         public void Test2UserTests()
         {
+            var repos = new UserRepository(new EntityUserRepository(_ambientDbContextLocator));
             using (var dbContextScope = _dbContextScopeFactory.Create())
             {
-                var getResult = _userRepository.Get(1);
+                var getResult = repos.Get(1);
                 var createObject = new Market_DomainModels.Models.User
                 {
                     Status = null,
@@ -72,19 +62,32 @@ namespace Warframe.Market_Unit_Tests
                     Avatar = "1231231231"
                 };
 
-                _userRepository.Create(ref createObject);
-                var reposResponse2 = _userRepository.Get(createObject.ID);
+                repos.Create(ref createObject);
+                var reposResponse2 = repos.Get(createObject.ID);
                 dbContextScope.SaveChanges();
                 _ = "";
             }
         }
 
-        [TestMethod("3. Order Create, Update, Delete")]
+        [TestMethod("3. Order")]
         public void Test3OrderTests()
         {
+            var repos = new OrderRepository(new EntityOrderRepository(_ambientDbContextLocator), new EntityUserRepository(_ambientDbContextLocator));
             using (var dbContextScope = _dbContextScopeFactory.Create())
             {
-                var getResult = _orderRepository.Get(1);
+                var createdEntity = new Warframe.Market_DomainModels.Models.Order
+                {
+                    Quantity = 1,
+                    Region = Region.De,
+                    SubType = SubType.Flawless,
+                    CreationDate = System.DateTimeOffset.Now,
+                    OrderType = Market_DomainModels.Enums.OrderType.Buy,
+                    Platform = Platform.Pc,
+                    ModRank = null,
+                    Platinum = 1000,
+                    LastUpdate = System.DateTimeOffset.Now
+                };
+                repos.Create(ref createdEntity, 4);
                 _ = "";
             }
         }

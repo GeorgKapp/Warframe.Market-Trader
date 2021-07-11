@@ -19,6 +19,6 @@ namespace Warframe.Market_DomainModels.Models
         public Platform Platform { get; set; }
         public Region Region { get; set; }
         public SubType SubType { get; set; }
-        public User User { get; }
+        public User User { get; private set; }
     }
 }

@@ -11,47 +11,47 @@ namespace Warframe.Market_Infrastructure_Repositories.Repositories.Implementatio
 {
     public class LinkedAccountsRepository : ILinkedAccountsRepository
     {
-        private readonly IEntityLinkedAccountsRepository _efLinkedAccountsRepository;
+        private readonly IEntityLinkedAccountsRepository _entityLinkedAccountsRepository;
 
-        public LinkedAccountsRepository(IEntityLinkedAccountsRepository efLinkedAccountsRepository)
+        public LinkedAccountsRepository(IEntityLinkedAccountsRepository entityLinkedAccountsRepository)
         {
-            _efLinkedAccountsRepository = efLinkedAccountsRepository ?? throw new ArgumentNullException(nameof(efLinkedAccountsRepository));
+            _entityLinkedAccountsRepository = entityLinkedAccountsRepository ?? throw new ArgumentNullException(nameof(entityLinkedAccountsRepository));
         }
 
         public void Create(ref Market_DomainModels.Models.LinkedAccounts entity)
         {
             var mappedEntityObject = ModelMapper.Map<Market_DomainModels.Models.LinkedAccounts, LinkedAccounts>(entity);
-            _efLinkedAccountsRepository.Create(ref mappedEntityObject);
+            _entityLinkedAccountsRepository.Create(ref mappedEntityObject);
             ModelMapper.Map(mappedEntityObject, entity);
         }
 
         public void Delete(int entityID)
         {
-            _efLinkedAccountsRepository.Delete(entityID);
+            _entityLinkedAccountsRepository.Delete(entityID);
         }
 
         public bool Exists(int entityID)
         {
-            return _efLinkedAccountsRepository.Exists(entityID);
+            return _entityLinkedAccountsRepository.Exists(entityID);
         }
 
         public Market_DomainModels.Models.LinkedAccounts Get(int entityID)
         {
-            return ModelMapper.Map<Market_DomainModels.Models.LinkedAccounts>(_efLinkedAccountsRepository.Get(entityID));
+            return ModelMapper.Map<Market_DomainModels.Models.LinkedAccounts>(_entityLinkedAccountsRepository.Get(entityID));
         }
 
         public IEnumerable<Market_DomainModels.Models.LinkedAccounts> Get(Expression<Func<Market_DomainModels.Models.LinkedAccounts, bool>> predicate)
         {
             var mappedPredicate = ModelMapper.Map<Expression<Func<LinkedAccounts, bool>>>(predicate);
 
-            return _efLinkedAccountsRepository.Get(mappedPredicate)
+            return _entityLinkedAccountsRepository.Get(mappedPredicate)
                 .ToList()
                 .Select(predicate => ModelMapper.Map<Market_DomainModels.Models.LinkedAccounts>(predicate));
         }
 
         public IEnumerable<Market_DomainModels.Models.LinkedAccounts> GetAll()
         {
-            return _efLinkedAccountsRepository.GetAll()
+            return _entityLinkedAccountsRepository.GetAll()
                 .ToList()
                 .Select(predicate => ModelMapper.Map<Market_DomainModels.Models.LinkedAccounts>(predicate));
         }
@@ -59,7 +59,7 @@ namespace Warframe.Market_Infrastructure_Repositories.Repositories.Implementatio
         public void Update(ref Market_DomainModels.Models.LinkedAccounts entity)
         {
             var mappedModel = ModelMapper.Map<LinkedAccounts>(entity);
-            _efLinkedAccountsRepository.Update(ref mappedModel);
+            _entityLinkedAccountsRepository.Update(ref mappedModel);
             ModelMapper.Map(mappedModel, entity);
         }
     }

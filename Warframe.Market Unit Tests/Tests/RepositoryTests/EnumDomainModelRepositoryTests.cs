@@ -9,7 +9,6 @@ using Warframe.Market_Infrastructure_Repositories.Repositories.Implementation.En
 
 namespace Warframe.Market_Unit_Tests
 {
-    [TestCategory("Enum Domain Model Repository Tests")]
     [TestClass]
     public class EnumDomainModelRepositoryTests
     {

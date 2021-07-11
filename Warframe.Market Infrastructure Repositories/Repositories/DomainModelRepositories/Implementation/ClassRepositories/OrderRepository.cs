@@ -11,52 +11,50 @@ namespace Warframe.Market_Infrastructure_Repositories.Repositories.Implementatio
 {
     public class OrderRepository : IOrderRepository
     {
-        private readonly IEntityOrderRepository _efOrderRepository;
+        private readonly IEntityOrderRepository _entityOrderRepository;
+        private readonly IEntityUserRepository _entityUserRepository;
 
-        public OrderRepository(IEntityOrderRepository efOrderRepository)
+        public OrderRepository(IEntityOrderRepository entityOrderRepository, IEntityUserRepository entityUserRepository)
         {
-            _efOrderRepository = efOrderRepository ?? throw new ArgumentNullException(nameof(efOrderRepository));
-        }
-
-        public void Create(ref Market_DomainModels.Models.Order entity)
-        {
-            var mappedEntityObject = ModelMapper.Map<Market_DomainModels.Models.Order, Order>(entity);
-            _efOrderRepository.Create(ref mappedEntityObject);
-            ModelMapper.Map(mappedEntityObject, entity);
+            _entityOrderRepository = entityOrderRepository ?? throw new ArgumentNullException(nameof(entityOrderRepository));
+            _entityUserRepository = entityUserRepository ?? throw new ArgumentNullException(nameof(entityUserRepository));
         }
 
         public void Create(ref Market_DomainModels.Models.Order entity, int userId)
         {
-            throw new NotImplementedException();
+            var mappedEntityObject = ModelMapper.Map<Market_DomainModels.Models.Order, Order>(entity);
+            mappedEntityObject.User = _entityUserRepository.Get(userId);
+            _entityOrderRepository.Create(ref mappedEntityObject);
+            ModelMapper.Map(mappedEntityObject, entity);
         }
 
         public void Delete(int entityID)
         {
-            _efOrderRepository.Delete(entityID);
+            _entityOrderRepository.Delete(entityID);
         }
 
         public bool Exists(int entityID)
         {
-            return _efOrderRepository.Exists(entityID);
+            return _entityOrderRepository.Exists(entityID);
         }
 
         public Market_DomainModels.Models.Order Get(int entityID)
         {
-            return ModelMapper.Map<Market_DomainModels.Models.Order>(_efOrderRepository.Get(entityID));
+            return ModelMapper.Map<Market_DomainModels.Models.Order>(_entityOrderRepository.Get(entityID));
         }
 
         public IEnumerable<Market_DomainModels.Models.Order> Get(Expression<Func<Market_DomainModels.Models.Order, bool>> predicate)
         {
             var mappedPredicate = ModelMapper.Map<Expression<Func<Order, bool>>>(predicate);
 
-            return _efOrderRepository.Get(mappedPredicate)
+            return _entityOrderRepository.Get(mappedPredicate)
                 .ToList()
                 .Select(predicate => ModelMapper.Map<Market_DomainModels.Models.Order>(predicate));
         }
 
         public IEnumerable<Market_DomainModels.Models.Order> GetAll()
         {
-            return _efOrderRepository.GetAll()
+            return _entityOrderRepository.GetAll()
                 .ToList()
                 .Select(predicate => ModelMapper.Map<Market_DomainModels.Models.Order>(predicate));
         }
@@ -64,7 +62,7 @@ namespace Warframe.Market_Infrastructure_Repositories.Repositories.Implementatio
         public void Update(ref Market_DomainModels.Models.Order entity)
         {
             var mappedModel = ModelMapper.Map<Order>(entity);
-            _efOrderRepository.Update(ref mappedModel);
+            _entityOrderRepository.Update(ref mappedModel);
             ModelMapper.Map(mappedModel, entity);
         }
     }

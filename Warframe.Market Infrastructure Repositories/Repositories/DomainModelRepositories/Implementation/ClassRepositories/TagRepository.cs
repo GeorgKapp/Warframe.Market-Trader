@@ -11,47 +11,47 @@ namespace Warframe.Market_Infrastructure_Repositories.Repositories.Implementatio
 {
     public class TagRepository : ITagRepository
     {
-        private readonly IEntityTagRepository _efTagRepository;
+        private readonly IEntityTagRepository _entityTagRepository;
 
-        public TagRepository(IEntityTagRepository efTagRepository)
+        public TagRepository(IEntityTagRepository entityTagRepository)
         {
-            _efTagRepository = efTagRepository ?? throw new ArgumentNullException(nameof(efTagRepository));
+            _entityTagRepository = entityTagRepository ?? throw new ArgumentNullException(nameof(entityTagRepository));
         }
 
         public void Create(ref Market_DomainModels.Models.Tag entity)
         {
             var mappedEntityObject = ModelMapper.Map<Market_DomainModels.Models.Tag, Tag>(entity);
-            _efTagRepository.Create(ref mappedEntityObject);
+            _entityTagRepository.Create(ref mappedEntityObject);
             ModelMapper.Map(mappedEntityObject, entity);
         }
 
         public void Delete(int entityID)
         {
-            _efTagRepository.Delete(entityID);
+            _entityTagRepository.Delete(entityID);
         }
 
         public bool Exists(int entityID)
         {
-            return _efTagRepository.Exists(entityID);
+            return _entityTagRepository.Exists(entityID);
         }
 
         public Market_DomainModels.Models.Tag Get(int entityID)
         {
-            return ModelMapper.Map<Market_DomainModels.Models.Tag>(_efTagRepository.Get(entityID));
+            return ModelMapper.Map<Market_DomainModels.Models.Tag>(_entityTagRepository.Get(entityID));
         }
 
         public IEnumerable<Market_DomainModels.Models.Tag> Get(Expression<Func<Market_DomainModels.Models.Tag, bool>> predicate)
         {
             var mappedPredicate = ModelMapper.Map<Expression<Func<Tag, bool>>>(predicate);
 
-            return _efTagRepository.Get(mappedPredicate)
+            return _entityTagRepository.Get(mappedPredicate)
                 .ToList()
                 .Select(predicate => ModelMapper.Map<Market_DomainModels.Models.Tag>(predicate));
         }
 
         public IEnumerable<Market_DomainModels.Models.Tag> GetAll()
         {
-            return _efTagRepository.GetAll()
+            return _entityTagRepository.GetAll()
                 .ToList()
                 .Select(predicate => ModelMapper.Map<Market_DomainModels.Models.Tag>(predicate));
         }
@@ -59,7 +59,7 @@ namespace Warframe.Market_Infrastructure_Repositories.Repositories.Implementatio
         public void Update(ref Market_DomainModels.Models.Tag entity)
         {
             var mappedModel = ModelMapper.Map<Tag>(entity);
-            _efTagRepository.Update(ref mappedModel);
+            _entityTagRepository.Update(ref mappedModel);
             ModelMapper.Map(mappedModel, entity);
         }
     }
