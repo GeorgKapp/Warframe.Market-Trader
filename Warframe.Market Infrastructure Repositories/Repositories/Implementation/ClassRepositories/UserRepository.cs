@@ -1,91 +1,67 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
-using Warframe.Market_DbContextScope;
 using Warframe.Market_Infrastructure;
 using Warframe.Market_Infrastructure_Repositories.Mapping;
-using Warframe.Market_Infrastructure_Repositories.Repositories.Exceptions;
+using Warframe.Market_Infrastructure_Repositories.Repositories.EntityFrameworkRepositories.Interfaces.RepositoryInterfaces;
 using Warframe.Market_Infrastructure_Repositories.Repositories.Interfaces.ClassRepositories;
 
 namespace Warframe.Market_Infrastructure_Repositories.Repositories.Implementation.ClassRepositories
 {
     public class UserRepository : IUserRepository
     {
-        private readonly IAmbientDbContextLocator _ambientDbContextLocator;
-        private DbContext DbContext => _ambientDbContextLocator.GetDbContextOrThrow<EntityContext>();
+        private readonly IEntityUserRepository _efUserRepository;
 
-        public UserRepository(IAmbientDbContextLocator ambientDbContextLocator)
+        public UserRepository(IEntityUserRepository efUserRepository)
         {
-            _ambientDbContextLocator = ambientDbContextLocator ?? throw new ArgumentNullException(nameof(ambientDbContextLocator));
+            _efUserRepository = efUserRepository ?? throw new ArgumentNullException(nameof(efUserRepository));
         }
 
         public void Create(ref Market_DomainModels.Models.User entity)
         {
-            var mappedEntityObject = DomainModelMapper.Map<Market_DomainModels.Models.User, User>(entity);
-            mappedEntityObject.ID = 0;
-            DbContext.Set<User>().Add(mappedEntityObject);
-
-            DbContext.SaveChanges();
-            DomainModelMapper.Map(mappedEntityObject, entity);
+            var mappedEntityObject = ModelMapper.Map<Market_DomainModels.Models.User, User>(entity);
+            _efUserRepository.Create(ref mappedEntityObject);
+            ModelMapper.Map(mappedEntityObject, entity);
         }
 
         public void Delete(int entityID)
         {
-            var entity = DbContext.Set<User>()
-                .Where(predicate => predicate.ID == entityID)
-                .SingleOrDefault()
-                ?? throw new EntityNotFoundException(nameof(User), entityID);
-
-            DbContext.Entry(entity).State = EntityState.Deleted;
-            DbContext.SaveChanges();
+            _efUserRepository.Delete(entityID);
         }
 
         public bool Exists(int entityID)
         {
-            return DbContext.Set<User>().Any(e => e.ID == entityID);
+            return _efUserRepository.Exists(entityID);
         }
 
         public Market_DomainModels.Models.User Get(int entityID)
         {
-            var searchedEntity =
-                DbContext.Set<User>()
-                .SingleOrDefault(predicate => predicate.ID == entityID)
-                ?? throw new EntityNotFoundException(nameof(User), entityID);
-
-            return DomainModelMapper.Map<Market_DomainModels.Models.User>(searchedEntity);
+            return ModelMapper.Map<Market_DomainModels.Models.User>(_efUserRepository.Get(entityID));
         }
 
         public IEnumerable<Market_DomainModels.Models.User> Get(Expression<Func<Market_DomainModels.Models.User, bool>> predicate)
         {
-            var mappedPredicate = DomainModelMapper.Map<Expression<Func<User, bool>>>(predicate);
+            var mappedPredicate = ModelMapper.Map<Expression<Func<User, bool>>>(predicate);
 
-            return DbContext.Set<User>().Where(mappedPredicate)
+            return _efUserRepository.Get(mappedPredicate)
                 .ToList()
-                .Select(predicate => DomainModelMapper.Map<Market_DomainModels.Models.User>(predicate));
+                .Select(predicate => ModelMapper.Map<Market_DomainModels.Models.User>(predicate));
         }
 
 
         public IEnumerable<Market_DomainModels.Models.User> GetAll()
         {
-            return DbContext.Set<User>()
+            return _efUserRepository.GetAll()
                 .ToList()
-                .Select(predicate => DomainModelMapper.Map<Market_DomainModels.Models.User>(predicate));
+                .Select(predicate => ModelMapper.Map<Market_DomainModels.Models.User>(predicate));
         }
 
         public void Update(ref Market_DomainModels.Models.User entity)
         {
-            var entityId = entity.ID;
-
-            var searchedEntity =
-                DbContext.Set<User>()
-                .SingleOrDefault(predicate => predicate.ID == entityId)
-                ?? throw new EntityNotFoundException(nameof(User), entity.ID);
-
-            DomainModelMapper.Map(entity, searchedEntity);
-            DbContext.SaveChanges();
-            DomainModelMapper.Map(searchedEntity, entity);
+            var mappedModel = ModelMapper.Map<User>(entity);
+            _efUserRepository.Update(ref mappedModel);
+            ModelMapper.Map(mappedModel, entity);
         }
     }
 }

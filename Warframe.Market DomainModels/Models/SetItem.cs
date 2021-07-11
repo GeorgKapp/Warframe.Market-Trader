@@ -8,7 +8,7 @@ namespace Warframe.Market_DomainModels.Models
         public SetItem(int id) : base(id) { }
 
         public byte ChildQuantity { get; set; }
-        public Item Child { get; set; }
-        public Item Parent { get; set; }
+        public Item Child { get; }
+        public Item Parent { get; }
     }
 }

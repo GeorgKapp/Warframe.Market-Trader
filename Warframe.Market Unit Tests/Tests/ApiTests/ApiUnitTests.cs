@@ -8,6 +8,7 @@ using Warframe.Market_Api.JsonData.Content;
 
 namespace Warframe.Market_Unit_Tests
 {
+    [TestCategory("Api Unit Tests")]
     [TestClass]
     public class ApiUnitTests
     {

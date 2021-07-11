@@ -1,18 +1,17 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using Warframe.Market_DbContextScope;
 using Warframe.Market_DomainModels.Enums;
 using Warframe.Market_Infrastructure_Repositories.Repositories.Exceptions;
-using Warframe.Market_Infrastructure_Repositories.Repositories.Implementation.ClassRepositories;
 using Warframe.Market_Infrastructure_Repositories.Repositories.Implementation.EnumRepositories;
 
 namespace Warframe.Market_Unit_Tests
 {
+    [TestCategory("Enum Domain Model Repository Tests")]
     [TestClass]
-    public class RepositoryTests
+    public class EnumDomainModelRepositoryTests
     {
         IDbContextScopeFactory _dbContextScopeFactory = new DbContextScopeFactory();
         IAmbientDbContextLocator _ambientDbContextLocator = new AmbientDbContextLocator();
@@ -222,88 +221,6 @@ namespace Warframe.Market_Unit_Tests
             }
         }
 
-        [TestMethod("LinkedAccounts Create, Update, Delete")]
-        public void Test15LinkedAccountsCreate()
-        {
-            var repos = new LinkedAccountsRepository(_ambientDbContextLocator);
-            using (var dbContextScope = _dbContextScopeFactory.CreateWithTransaction(IsolationLevel.ReadCommitted))
-            {
-                var newAccount = new Market_DomainModels.Models.LinkedAccounts
-                {
-                    HasSteamProfile = true,
-                    HasDiscordProfile = false,
-                    HasPatreonProfile = true,
-                    HasXboxProfile = true
-                };
-
-                repos.Create(ref newAccount);
-                var getResult = repos.Get(newAccount.ID);
-                var hasFoundOnlyOneByPredicate = repos.Get(predicate => predicate.ID == newAccount.ID).SingleOrDefault()?.ID == newAccount.ID;
-                Assert.IsTrue(hasFoundOnlyOneByPredicate);
-                getResult.HasSteamProfile = false;
-                repos.Update(ref getResult);
-                Assert.IsFalse(getResult.HasSteamProfile);
-                Assert.IsTrue(getResult.HasXboxProfile);
-
-                repos.Delete(newAccount.ID);
-                Assert.ThrowsException<EntityNotFoundException>(() => repos.Get(newAccount.ID));
-            }
-        }
-
-        [TestMethod("User Get 1 / Create")]
-        public void Test16LinkedAccountsCreate()
-        {
-            var repos = new UserRepository(_ambientDbContextLocator);
-            using (var dbContextScope = _dbContextScopeFactory.Create())
-            {
-                var getResult = repos.Get(1);
-                var createObject = new Market_DomainModels.Models.User
-                {
-                    Status = null,
-                    Region = Region.En,
-                    LastSeen = DateTimeOffset.Now,
-                    InGameName = "Ivoken3",
-                    Reputation = 37,
-                    Avatar = "1231231231"
-                };
-
-                repos.Create(ref createObject);
-                var reposResponse2 = repos.Get(createObject.ID);
-                dbContextScope.SaveChanges();
-                _ = "";
-            }
-        }
-
-        [TestMethod("Order Create, Update, Delete")]
-        public void Test17OrderCreate()
-        {
-            var repos = new OrderRepository(_ambientDbContextLocator);
-            using (var dbContextScope = _dbContextScopeFactory.CreateWithTransaction(IsolationLevel.ReadCommitted))
-            {
-                var newOrder = new Market_DomainModels.Models.Order
-                {
-                    User = new Market_DomainModels.Models.User(1),
-                    SubType = SubType.Radiant,
-                    CreationDate = DateTimeOffset.UtcNow,
-                    LastUpdate = DateTimeOffset.UtcNow,
-                    ModRank = null,
-                    Platform = Platform.Pc,
-                    OrderType = OrderType.Buy,
-                    Platinum = 100,
-                    Quantity = 3,
-                    Region = Region.En,
-                    Visible = true
-                };
-
-                repos.Create(ref newOrder);
-                var getResult = repos.Get(newOrder.ID);
-                var hasFoundOnlyOneByPredicate = repos.Get(predicate => predicate.ID == newOrder.ID).SingleOrDefault()?.ID == newOrder.ID;
-                Assert.IsTrue(hasFoundOnlyOneByPredicate);
-                repos.Update(ref getResult);
-                repos.Delete(newOrder.ID);
-                Assert.ThrowsException<EntityNotFoundException>(() => repos.Get(newOrder.ID));
-            }
-        }
 
         private bool CheckIfEnumIdAndValueMatch<TEnum>(int id, TEnum enumValue) where TEnum : Enum
         {

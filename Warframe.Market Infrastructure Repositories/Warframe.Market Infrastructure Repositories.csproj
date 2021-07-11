@@ -58,7 +58,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Mapping\DomainModelMapper.cs" />
+    <Compile Include="Mapping\ModelMapper.cs" />
     <Compile Include="Mapping\Profiles\ClassProfiles\OrderMappingProfile.cs" />
     <Compile Include="Mapping\Profiles\ClassProfiles\TagMappingProfile.cs" />
     <Compile Include="Mapping\Profiles\ClassProfiles\TranslationMappingProfile.cs" />
@@ -70,6 +70,10 @@
     <Compile Include="Mapping\Profiles\EnumProfiles\PlatformMappingProfile.cs" />
     <Compile Include="Mapping\Profiles\EnumProfiles\RegionMappingProfile.cs" />
     <Compile Include="Mapping\Profiles\ClassProfiles\UserMappingProfile.cs" />
+    <Compile Include="Repositories\EntityFrameworkRepositories\Implementation\EntityUserRepository.cs" />
+    <Compile Include="Repositories\EntityFrameworkRepositories\Interfaces\Base\IEntityReadonlyRepository.cs" />
+    <Compile Include="Repositories\EntityFrameworkRepositories\Interfaces\Base\IEntityRepository.cs" />
+    <Compile Include="Repositories\EntityFrameworkRepositories\Interfaces\RepositoryInterfaces\IEntityUserRepository.cs" />
     <Compile Include="Repositories\Implementation\ClassRepositories\OrderRepository.cs" />
     <Compile Include="Repositories\Implementation\ClassRepositories\TagRepository.cs" />
     <Compile Include="Repositories\Implementation\ClassRepositories\TranslationRepository.cs" />

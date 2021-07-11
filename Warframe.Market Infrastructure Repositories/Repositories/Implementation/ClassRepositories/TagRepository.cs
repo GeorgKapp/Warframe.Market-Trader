@@ -24,12 +24,12 @@ namespace Warframe.Market_Infrastructure_Repositories.Repositories.Implementatio
 
         public void Create(ref Market_DomainModels.Models.Tag entity)
         {
-            var mappedEntityObject = DomainModelMapper.Map<Market_DomainModels.Models.Tag, Tag>(entity);
+            var mappedEntityObject = ModelMapper.Map<Market_DomainModels.Models.Tag, Tag>(entity);
             mappedEntityObject.ID = 0;
             DbContext.Set<Tag>().Add(mappedEntityObject);
 
             DbContext.SaveChanges();
-            DomainModelMapper.Map(mappedEntityObject, entity);
+            ModelMapper.Map(mappedEntityObject, entity);
         }
 
         public void Delete(int entityID)
@@ -50,23 +50,23 @@ namespace Warframe.Market_Infrastructure_Repositories.Repositories.Implementatio
                 .SingleOrDefault(predicate => predicate.ID == entityID)
                 ?? throw new EntityNotFoundException(nameof(Tag), entityID);
 
-            return DomainModelMapper.Map<Market_DomainModels.Models.Tag>(searchedEntity);
+            return ModelMapper.Map<Market_DomainModels.Models.Tag>(searchedEntity);
         }
 
         public IEnumerable<Market_DomainModels.Models.Tag> Get(Expression<Func<Market_DomainModels.Models.Tag, bool>> predicate)
         {
-            var mappedPredicate = DomainModelMapper.Map<Expression<Func<Tag, bool>>>(predicate);
+            var mappedPredicate = ModelMapper.Map<Expression<Func<Tag, bool>>>(predicate);
 
             return DbContext.Set<Tag>().Where(mappedPredicate)
                 .ToList()
-                .Select(predicate => DomainModelMapper.Map<Market_DomainModels.Models.Tag>(predicate));
+                .Select(predicate => ModelMapper.Map<Market_DomainModels.Models.Tag>(predicate));
         }
 
         public IEnumerable<Market_DomainModels.Models.Tag> GetAll()
         {
             return DbContext.Set<Tag>()
                 .ToList()
-                .Select(predicate => DomainModelMapper.Map<Market_DomainModels.Models.Tag>(predicate));
+                .Select(predicate => ModelMapper.Map<Market_DomainModels.Models.Tag>(predicate));
         }
 
         public void Update(ref Market_DomainModels.Models.Tag entity)
@@ -77,9 +77,9 @@ namespace Warframe.Market_Infrastructure_Repositories.Repositories.Implementatio
                 DbContext.Set<Tag>().SingleOrDefault(predicate => predicate.ID == entityId)
                 ?? throw new EntityNotFoundException(nameof(Tag), entity.ID);
 
-            DomainModelMapper.Map(entity, searchedEntity);
+            ModelMapper.Map(entity, searchedEntity);
             DbContext.SaveChanges();
-            DomainModelMapper.Map(searchedEntity, entity);
+            ModelMapper.Map(searchedEntity, entity);
         }
 
         public bool Exists(int entityID)

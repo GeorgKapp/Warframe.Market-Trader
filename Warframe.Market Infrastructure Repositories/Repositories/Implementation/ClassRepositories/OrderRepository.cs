@@ -24,12 +24,12 @@ namespace Warframe.Market_Infrastructure_Repositories.Repositories.Implementatio
 
         public void Create(ref Market_DomainModels.Models.Order entity)
         {
-            var mappedEntityObject = DomainModelMapper.Map<Market_DomainModels.Models.Order, Order>(entity);
+            var mappedEntityObject = ModelMapper.Map<Market_DomainModels.Models.Order, Order>(entity);
             mappedEntityObject.ID = 0;
             DbContext.Set<Order>().Add(mappedEntityObject);
 
             DbContext.SaveChanges();
-            DomainModelMapper.Map(mappedEntityObject, entity);
+            ModelMapper.Map(mappedEntityObject, entity);
         }
 
         public void Delete(int entityID)
@@ -50,23 +50,23 @@ namespace Warframe.Market_Infrastructure_Repositories.Repositories.Implementatio
                 .SingleOrDefault(predicate => predicate.ID == entityID)
                 ?? throw new EntityNotFoundException(nameof(Order), entityID);
 
-            return DomainModelMapper.Map<Market_DomainModels.Models.Order>(searchedEntity);
+            return ModelMapper.Map<Market_DomainModels.Models.Order>(searchedEntity);
         }
 
         public IEnumerable<Market_DomainModels.Models.Order> Get(Expression<Func<Market_DomainModels.Models.Order, bool>> predicate)
         {
-            var mappedPredicate = DomainModelMapper.Map<Expression<Func<Order, bool>>>(predicate);
+            var mappedPredicate = ModelMapper.Map<Expression<Func<Order, bool>>>(predicate);
 
             return DbContext.Set<Order>().Where(mappedPredicate)
                 .ToList()
-                .Select(predicate => DomainModelMapper.Map<Market_DomainModels.Models.Order>(predicate));
+                .Select(predicate => ModelMapper.Map<Market_DomainModels.Models.Order>(predicate));
         }
 
         public IEnumerable<Market_DomainModels.Models.Order> GetAll()
         {
             return DbContext.Set<Order>()
                 .ToList()
-                .Select(predicate => DomainModelMapper.Map<Market_DomainModels.Models.Order>(predicate));
+                .Select(predicate => ModelMapper.Map<Market_DomainModels.Models.Order>(predicate));
         }
 
         public void Update(ref Market_DomainModels.Models.Order entity)
@@ -77,9 +77,9 @@ namespace Warframe.Market_Infrastructure_Repositories.Repositories.Implementatio
                 DbContext.Set<Order>().SingleOrDefault(predicate => predicate.ID == entityId)
                 ?? throw new EntityNotFoundException(nameof(Order), entity.ID);
 
-            DomainModelMapper.Map(entity, searchedEntity);
+            ModelMapper.Map(entity, searchedEntity);
             DbContext.SaveChanges();
-            DomainModelMapper.Map(searchedEntity, entity);
+            ModelMapper.Map(searchedEntity, entity);
         }
 
         public bool Exists(int entityID)

@@ -14,6 +14,9 @@ namespace Warframe.Market_Infrastructure_Repositories.Mapping.Profiles.ClassProf
             CreateMap<Market_Infrastructure.User, Market_DomainModels.Models.User>()
                 .ForMember(dest => dest.Region, opt => opt.MapFrom(source => (Region?)source.RegionID))
                 .ForMember(dest => dest.Status, opt => opt.MapFrom(source => (Region?)source.StatusID));
+
+            CreateMap<Market_Infrastructure.User, Market_Infrastructure.User>()
+                .ReverseMap();
         }
     }
 }

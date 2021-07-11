@@ -4,11 +4,11 @@ using Warframe.Market_Infrastructure_Repositories.Mapping.Profiles.ClassProfiles
 
 namespace Warframe.Market_Infrastructure_Repositories.Mapping
 {
-    public static class DomainModelMapper
+    public static class ModelMapper
     {
         private static IMapper _mapper;
 
-        static DomainModelMapper()
+        static ModelMapper()
         {
             _mapper = new MapperConfiguration(
             config =>

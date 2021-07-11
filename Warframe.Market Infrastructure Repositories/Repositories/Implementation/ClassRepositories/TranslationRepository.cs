@@ -23,12 +23,12 @@ namespace Warframe.Market_Infrastructure_Repositories.Repositories.Implementatio
 
         public void Create(ref Market_DomainModels.Models.Translation entity)
         {
-            var mappedEntityObject = DomainModelMapper.Map<Market_DomainModels.Models.Translation, Translation>(entity);
+            var mappedEntityObject = ModelMapper.Map<Market_DomainModels.Models.Translation, Translation>(entity);
             mappedEntityObject.ID = 0;
             DbContext.Set<Translation>().Add(mappedEntityObject);
 
             DbContext.SaveChanges();
-            DomainModelMapper.Map(mappedEntityObject, entity);
+            ModelMapper.Map(mappedEntityObject, entity);
         }
 
         public void Delete(int entityID)
@@ -54,16 +54,16 @@ namespace Warframe.Market_Infrastructure_Repositories.Repositories.Implementatio
                 .SingleOrDefault(predicate => predicate.ID == entityID)
                 ?? throw new EntityNotFoundException(nameof(Translation), entityID);
 
-            return DomainModelMapper.Map<Market_DomainModels.Models.Translation>(searchedEntity);
+            return ModelMapper.Map<Market_DomainModels.Models.Translation>(searchedEntity);
         }
 
         public IEnumerable<Market_DomainModels.Models.Translation> Get(Expression<Func<Market_DomainModels.Models.Translation, bool>> predicate)
         {
-            var mappedPredicate = DomainModelMapper.Map<Expression<Func<Translation, bool>>>(predicate);
+            var mappedPredicate = ModelMapper.Map<Expression<Func<Translation, bool>>>(predicate);
 
             return DbContext.Set<Translation>().Where(mappedPredicate)
                 .ToList()
-                .Select(predicate => DomainModelMapper.Map<Market_DomainModels.Models.Translation>(predicate));
+                .Select(predicate => ModelMapper.Map<Market_DomainModels.Models.Translation>(predicate));
         }
 
 
@@ -71,7 +71,7 @@ namespace Warframe.Market_Infrastructure_Repositories.Repositories.Implementatio
         {
             return DbContext.Set<Translation>()
                 .ToList()
-                .Select(predicate => DomainModelMapper.Map<Market_DomainModels.Models.Translation>(predicate));
+                .Select(predicate => ModelMapper.Map<Market_DomainModels.Models.Translation>(predicate));
         }
 
         public void Update(ref Market_DomainModels.Models.Translation entity)
@@ -83,9 +83,9 @@ namespace Warframe.Market_Infrastructure_Repositories.Repositories.Implementatio
                 .SingleOrDefault(predicate => predicate.ID == entityId)
                 ?? throw new EntityNotFoundException(nameof(Translation), entity.ID);
 
-            DomainModelMapper.Map(entity, searchedEntity);
+            ModelMapper.Map(entity, searchedEntity);
             DbContext.SaveChanges();
-            DomainModelMapper.Map(searchedEntity, entity);
+            ModelMapper.Map(searchedEntity, entity);
         }
     }
 }

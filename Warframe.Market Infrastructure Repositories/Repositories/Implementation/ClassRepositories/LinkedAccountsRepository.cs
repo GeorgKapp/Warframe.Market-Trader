@@ -24,12 +24,12 @@ namespace Warframe.Market_Infrastructure_Repositories.Repositories.Implementatio
 
         public void Create(ref Market_DomainModels.Models.LinkedAccounts entity)
         {
-            var mappedEntityObject = DomainModelMapper.Map<Market_DomainModels.Models.LinkedAccounts, LinkedAccounts>(entity);
+            var mappedEntityObject = ModelMapper.Map<Market_DomainModels.Models.LinkedAccounts, LinkedAccounts>(entity);
             mappedEntityObject.ID = 0;
             DbContext.Set<LinkedAccounts>().Add(mappedEntityObject);
 
             DbContext.SaveChanges();
-            DomainModelMapper.Map(mappedEntityObject, entity);
+            ModelMapper.Map(mappedEntityObject, entity);
         }
 
         public void Delete(int entityID)
@@ -50,23 +50,23 @@ namespace Warframe.Market_Infrastructure_Repositories.Repositories.Implementatio
                 .SingleOrDefault(predicate => predicate.ID == entityID)
                 ?? throw new EntityNotFoundException(nameof(LinkedAccounts), entityID);
 
-            return DomainModelMapper.Map<Market_DomainModels.Models.LinkedAccounts>(searchedEntity);
+            return ModelMapper.Map<Market_DomainModels.Models.LinkedAccounts>(searchedEntity);
         }
 
         public IEnumerable<Market_DomainModels.Models.LinkedAccounts> Get(Expression<Func<Market_DomainModels.Models.LinkedAccounts, bool>> predicate)
         {
-            var mappedPredicate = DomainModelMapper.Map<Expression<Func<LinkedAccounts, bool>>>(predicate);
+            var mappedPredicate = ModelMapper.Map<Expression<Func<LinkedAccounts, bool>>>(predicate);
 
             return DbContext.Set<LinkedAccounts>().Where(mappedPredicate)
                 .ToList()
-                .Select(predicate => DomainModelMapper.Map<Market_DomainModels.Models.LinkedAccounts>(predicate));
+                .Select(predicate => ModelMapper.Map<Market_DomainModels.Models.LinkedAccounts>(predicate));
         }
         
         public IEnumerable<Market_DomainModels.Models.LinkedAccounts> GetAll()
         {
             return DbContext.Set<LinkedAccounts>()
                 .ToList()
-                .Select(predicate => DomainModelMapper.Map<Market_DomainModels.Models.LinkedAccounts>(predicate));
+                .Select(predicate => ModelMapper.Map<Market_DomainModels.Models.LinkedAccounts>(predicate));
         }
 
         public void Update(ref Market_DomainModels.Models.LinkedAccounts entity)
@@ -77,9 +77,9 @@ namespace Warframe.Market_Infrastructure_Repositories.Repositories.Implementatio
                 DbContext.Set<LinkedAccounts>().SingleOrDefault(predicate => predicate.ID == entityId)
                 ?? throw new EntityNotFoundException(nameof(LinkedAccounts), entity.ID);
 
-            DomainModelMapper.Map(entity, searchedEntity);
+            ModelMapper.Map(entity, searchedEntity);
             DbContext.SaveChanges();
-            DomainModelMapper.Map(searchedEntity, entity);
+            ModelMapper.Map(searchedEntity, entity);
         }
 
         public bool Exists(int entityID)

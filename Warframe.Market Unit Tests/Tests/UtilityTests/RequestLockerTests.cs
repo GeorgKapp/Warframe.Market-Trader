@@ -6,6 +6,7 @@ using static Warframe.Market_Api.Clients.Implementation.RequestLocker;
 
 namespace Warframe.Market_Unit_Tests
 {
+    [TestCategory("Request Locker Tests")]
     [TestClass]
     public class RequestLockerTests
     {
