@@ -5,6 +5,6 @@ namespace Warframe.Market_Infrastructure_Repositories.Repositories.Interfaces.Cl
 {
     public interface IItemDomainRepository : IComplexClassDomainRepository<Item, Market_DomainModels.Models.Item>
     {
-        void Create(ref Market_DomainModels.Models.Item entity, int userId);
+        void Create(ref Market_DomainModels.Models.Item entity, int descriptionId, int wikiLinkId, int itemNameId);
     }
 }

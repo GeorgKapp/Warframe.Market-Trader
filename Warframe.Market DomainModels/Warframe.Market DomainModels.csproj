@@ -53,6 +53,7 @@
     <Compile Include="Models\LinkedAccounts.cs" />
     <Compile Include="Models\LoginUser.cs" />
     <Compile Include="Models\Order.cs" />
+    <Compile Include="Models\ReferencedItem.cs" />
     <Compile Include="Models\SetItem.cs" />
     <Compile Include="Models\Tag.cs" />
     <Compile Include="Models\Translation.cs" />
