@@ -45,14 +45,12 @@ namespace Warframe.Market_Infrastructure_Repositories.Repositories.Implementatio
             var mappedPredicate = ModelMapper.Map<Expression<Func<LinkedAccounts, bool>>>(predicate);
 
             return _entityLinkedAccountsRepository.Get(mappedPredicate)
-                .ToList()
                 .Select(predicate => ModelMapper.Map<Market_DomainModels.Models.LinkedAccounts>(predicate));
         }
 
         public IEnumerable<Market_DomainModels.Models.LinkedAccounts> GetAll()
         {
             return _entityLinkedAccountsRepository.GetAll()
-                .ToList()
                 .Select(predicate => ModelMapper.Map<Market_DomainModels.Models.LinkedAccounts>(predicate));
         }
 

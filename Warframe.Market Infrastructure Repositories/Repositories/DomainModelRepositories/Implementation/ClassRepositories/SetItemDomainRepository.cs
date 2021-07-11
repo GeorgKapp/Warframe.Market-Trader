@@ -52,14 +52,12 @@ namespace Warframe.Market_Infrastructure_Repositories.Repositories.Implementatio
             var mappedPredicate = ModelMapper.Map<Expression<Func<SetItem, bool>>>(predicate);
 
             return _entitySetItemRepository.Get(mappedPredicate)
-                .ToList()
                 .Select(predicate => ModelMapper.Map<Market_DomainModels.Models.SetItem>(predicate));
         }
 
         public IEnumerable<Market_DomainModels.Models.SetItem> GetAll()
         {
             return _entitySetItemRepository.GetAll()
-                .ToList()
                 .Select(predicate => ModelMapper.Map<Market_DomainModels.Models.SetItem>(predicate));
         }
 

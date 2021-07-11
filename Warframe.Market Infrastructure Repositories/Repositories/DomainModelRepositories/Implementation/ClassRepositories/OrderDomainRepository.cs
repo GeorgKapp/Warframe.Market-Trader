@@ -48,14 +48,12 @@ namespace Warframe.Market_Infrastructure_Repositories.Repositories.Implementatio
             var mappedPredicate = ModelMapper.Map<Expression<Func<Order, bool>>>(predicate);
 
             return _entityOrderRepository.Get(mappedPredicate)
-                .ToList()
                 .Select(predicate => ModelMapper.Map<Market_DomainModels.Models.Order>(predicate));
         }
 
         public IEnumerable<Market_DomainModels.Models.Order> GetAll()
         {
             return _entityOrderRepository.GetAll()
-                .ToList()
                 .Select(predicate => ModelMapper.Map<Market_DomainModels.Models.Order>(predicate));
         }
 

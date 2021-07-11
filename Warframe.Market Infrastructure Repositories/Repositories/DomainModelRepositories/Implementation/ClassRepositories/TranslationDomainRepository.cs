@@ -45,14 +45,12 @@ namespace Warframe.Market_Infrastructure_Repositories.Repositories.Implementatio
             var mappedPredicate = ModelMapper.Map<Expression<Func<Translation, bool>>>(predicate);
 
             return _entityTranslationRepository.Get(mappedPredicate)
-                .ToList()
                 .Select(predicate => ModelMapper.Map<Market_DomainModels.Models.Translation>(predicate));
         }
 
         public IEnumerable<Market_DomainModels.Models.Translation> GetAll()
         {
             return _entityTranslationRepository.GetAll()
-                .ToList()
                 .Select(predicate => ModelMapper.Map<Market_DomainModels.Models.Translation>(predicate));
         }
 

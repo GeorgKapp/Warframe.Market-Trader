@@ -51,14 +51,12 @@ namespace Warframe.Market_Infrastructure_Repositories.Repositories.Implementatio
             var mappedPredicate = ModelMapper.Map<Expression<Func<LoginUser, bool>>>(predicate);
 
             return _entityLoginUserRepository.Get(mappedPredicate)
-                .ToList()
                 .Select(predicate => ModelMapper.Map<Market_DomainModels.Models.LoginUser>(predicate));
         }
 
         public IEnumerable<Market_DomainModels.Models.LoginUser> GetAll()
         {
             return _entityLoginUserRepository.GetAll()
-                .ToList()
                 .Select(predicate => ModelMapper.Map<Market_DomainModels.Models.LoginUser>(predicate));
         }
 
