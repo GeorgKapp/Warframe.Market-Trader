@@ -20,7 +20,7 @@ namespace Warframe.Market_Unit_Tests
         [TestMethod("1. LinkedAccounts")]
         public void Test1LinkedAccountsTests()
         {
-            var repos = new LinkedAccountsRepository(new EntityLinkedAccountsRepository(_ambientDbContextLocator));
+            var repos = new LinkedAccountsDomainRepository(new LinkedAccountsEntityRepository(_ambientDbContextLocator));
             using (var dbContextScope = _dbContextScopeFactory.CreateWithTransaction(IsolationLevel.ReadCommitted))
             {
                 var newAccount = new Market_DomainModels.Models.LinkedAccounts
@@ -48,7 +48,7 @@ namespace Warframe.Market_Unit_Tests
         [TestMethod("2. User")]
         public void Test2UserTests()
         {
-            var repos = new UserRepository(new EntityUserRepository(_ambientDbContextLocator));
+            var repos = new UserDomainRepository(new UserEntityRepository(_ambientDbContextLocator));
             using (var dbContextScope = _dbContextScopeFactory.Create())
             {
                 var getResult = repos.Get(1);
@@ -72,7 +72,8 @@ namespace Warframe.Market_Unit_Tests
         [TestMethod("3. Order")]
         public void Test3OrderTests()
         {
-            var repos = new OrderRepository(new EntityOrderRepository(_ambientDbContextLocator), new EntityUserRepository(_ambientDbContextLocator));
+            var userentityrepos = new UserEntityRepository(_ambientDbContextLocator);
+            var repos = new OrderDomainRepository(new OrderEntityRepository(_ambientDbContextLocator), userentityrepos);
             using (var dbContextScope = _dbContextScopeFactory.Create())
             {
                 var createdEntity = new Warframe.Market_DomainModels.Models.Order
@@ -87,7 +88,13 @@ namespace Warframe.Market_Unit_Tests
                     Platinum = 1000,
                     LastUpdate = System.DateTimeOffset.Now
                 };
+
                 repos.Create(ref createdEntity, 4);
+                var userCount = userentityrepos.GetAll().Count();
+                createdEntity.Region = Region.Pl;
+                repos.Update(ref createdEntity);
+                var userCount2 = userentityrepos.GetAll().Count();
+                Assert.IsTrue(userCount == userCount2);
                 _ = "";
             }
         }

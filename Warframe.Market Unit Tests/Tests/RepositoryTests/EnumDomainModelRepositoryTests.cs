@@ -20,7 +20,7 @@ namespace Warframe.Market_Unit_Tests
 
         public void Test1IconFormatGetByID()
         {
-            var repos = new IconFormatRepository(_ambientDbContextLocator);
+            var repos = new IconFormatDomainRepository(_ambientDbContextLocator);
             using (var dbContextScope = _dbContextScopeFactory.CreateReadOnly())
             {
                 var enumValues = GetAllEnumValues<IconFormat>();
@@ -38,7 +38,7 @@ namespace Warframe.Market_Unit_Tests
 
         public void Test2IconFormatGetAll()
         {
-            var repos = new IconFormatRepository(_ambientDbContextLocator);
+            var repos = new IconFormatDomainRepository(_ambientDbContextLocator);
             using (var dbContextScope = _dbContextScopeFactory.CreateReadOnly())
             {
                 var results = repos.GetAll();
@@ -50,7 +50,7 @@ namespace Warframe.Market_Unit_Tests
 
         public void Test3OrderTypeGetByID()
         {
-            var repos = new OrderTypeRepository(_ambientDbContextLocator);
+            var repos = new OrderTypeDomainRepository(_ambientDbContextLocator);
             using (var dbContextScope = _dbContextScopeFactory.CreateReadOnly())
             {
                 var enumValues = GetAllEnumValues<OrderType>();
@@ -67,7 +67,7 @@ namespace Warframe.Market_Unit_Tests
 
         public void Test4OrderTypeGetAll()
         {
-            var repos = new OrderTypeRepository(_ambientDbContextLocator);
+            var repos = new OrderTypeDomainRepository(_ambientDbContextLocator);
             using (var dbContextScope = _dbContextScopeFactory.CreateReadOnly())
             {
                 var results = repos.GetAll();
@@ -79,7 +79,7 @@ namespace Warframe.Market_Unit_Tests
 
         public void Test5PlatformGetByID()
         {
-            var repos = new PlatformRepository(_ambientDbContextLocator);
+            var repos = new PlatformDomainRepository(_ambientDbContextLocator);
             using (var dbContextScope = _dbContextScopeFactory.CreateReadOnly())
             {
                 var enumValues = GetAllEnumValues<Platform>();
@@ -96,7 +96,7 @@ namespace Warframe.Market_Unit_Tests
 
         public void Test6PlatformGetAll()
         {
-            var repos = new PlatformRepository(_ambientDbContextLocator);
+            var repos = new PlatformDomainRepository(_ambientDbContextLocator);
             using (var dbContextScope = _dbContextScopeFactory.CreateReadOnly())
             {
                 var results = repos.GetAll();
@@ -108,7 +108,7 @@ namespace Warframe.Market_Unit_Tests
 
         public void Test7RegionGetByID()
         {
-            var repos = new RegionRepository(_ambientDbContextLocator);
+            var repos = new RegionDomainRepository(_ambientDbContextLocator);
             using (var dbContextScope = _dbContextScopeFactory.CreateReadOnly())
             {
                 var enumValues = GetAllEnumValues<Region>();
@@ -125,7 +125,7 @@ namespace Warframe.Market_Unit_Tests
 
         public void Test8RegionGetAll()
         {
-            var repos = new RegionRepository(_ambientDbContextLocator);
+            var repos = new RegionDomainRepository(_ambientDbContextLocator);
             using (var dbContextScope = _dbContextScopeFactory.CreateReadOnly())
             {
                 var results = repos.GetAll();
@@ -137,7 +137,7 @@ namespace Warframe.Market_Unit_Tests
 
         public void Test9RoleGetByID()
         {
-            var repos = new RoleRepository(_ambientDbContextLocator);
+            var repos = new RoleDomainRepository(_ambientDbContextLocator);
             using (var dbContextScope = _dbContextScopeFactory.CreateReadOnly())
             {
                 var enumValues = GetAllEnumValues<Role>();
@@ -154,7 +154,7 @@ namespace Warframe.Market_Unit_Tests
 
         public void Test10RoleGetAll()
         {
-            var repos = new RoleRepository(_ambientDbContextLocator);
+            var repos = new RoleDomainRepository(_ambientDbContextLocator);
             using (var dbContextScope = _dbContextScopeFactory.CreateReadOnly())
             {
                 var results = repos.GetAll();
@@ -166,7 +166,7 @@ namespace Warframe.Market_Unit_Tests
 
         public void Test11StatusGetByID()
         {
-            var repos = new StatusRepository(_ambientDbContextLocator);
+            var repos = new StatusDomainRepository(_ambientDbContextLocator);
             using (var dbContextScope = _dbContextScopeFactory.CreateReadOnly())
             {
                 var enumValues = GetAllEnumValues<Status>();
@@ -183,7 +183,7 @@ namespace Warframe.Market_Unit_Tests
 
         public void Test12StatusGetAll()
         {
-            var repos = new StatusRepository(_ambientDbContextLocator);
+            var repos = new StatusDomainRepository(_ambientDbContextLocator);
             using (var dbContextScope = _dbContextScopeFactory.CreateReadOnly())
             {
                 var results = repos.GetAll();
@@ -195,7 +195,7 @@ namespace Warframe.Market_Unit_Tests
 
         public void Test13SubTypeGetByID()
         {
-            var repos = new SubTypeRepository(_ambientDbContextLocator);
+            var repos = new SubTypeDomainRepository(_ambientDbContextLocator);
             using (var dbContextScope = _dbContextScopeFactory.CreateReadOnly())
             {
                 var enumValues = GetAllEnumValues<SubType>();
@@ -212,7 +212,7 @@ namespace Warframe.Market_Unit_Tests
 
         public void Test14SubTypeGetAll()
         {
-            var repos = new SubTypeRepository(_ambientDbContextLocator);
+            var repos = new SubTypeDomainRepository(_ambientDbContextLocator);
             using (var dbContextScope = _dbContextScopeFactory.CreateReadOnly())
             {
                 var results = repos.GetAll();

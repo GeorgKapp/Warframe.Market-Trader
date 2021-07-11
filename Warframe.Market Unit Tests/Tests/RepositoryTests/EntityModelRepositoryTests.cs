@@ -15,7 +15,7 @@ namespace Warframe.Market_Unit_Tests
         [TestMethod("EfUserRepository Test")]
         public void Test1EfUserRepository()
         {
-            var repos = new EntityUserRepository(_ambientDbContextLocator);
+            var repos = new UserEntityRepository(_ambientDbContextLocator);
             using (var dbContextScope = _dbContextScopeFactory.CreateReadOnly())
             {
                 var createdEntity = new User
@@ -42,7 +42,7 @@ namespace Warframe.Market_Unit_Tests
         [TestMethod("EfOrderRepository Test")]
         public void Test2EfOrderRepository()
         {
-            var repos = new EntityOrderRepository(_ambientDbContextLocator);
+            var repos = new OrderEntityRepository(_ambientDbContextLocator);
             using (var dbContextScope = _dbContextScopeFactory.CreateReadOnly())
             {
                 var gottenentity = repos.Get(1006);
