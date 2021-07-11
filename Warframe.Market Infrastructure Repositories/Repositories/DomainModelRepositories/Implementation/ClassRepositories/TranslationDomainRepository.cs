@@ -58,9 +58,10 @@ namespace Warframe.Market_Infrastructure_Repositories.Repositories.Implementatio
 
         public void Update(ref Market_DomainModels.Models.Translation entity)
         {
-            var mappedModel = ModelMapper.Map<Translation>(entity);
-            _entityTranslationRepository.Update(ref mappedModel);
-            ModelMapper.Map(mappedModel, entity);
+            var mappedEntityModel = _entityTranslationRepository.Get(entity.ID);
+            ModelMapper.Map(entity, mappedEntityModel);
+            _entityTranslationRepository.Update(ref mappedEntityModel);
+            ModelMapper.Map(mappedEntityModel, entity);
         }
     }
 }

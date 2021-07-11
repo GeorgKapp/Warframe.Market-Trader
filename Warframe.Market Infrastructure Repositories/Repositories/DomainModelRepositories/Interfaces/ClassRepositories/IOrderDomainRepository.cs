@@ -6,5 +6,6 @@ namespace Warframe.Market_Infrastructure_Repositories.Repositories.Interfaces.Cl
     public interface IOrderDomainRepository : IComplexClassDomainRepository<Order, Market_DomainModels.Models.Order>
     {
         void Create(ref Market_DomainModels.Models.Order entity, int userId);
+        void Update(ref Market_DomainModels.Models.Order entity);
     }
 }

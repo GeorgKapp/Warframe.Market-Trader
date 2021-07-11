@@ -63,6 +63,7 @@
     <Compile Include="Mapping\Profiles\ClassProfiles\OrderMappingProfile.cs" />
     <Compile Include="Mapping\Profiles\ClassProfiles\TagMappingProfile.cs" />
     <Compile Include="Mapping\Profiles\ClassProfiles\TranslationMappingProfile.cs" />
+    <Compile Include="Mapping\Profiles\ClassProfiles\SetItemMappingProfile.cs" />
     <Compile Include="Mapping\Profiles\EnumProfiles\SubTypeMappingProfile.cs" />
     <Compile Include="Mapping\Profiles\EnumProfiles\StatusMappingProfile.cs" />
     <Compile Include="Mapping\Profiles\EnumProfiles\RoleMappingProfile.cs" />
@@ -71,8 +72,11 @@
     <Compile Include="Mapping\Profiles\EnumProfiles\PlatformMappingProfile.cs" />
     <Compile Include="Mapping\Profiles\EnumProfiles\RegionMappingProfile.cs" />
     <Compile Include="Mapping\Profiles\ClassProfiles\UserMappingProfile.cs" />
+    <Compile Include="Repositories\DomainModelRepositories\Implementation\ClassRepositories\SetItemDomainRepository.cs" />
     <Compile Include="Repositories\DomainModelRepositories\Implementation\ClassRepositories\LoginUserDomainRepository.cs" />
     <Compile Include="Repositories\DomainModelRepositories\Interfaces\Base\IComplexClassDomainRepository.cs" />
+    <Compile Include="Repositories\DomainModelRepositories\Interfaces\ClassRepositories\IItemDomainRepository.cs" />
+    <Compile Include="Repositories\DomainModelRepositories\Interfaces\ClassRepositories\ISetItemDomainRepository.cs" />
     <Compile Include="Repositories\DomainModelRepositories\Interfaces\ClassRepositories\ILoginUserDomainRepository.cs" />
     <Compile Include="Repositories\EntityModelRepositories\Implementation\LoginUserEntityRepository.cs" />
     <Compile Include="Repositories\EntityModelRepositories\Implementation\LinkedAccountsEntityRepository.cs" />

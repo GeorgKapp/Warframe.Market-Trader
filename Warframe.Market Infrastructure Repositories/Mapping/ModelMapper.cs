@@ -7,21 +7,13 @@ namespace Warframe.Market_Infrastructure_Repositories.Mapping
     public static class ModelMapper
     {
         private static IMapper _mapper;
-
         static ModelMapper()
         {
             _mapper = new MapperConfiguration(
             config =>
             {
                 config.AddExpressionMapping();
-                //config.AddProfile<IconFormatMappingProfile>();
-                //config.AddProfile<OrderTypeMappingProfile>();
-                //config.AddProfile<PlatformMappingProfile>();
-                //config.AddProfile<RegionMappingProfile>();
-                //config.AddProfile<RoleMappingProfile>();
-                //config.AddProfile<StatusMappingProfile>();
-                //config.AddProfile<SubTypeMappingProfile>();
-
+                config.AddProfile<SetItemMappingProfile>();
                 config.AddProfile<LoginUserMappingProfile>();
                 config.AddProfile<OrderMappingProfile>();
                 config.AddProfile<TagMappingProfile>();

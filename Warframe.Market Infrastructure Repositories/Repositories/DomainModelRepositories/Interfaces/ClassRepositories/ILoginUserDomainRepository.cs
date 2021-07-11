@@ -6,5 +6,6 @@ namespace Warframe.Market_Infrastructure_Repositories.Repositories.Interfaces.Cl
     public interface ILoginUserDomainRepository : IComplexClassDomainRepository<LoginUser, Market_DomainModels.Models.LoginUser>
     {
         void Create(ref Market_DomainModels.Models.LoginUser entity, int userId, int linkedAccountId);
+        void Update(ref Market_DomainModels.Models.LoginUser entity);
     }
 }

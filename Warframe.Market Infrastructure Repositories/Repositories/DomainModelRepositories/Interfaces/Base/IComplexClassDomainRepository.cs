@@ -9,7 +9,6 @@ namespace Warframe.Market_Infrastructure_Repositories.Repositories.Interfaces.Ba
         where TEntity : class
         where TDomain : ADomainModel
     {
-        void Update (ref TDomain entity);
         void Delete (int entityID);
         bool Exists(int entityID);
         TDomain Get (int entityID);

@@ -58,9 +58,10 @@ namespace Warframe.Market_Infrastructure_Repositories.Repositories.Implementatio
 
         public void Update(ref Market_DomainModels.Models.LinkedAccounts entity)
         {
-            var mappedModel = ModelMapper.Map<LinkedAccounts>(entity);
-            _entityLinkedAccountsRepository.Update(ref mappedModel);
-            ModelMapper.Map(mappedModel, entity);
+            var mappedEntityModel = _entityLinkedAccountsRepository.Get(entity.ID);
+            ModelMapper.Map(entity, mappedEntityModel);
+            _entityLinkedAccountsRepository.Update(ref mappedEntityModel);
+            ModelMapper.Map(mappedEntityModel, entity);
         }
     }
 }
