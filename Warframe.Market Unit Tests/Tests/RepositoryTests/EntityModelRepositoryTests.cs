@@ -2,7 +2,7 @@
 using Warframe.Market_DbContextScope;
 using Warframe.Market_DomainModels.Enums;
 using Warframe.Market_Infrastructure;
-using Warframe.Market_Infrastructure_Repositories.Repositories.EntityFrameworkRepositories;
+using Warframe.Market_Infrastructure_Repositories.Repositories.EntityModelRepositories.Implementation;
 
 namespace Warframe.Market_Unit_Tests.Tests
 {
@@ -14,7 +14,6 @@ namespace Warframe.Market_Unit_Tests.Tests
         IAmbientDbContextLocator _ambientDbContextLocator = new AmbientDbContextLocator();
 
         [TestMethod("EfUserRepository Test")]
-
         public void Test1EfUserRepository()
         {
             var repos = new EntityUserRepository(_ambientDbContextLocator);
@@ -33,6 +32,21 @@ namespace Warframe.Market_Unit_Tests.Tests
                 createdEntity.RegionID = (int)Region.Fr;
                 repos.Update(ref createdEntity);
 
+                //var entity = repos.Get(4);
+                //entity.LastSeen = DateTimeOffset.Now;
+                //repos.Update(ref entity);
+                _ = "";
+            }
+        }
+
+
+        [TestMethod("EfOrderRepository Test")]
+        public void Test2EfOrderRepository()
+        {
+            var repos = new EntityOrderRepository(_ambientDbContextLocator);
+            using (var dbContextScope = _dbContextScopeFactory.CreateReadOnly())
+            {
+                var gottenentity = repos.Get(1006);
                 //var entity = repos.Get(4);
                 //entity.LastSeen = DateTimeOffset.Now;
                 //repos.Update(ref entity);

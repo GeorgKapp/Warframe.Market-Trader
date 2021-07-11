@@ -4,7 +4,7 @@ using System.Data;
 using System.Linq;
 using Warframe.Market_DbContextScope;
 using Warframe.Market_DomainModels.Enums;
-using Warframe.Market_Infrastructure_Repositories.Repositories.EntityFrameworkRepositories;
+using Warframe.Market_Infrastructure_Repositories.Repositories.EntityModelRepositories.Implementation;
 using Warframe.Market_Infrastructure_Repositories.Repositories.Exceptions;
 using Warframe.Market_Infrastructure_Repositories.Repositories.Implementation.ClassRepositories;
 using Warframe.Market_Infrastructure_Repositories.Repositories.Interfaces.ClassRepositories;
@@ -24,9 +24,9 @@ namespace Warframe.Market_Unit_Tests.Tests.RepositoryTests
         [ClassInitialize]
         public void ClassInitialize(TestContext context)
         {
-            _linkedAccountsRepository = new LinkedAccountsRepository(_ambientDbContextLocator);
+            _linkedAccountsRepository = new LinkedAccountsRepository(new EntityLinkedAccountsRepository(_ambientDbContextLocator));
             _userRepository = new UserRepository(new EntityUserRepository(_ambientDbContextLocator));
-            _orderRepository = new OrderRepository(_ambientDbContextLocator);
+            _orderRepository = new OrderRepository(new EntityOrderRepository(_ambientDbContextLocator));
         }
 
         [TestMethod("LinkedAccounts Create, Update, Delete")]
@@ -84,28 +84,8 @@ namespace Warframe.Market_Unit_Tests.Tests.RepositoryTests
         {
             using (var dbContextScope = _dbContextScopeFactory.Create())
             {
-                var newOrder = new Market_DomainModels.Models.Order
-                {
-                    User = new Market_DomainModels.Models.User(1),
-                    SubType = SubType.Radiant,
-                    CreationDate = DateTimeOffset.UtcNow,
-                    LastUpdate = DateTimeOffset.UtcNow,
-                    ModRank = null,
-                    Platform = Platform.Pc,
-                    OrderType = OrderType.Buy,
-                    Platinum = 100,
-                    Quantity = 3,
-                    Region = Region.En,
-                    Visible = true
-                };
-
-                _orderRepository.Create(ref newOrder);
-                var getResult = _orderRepository.Get(newOrder.ID);
-                var hasFoundOnlyOneByPredicate = _orderRepository.Get(predicate => predicate.ID == newOrder.ID).SingleOrDefault()?.ID == newOrder.ID;
-                Assert.IsTrue(hasFoundOnlyOneByPredicate);
-                _orderRepository.Update(ref getResult);
-                _orderRepository.Delete(newOrder.ID);
-                Assert.ThrowsException<EntityNotFoundException>(() => _orderRepository.Get(newOrder.ID));
+                var getResult = _orderRepository.Get(1);
+                _ = "";
             }
         }
     }
