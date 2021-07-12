@@ -8,14 +8,16 @@ namespace Warframe.Market_Infrastructure_Repositories.Mapping.Profiles.ClassProf
         public ItemMappingProfile()
         {
             CreateMap<Market_DomainModels.Models.Item, Market_Infrastructure.Item>()
-                .ForMember(dest => dest.IconFormatID, opt => opt.MapFrom(source => (int)source.IconFormat));
+                .ForMember(dest => dest.IconFormatID, opt => opt.MapFrom(source => (int?)source.IconFormat))
+                .ForMember(dest => dest.ExternalID, opt => opt.MapFrom(source => source.ExternalID));
 
             CreateMap<Market_Infrastructure.Item, Market_DomainModels.Models.Item>()
                 .IncludeAllDerived()
-                .ForMember(dest => dest.IconFormat, opt => opt.MapFrom(source => (IconFormat)source.IconFormatID))
+                .ForMember(dest => dest.IconFormat, opt => opt.MapFrom(source => (IconFormat?)source.IconFormatID))
                 .ForMember(dest => dest.Tags, opt => opt.MapFrom(source => source.ItemTag))
                 .ForMember(dest => dest.ChildItems, opt => opt.MapFrom(source => source.SetItem))
-                .ForMember(dest => dest.ParentItems, opt => opt.MapFrom(source => source.SetItem1));
+                .ForMember(dest => dest.ParentItems, opt => opt.MapFrom(source => source.SetItem1))
+                .ForMember(dest => dest.ExternalID, opt => opt.MapFrom(source => source.ExternalID));
         }
     }
 }

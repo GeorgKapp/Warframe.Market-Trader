@@ -12,6 +12,7 @@
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -41,8 +42,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Implementation\ItemService.cs" />
-    <Compile Include="Interfaces\IItemService.cs" />
+    <Compile Include="Implementation\ItemDomainService.cs" />
+    <Compile Include="Implementation\TranslationDomainService.cs" />
+    <Compile Include="Interfaces\IItemDomainService.cs" />
+    <Compile Include="Interfaces\ITranslationDomainService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

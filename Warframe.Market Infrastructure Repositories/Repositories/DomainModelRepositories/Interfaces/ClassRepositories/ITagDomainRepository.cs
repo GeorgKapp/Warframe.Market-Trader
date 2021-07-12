@@ -3,5 +3,5 @@ using Warframe.Market_Infrastructure_Repositories.Repositories.Interfaces.Base;
 
 namespace Warframe.Market_Infrastructure_Repositories.Repositories.Interfaces.ClassRepositories
 {
-    public interface ITagDomainRepository : IClassDomainRepository<Tag, Market_DomainModels.Models.Tag> { }
+    public interface ITagDomainRepository : IClassDomainRepository<Market_DomainModels.Models.Tag> { }
 }

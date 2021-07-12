@@ -34,7 +34,6 @@ namespace Warframe.Market_Infrastructure_Repositories.Repositories.Implementatio
         public IEnumerable<Region> GetAll()
         {
             return DbContext.Set<RegionType>()
-                .ToList()
                 .Select(predicate => predicate.Type.ParseEnum<Region>());
         }
     }

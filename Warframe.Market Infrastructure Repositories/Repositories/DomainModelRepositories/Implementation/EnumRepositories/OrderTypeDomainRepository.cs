@@ -34,7 +34,6 @@ namespace Warframe.Market_Infrastructure_Repositories.Repositories.Implementatio
         public IEnumerable<OrderTypeE> GetAll()
         {
             return DbContext.Set<OrderType>()
-                .ToList()
                 .Select(predicate => predicate.Type.ParseEnum<OrderTypeE>());
         }
     }

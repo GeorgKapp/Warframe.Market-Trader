@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
@@ -29,7 +30,7 @@ namespace Warframe.Market_Infrastructure_Repositories.Repositories.EntityModelRe
         {
             var entity = DbContext.Set<Translation>()
                 .Where(predicate => predicate.ID == entityID)
-                .SingleOrDefault()
+                ?.SingleOrDefault()
                 ?? throw new EntityNotFoundException(nameof(Translation), entityID);
 
             DbContext.Entry(entity).State = EntityState.Deleted;
@@ -44,16 +45,16 @@ namespace Warframe.Market_Infrastructure_Repositories.Repositories.EntityModelRe
         public Translation Get(int entityID)
         {
             return DbContext.Set<Translation>()
-                .SingleOrDefault(predicate => predicate.ID == entityID)
+                ?.SingleOrDefault(predicate => predicate.ID == entityID)
                 ?? throw new EntityNotFoundException(nameof(Translation), entityID);
         }
 
-        public IQueryable<Translation> Get(Expression<Func<Translation, bool>> predicate)
+        public IEnumerable<Translation> Get(Expression<Func<Translation, bool>> predicate)
         {
             return DbContext.Set<Translation>().Where(predicate);
         }
 
-        public IQueryable<Translation> GetAll()
+        public IEnumerable<Translation> GetAll()
         {
             return DbContext.Set<Translation>();
         }

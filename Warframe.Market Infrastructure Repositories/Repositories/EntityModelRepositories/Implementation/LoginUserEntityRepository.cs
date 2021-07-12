@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
@@ -29,7 +30,7 @@ namespace Warframe.Market_Infrastructure_Repositories.Repositories.EntityModelRe
         {
             var entity = DbContext.Set<LoginUser>()
                 .Where(predicate => predicate.ID == entityID)
-                .SingleOrDefault()
+                ?.SingleOrDefault()
                 ?? throw new EntityNotFoundException(nameof(LoginUser), entityID);
 
             DbContext.Entry(entity).State = EntityState.Deleted;
@@ -44,16 +45,16 @@ namespace Warframe.Market_Infrastructure_Repositories.Repositories.EntityModelRe
         public LoginUser Get(int entityID)
         {
             return DbContext.Set<LoginUser>()
-                .SingleOrDefault(predicate => predicate.ID == entityID)
+                ?.SingleOrDefault(predicate => predicate.ID == entityID)
                 ?? throw new EntityNotFoundException(nameof(LoginUser), entityID);
         }
 
-        public IQueryable<LoginUser> Get(Expression<Func<LoginUser, bool>> predicate)
+        public IEnumerable<LoginUser> Get(Expression<Func<LoginUser, bool>> predicate)
         {
             return DbContext.Set<LoginUser>().Where(predicate);
         }
 
-        public IQueryable<LoginUser> GetAll()
+        public IEnumerable<LoginUser> GetAll()
         {
             return DbContext.Set<LoginUser>();
         }

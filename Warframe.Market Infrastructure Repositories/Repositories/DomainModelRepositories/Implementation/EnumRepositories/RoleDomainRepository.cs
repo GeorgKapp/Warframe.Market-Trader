@@ -34,7 +34,6 @@ namespace Warframe.Market_Infrastructure_Repositories.Repositories.Implementatio
         public IEnumerable<Role> GetAll()
         {
             return DbContext.Set<RoleType>()
-                .ToList()
                 .Select(predicate => predicate.Type.ParseEnum<Role>());
         }
     }

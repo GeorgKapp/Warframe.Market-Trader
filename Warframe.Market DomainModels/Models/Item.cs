@@ -9,6 +9,7 @@ namespace Warframe.Market_DomainModels.Models
         public Item() { }
         public Item(int id) : base(id) { }
 
+        public string ExternalID { get; set; }
         public string UrlName { get; set; }
         public string Thumb { get; set; }
         public int? Ducats { get; set; }

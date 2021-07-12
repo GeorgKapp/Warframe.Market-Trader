@@ -20,11 +20,11 @@ namespace Warframe.Market_Infrastructure_Repositories.Repositories.Implementatio
             _entityTranslationRepository = entityTranslationRepository ?? throw new ArgumentNullException(nameof(entityTranslationRepository));
         }
 
-        public void Create(ref Market_DomainModels.Models.Item entity, int descriptionId, int wikiLinkId, int itemNameId)
+        public void Create(ref Market_DomainModels.Models.Item entity, int itemNameId, int? descriptionId = null, int? wikiLinkId = null)
         {
             var mappedEntityObject = ModelMapper.Map<Market_DomainModels.Models.Item, Item>(entity);
-            mappedEntityObject.Translation = _entityTranslationRepository.Get(descriptionId);
-            mappedEntityObject.Translation1 = _entityTranslationRepository.Get(wikiLinkId);
+            mappedEntityObject.Translation = descriptionId.HasValue ? _entityTranslationRepository.Get(descriptionId.Value) : null;
+            mappedEntityObject.Translation1 = wikiLinkId.HasValue ? _entityTranslationRepository.Get(wikiLinkId.Value) : null ;
             mappedEntityObject.Translation2 = _entityTranslationRepository.Get(itemNameId);
             _entityItemRepository.Create(ref mappedEntityObject);
             ModelMapper.Map(mappedEntityObject, entity);
@@ -48,9 +48,9 @@ namespace Warframe.Market_Infrastructure_Repositories.Repositories.Implementatio
         public IEnumerable<Market_DomainModels.Models.Item> Get(Expression<Func<Market_DomainModels.Models.Item, bool>> predicate)
         {
             var mappedPredicate = ModelMapper.Map<Expression<Func<Item, bool>>>(predicate);
-
             return _entityItemRepository.Get(mappedPredicate)
                 .Select(predicate => ModelMapper.Map<Market_DomainModels.Models.Item>(predicate));
+   
         }
 
         public IEnumerable<Market_DomainModels.Models.Item> GetAll()
@@ -59,12 +59,17 @@ namespace Warframe.Market_Infrastructure_Repositories.Repositories.Implementatio
                 .Select(predicate => ModelMapper.Map<Market_DomainModels.Models.Item>(predicate));
         }
 
-        public void Update(ref Market_DomainModels.Models.Item entity)
+        public void Update(ref Market_DomainModels.Models.Item entity, int? itemNameId = null, int? descriptionId = null, int? wikiLinkId = null)
         {
             var mappedEntityModel = _entityItemRepository.Get(entity.ID);
             ModelMapper.Map(entity, mappedEntityModel);
+
+            if (descriptionId.HasValue) mappedEntityModel.Translation = _entityTranslationRepository.Get(descriptionId.Value);
+            if (wikiLinkId.HasValue) mappedEntityModel.Translation1 = _entityTranslationRepository.Get(wikiLinkId.Value);
+            if (itemNameId.HasValue) mappedEntityModel.Translation2 = _entityTranslationRepository.Get(itemNameId.Value);
+
             _entityItemRepository.Update(ref mappedEntityModel);
             ModelMapper.Map(mappedEntityModel, entity);
-        }
+        } 
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 
@@ -12,7 +13,7 @@ namespace Warframe.Market_Infrastructure_Repositories.Repositories.EntityModelRe
         void Delete(int entityID);
         bool Exists(int entityID);
         TEntity Get(int entityID);
-        IQueryable<TEntity> Get(Expression<Func<TEntity, bool>> predicate);
-        IQueryable<TEntity> GetAll();
+        IEnumerable<TEntity> Get(Expression<Func<TEntity, bool>> predicate);
+        IEnumerable<TEntity> GetAll();
     }
 }

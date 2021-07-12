@@ -33,7 +33,6 @@ namespace Warframe.Market_Infrastructure_Repositories.Repositories.Implementatio
         public IEnumerable<SubType> GetAll()
         {
             return DbContext.Set<SubTypeType>()
-                .ToList()
                 .Select(predicate => predicate.Type.ParseEnum<SubType>());
         }
     }

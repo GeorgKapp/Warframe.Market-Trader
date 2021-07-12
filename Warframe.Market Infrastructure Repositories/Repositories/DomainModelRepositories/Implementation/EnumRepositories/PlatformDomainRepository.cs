@@ -33,7 +33,6 @@ namespace Warframe.Market_Infrastructure_Repositories.Repositories.Implementatio
         public IEnumerable<Platform> GetAll()
         {
             return DbContext.Set<PlatformType>()
-                .ToList()
                 .Select(predicate => predicate.Type.ParseEnum<Platform>());
         }
     }

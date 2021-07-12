@@ -58,6 +58,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exceptions\NoEntitiesFoundException.cs" />
     <Compile Include="Mapping\ModelMapper.cs" />
     <Compile Include="Mapping\Profiles\ClassProfiles\ItemMappingProfile.cs" />
     <Compile Include="Mapping\Profiles\ClassProfiles\LoginUserMappingProfile.cs" />
