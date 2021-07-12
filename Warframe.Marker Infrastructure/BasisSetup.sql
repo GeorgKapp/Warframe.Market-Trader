@@ -104,7 +104,7 @@ create table [dbo].[Translation] (
 
 create table [dbo].[Item] (
     ID int not null identity(1,1) primary key,
-	ExternalID int not null,
+	ExternalID nvarchar(100) null,
 	UrlName nvarchar(100),
 	Thumb nvarchar(1000),
 	Ducats int,
