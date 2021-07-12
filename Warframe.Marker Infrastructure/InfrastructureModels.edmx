@@ -4,12 +4,13 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Warframe.Market_Infrastructure.DataBaseContextModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Warframe.Market_Infrastructure.DataBaseContextModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Item">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ExternalID" Type="int" Nullable="false" />
           <Property Name="UrlName" Type="nvarchar" MaxLength="100" />
           <Property Name="Thumb" Type="nvarchar" MaxLength="1000" />
           <Property Name="Ducats" Type="int" />
@@ -145,14 +146,14 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" Nullable="false" />
-          <Property Name="Type" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="Type" Type="varchar" MaxLength="10" Nullable="false" />
         </EntityType>
         <EntityType Name="RoleType">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" Nullable="false" />
-          <Property Name="Type" Type="varchar" MaxLength="10" />
+          <Property Name="Type" Type="varchar" MaxLength="10" Nullable="false" />
         </EntityType>
         <EntityType Name="StatusType">
           <Key>
@@ -168,7 +169,7 @@
           <Property Name="ID" Type="int" Nullable="false" />
           <Property Name="Type" Type="varchar" MaxLength="20" Nullable="false" />
         </EntityType>
-        <Association Name="FK__Item__Descriptio__300424B4">
+        <Association Name="FK__Item__Descriptio__412EB0B6">
           <End Role="Translation" Type="Self.Translation" Multiplicity="0..1" />
           <End Role="Item" Type="Self.Item" Multiplicity="*" />
           <ReferentialConstraint>
@@ -180,7 +181,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Item__IconFormat__2F10007B">
+        <Association Name="FK__Item__IconFormat__403A8C7D">
           <End Role="IconFormatType" Type="Self.IconFormatType" Multiplicity="0..1" />
           <End Role="Item" Type="Self.Item" Multiplicity="*" />
           <ReferentialConstraint>
@@ -192,7 +193,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Item__ItemNameID__31EC6D26">
+        <Association Name="FK__Item__ItemNameID__4316F928">
           <End Role="Translation" Type="Self.Translation" Multiplicity="0..1" />
           <End Role="Item" Type="Self.Item" Multiplicity="*" />
           <ReferentialConstraint>
@@ -204,7 +205,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Item__WikiLinkID__30F848ED">
+        <Association Name="FK__Item__WikiLinkID__4222D4EF">
           <End Role="Translation" Type="Self.Translation" Multiplicity="0..1" />
           <End Role="Item" Type="Self.Item" Multiplicity="*" />
           <ReferentialConstraint>
@@ -216,7 +217,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ItemTag__ItemID__34C8D9D1">
+        <Association Name="FK__ItemTag__ItemID__4CA06362">
           <End Role="Item" Type="Self.Item" Multiplicity="1" />
           <End Role="ItemTag" Type="Self.ItemTag" Multiplicity="*" />
           <ReferentialConstraint>
@@ -228,7 +229,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ItemTag__TagID__35BCFE0A">
+        <Association Name="FK__ItemTag__TagID__4D94879B">
           <End Role="Tag" Type="Self.Tag" Multiplicity="1" />
           <End Role="ItemTag" Type="Self.ItemTag" Multiplicity="*" />
           <ReferentialConstraint>
@@ -240,7 +241,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__LoginUser__Linke__48CFD27E">
+        <Association Name="FK__LoginUser__Linke__3B75D760">
           <End Role="LinkedAccounts" Type="Self.LinkedAccounts" Multiplicity="0..1" />
           <End Role="LoginUser" Type="Self.LoginUser" Multiplicity="*" />
           <ReferentialConstraint>
@@ -252,7 +253,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__LoginUser__Platf__46E78A0C">
+        <Association Name="FK__LoginUser__Platf__398D8EEE">
           <End Role="PlatformType" Type="Self.PlatformType" Multiplicity="0..1" />
           <End Role="LoginUser" Type="Self.LoginUser" Multiplicity="*" />
           <ReferentialConstraint>
@@ -264,7 +265,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__LoginUser__RoleI__47DBAE45">
+        <Association Name="FK__LoginUser__RoleI__3A81B327">
           <End Role="RoleType" Type="Self.RoleType" Multiplicity="0..1" />
           <End Role="LoginUser" Type="Self.LoginUser" Multiplicity="*" />
           <ReferentialConstraint>
@@ -276,7 +277,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__LoginUser__UserI__45F365D3">
+        <Association Name="FK__LoginUser__UserI__38996AB5">
           <End Role="User" Type="Self.User" Multiplicity="0..1" />
           <End Role="LoginUser" Type="Self.LoginUser" Multiplicity="*" />
           <ReferentialConstraint>
@@ -288,7 +289,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Order__OrderType__778AC167">
+        <Association Name="FK__Order__OrderType__49C3F6B7">
           <End Role="OrderType" Type="Self.OrderType" Multiplicity="1" />
           <End Role="Order" Type="Self.Order" Multiplicity="*" />
           <ReferentialConstraint>
@@ -300,7 +301,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Order__PlatformT__75A278F5">
+        <Association Name="FK__Order__PlatformT__47DBAE45">
           <End Role="PlatformType" Type="Self.PlatformType" Multiplicity="1" />
           <End Role="Order" Type="Self.Order" Multiplicity="*" />
           <ReferentialConstraint>
@@ -312,7 +313,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Order__RegionTyp__76969D2E">
+        <Association Name="FK__Order__RegionTyp__48CFD27E">
           <End Role="RegionType" Type="Self.RegionType" Multiplicity="1" />
           <End Role="Order" Type="Self.Order" Multiplicity="*" />
           <ReferentialConstraint>
@@ -324,7 +325,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Order__SubTypeTy__74AE54BC">
+        <Association Name="FK__Order__SubTypeTy__46E78A0C">
           <End Role="SubTypeType" Type="Self.SubTypeType" Multiplicity="1" />
           <End Role="Order" Type="Self.Order" Multiplicity="*" />
           <ReferentialConstraint>
@@ -336,7 +337,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Order__UserID__73BA3083">
+        <Association Name="FK__Order__UserID__45F365D3">
           <End Role="User" Type="Self.User" Multiplicity="1" />
           <End Role="Order" Type="Self.Order" Multiplicity="*" />
           <ReferentialConstraint>
@@ -348,7 +349,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SetItem__ChildIt__38996AB5">
+        <Association Name="FK__SetItem__ChildIt__5070F446">
           <End Role="Item" Type="Self.Item" Multiplicity="1" />
           <End Role="SetItem" Type="Self.SetItem" Multiplicity="*" />
           <ReferentialConstraint>
@@ -360,7 +361,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SetItem__ParentI__398D8EEE">
+        <Association Name="FK__SetItem__ParentI__5165187F">
           <End Role="Item" Type="Self.Item" Multiplicity="1" />
           <End Role="SetItem" Type="Self.SetItem" Multiplicity="*" />
           <ReferentialConstraint>
@@ -372,7 +373,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__User__RegionID__3C69FB99">
+        <Association Name="FK__User__RegionID__34C8D9D1">
           <End Role="RegionType" Type="Self.RegionType" Multiplicity="0..1" />
           <End Role="User" Type="Self.User" Multiplicity="*" />
           <ReferentialConstraint>
@@ -384,7 +385,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__User__StatusID__3D5E1FD2">
+        <Association Name="FK__User__StatusID__35BCFE0A">
           <End Role="StatusType" Type="Self.StatusType" Multiplicity="0..1" />
           <End Role="User" Type="Self.User" Multiplicity="*" />
           <ReferentialConstraint>
@@ -413,85 +414,84 @@
           <EntitySet Name="RoleType" EntityType="Self.RoleType" Schema="enum" store:Type="Tables" />
           <EntitySet Name="StatusType" EntityType="Self.StatusType" Schema="enum" store:Type="Tables" />
           <EntitySet Name="SubTypeType" EntityType="Self.SubTypeType" Schema="enum" store:Type="Tables" />
-          <AssociationSet Name="FK__Item__Descriptio__300424B4" Association="Self.FK__Item__Descriptio__300424B4">
+          <AssociationSet Name="FK__Item__Descriptio__412EB0B6" Association="Self.FK__Item__Descriptio__412EB0B6">
             <End Role="Translation" EntitySet="Translation" />
             <End Role="Item" EntitySet="Item" />
           </AssociationSet>
-          <AssociationSet Name="FK__Item__IconFormat__2F10007B" Association="Self.FK__Item__IconFormat__2F10007B">
+          <AssociationSet Name="FK__Item__IconFormat__403A8C7D" Association="Self.FK__Item__IconFormat__403A8C7D">
             <End Role="IconFormatType" EntitySet="IconFormatType" />
             <End Role="Item" EntitySet="Item" />
           </AssociationSet>
-          <AssociationSet Name="FK__Item__ItemNameID__31EC6D26" Association="Self.FK__Item__ItemNameID__31EC6D26">
+          <AssociationSet Name="FK__Item__ItemNameID__4316F928" Association="Self.FK__Item__ItemNameID__4316F928">
             <End Role="Translation" EntitySet="Translation" />
             <End Role="Item" EntitySet="Item" />
           </AssociationSet>
-          <AssociationSet Name="FK__Item__WikiLinkID__30F848ED" Association="Self.FK__Item__WikiLinkID__30F848ED">
+          <AssociationSet Name="FK__Item__WikiLinkID__4222D4EF" Association="Self.FK__Item__WikiLinkID__4222D4EF">
             <End Role="Translation" EntitySet="Translation" />
             <End Role="Item" EntitySet="Item" />
           </AssociationSet>
-          <AssociationSet Name="FK__ItemTag__ItemID__34C8D9D1" Association="Self.FK__ItemTag__ItemID__34C8D9D1">
+          <AssociationSet Name="FK__ItemTag__ItemID__4CA06362" Association="Self.FK__ItemTag__ItemID__4CA06362">
             <End Role="Item" EntitySet="Item" />
             <End Role="ItemTag" EntitySet="ItemTag" />
           </AssociationSet>
-          <AssociationSet Name="FK__ItemTag__TagID__35BCFE0A" Association="Self.FK__ItemTag__TagID__35BCFE0A">
+          <AssociationSet Name="FK__ItemTag__TagID__4D94879B" Association="Self.FK__ItemTag__TagID__4D94879B">
             <End Role="Tag" EntitySet="Tag" />
             <End Role="ItemTag" EntitySet="ItemTag" />
           </AssociationSet>
-          <AssociationSet Name="FK__LoginUser__Linke__48CFD27E" Association="Self.FK__LoginUser__Linke__48CFD27E">
+          <AssociationSet Name="FK__LoginUser__Linke__3B75D760" Association="Self.FK__LoginUser__Linke__3B75D760">
             <End Role="LinkedAccounts" EntitySet="LinkedAccounts" />
             <End Role="LoginUser" EntitySet="LoginUser" />
           </AssociationSet>
-          <AssociationSet Name="FK__LoginUser__Platf__46E78A0C" Association="Self.FK__LoginUser__Platf__46E78A0C">
+          <AssociationSet Name="FK__LoginUser__Platf__398D8EEE" Association="Self.FK__LoginUser__Platf__398D8EEE">
             <End Role="PlatformType" EntitySet="PlatformType" />
             <End Role="LoginUser" EntitySet="LoginUser" />
           </AssociationSet>
-          <AssociationSet Name="FK__LoginUser__RoleI__47DBAE45" Association="Self.FK__LoginUser__RoleI__47DBAE45">
+          <AssociationSet Name="FK__LoginUser__RoleI__3A81B327" Association="Self.FK__LoginUser__RoleI__3A81B327">
             <End Role="RoleType" EntitySet="RoleType" />
             <End Role="LoginUser" EntitySet="LoginUser" />
           </AssociationSet>
-          <AssociationSet Name="FK__LoginUser__UserI__45F365D3" Association="Self.FK__LoginUser__UserI__45F365D3">
+          <AssociationSet Name="FK__LoginUser__UserI__38996AB5" Association="Self.FK__LoginUser__UserI__38996AB5">
             <End Role="User" EntitySet="User" />
             <End Role="LoginUser" EntitySet="LoginUser" />
           </AssociationSet>
-          <AssociationSet Name="FK__Order__OrderType__778AC167" Association="Self.FK__Order__OrderType__778AC167">
+          <AssociationSet Name="FK__Order__OrderType__49C3F6B7" Association="Self.FK__Order__OrderType__49C3F6B7">
             <End Role="OrderType" EntitySet="OrderType" />
             <End Role="Order" EntitySet="Order" />
           </AssociationSet>
-          <AssociationSet Name="FK__Order__PlatformT__75A278F5" Association="Self.FK__Order__PlatformT__75A278F5">
+          <AssociationSet Name="FK__Order__PlatformT__47DBAE45" Association="Self.FK__Order__PlatformT__47DBAE45">
             <End Role="PlatformType" EntitySet="PlatformType" />
             <End Role="Order" EntitySet="Order" />
           </AssociationSet>
-          <AssociationSet Name="FK__Order__RegionTyp__76969D2E" Association="Self.FK__Order__RegionTyp__76969D2E">
+          <AssociationSet Name="FK__Order__RegionTyp__48CFD27E" Association="Self.FK__Order__RegionTyp__48CFD27E">
             <End Role="RegionType" EntitySet="RegionType" />
             <End Role="Order" EntitySet="Order" />
           </AssociationSet>
-          <AssociationSet Name="FK__Order__SubTypeTy__74AE54BC" Association="Self.FK__Order__SubTypeTy__74AE54BC">
+          <AssociationSet Name="FK__Order__SubTypeTy__46E78A0C" Association="Self.FK__Order__SubTypeTy__46E78A0C">
             <End Role="SubTypeType" EntitySet="SubTypeType" />
             <End Role="Order" EntitySet="Order" />
           </AssociationSet>
-          <AssociationSet Name="FK__Order__UserID__73BA3083" Association="Self.FK__Order__UserID__73BA3083">
+          <AssociationSet Name="FK__Order__UserID__45F365D3" Association="Self.FK__Order__UserID__45F365D3">
             <End Role="User" EntitySet="User" />
             <End Role="Order" EntitySet="Order" />
           </AssociationSet>
-          <AssociationSet Name="FK__SetItem__ChildIt__38996AB5" Association="Self.FK__SetItem__ChildIt__38996AB5">
+          <AssociationSet Name="FK__SetItem__ChildIt__5070F446" Association="Self.FK__SetItem__ChildIt__5070F446">
             <End Role="Item" EntitySet="Item" />
             <End Role="SetItem" EntitySet="SetItem" />
           </AssociationSet>
-          <AssociationSet Name="FK__SetItem__ParentI__398D8EEE" Association="Self.FK__SetItem__ParentI__398D8EEE">
+          <AssociationSet Name="FK__SetItem__ParentI__5165187F" Association="Self.FK__SetItem__ParentI__5165187F">
             <End Role="Item" EntitySet="Item" />
             <End Role="SetItem" EntitySet="SetItem" />
           </AssociationSet>
-          <AssociationSet Name="FK__User__RegionID__3C69FB99" Association="Self.FK__User__RegionID__3C69FB99">
+          <AssociationSet Name="FK__User__RegionID__34C8D9D1" Association="Self.FK__User__RegionID__34C8D9D1">
             <End Role="RegionType" EntitySet="RegionType" />
             <End Role="User" EntitySet="User" />
           </AssociationSet>
-          <AssociationSet Name="FK__User__StatusID__3D5E1FD2" Association="Self.FK__User__StatusID__3D5E1FD2">
+          <AssociationSet Name="FK__User__StatusID__35BCFE0A" Association="Self.FK__User__StatusID__35BCFE0A">
             <End Role="StatusType" EntitySet="StatusType" />
             <End Role="User" EntitySet="User" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Warframe.Market_Infrastructure.DataBaseContextModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -518,6 +518,7 @@
           <NavigationProperty Name="ItemTag" Relationship="Self.FK__ItemTag__ItemID__34C8D9D1" FromRole="Item" ToRole="ItemTag" />
           <NavigationProperty Name="SetItem" Relationship="Self.FK__SetItem__ChildIt__38996AB5" FromRole="Item" ToRole="SetItem" />
           <NavigationProperty Name="SetItem1" Relationship="Self.FK__SetItem__ParentI__398D8EEE" FromRole="Item" ToRole="SetItem" />
+          <Property Name="ExternalID" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="ItemTag">
           <Key>
@@ -668,7 +669,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="Type" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Type" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Order" Relationship="Self.FK__Order__RegionTyp__76969D2E" FromRole="RegionType" ToRole="Order" />
           <NavigationProperty Name="User" Relationship="Self.FK__User__RegionID__3C69FB99" FromRole="RegionType" ToRole="User" />
         </EntityType>
@@ -677,7 +678,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="Type" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Type" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="LoginUser" Relationship="Self.FK__LoginUser__RoleI__47DBAE45" FromRole="RoleType" ToRole="LoginUser" />
         </EntityType>
         <EntityType Name="StatusType">
@@ -1027,6 +1028,7 @@
           <EntitySetMapping Name="Item">
             <EntityTypeMapping TypeName="Warframe.Market_Infrastructure.DataBaseContextModel.Item">
               <MappingFragment StoreEntitySet="Item">
+                <ScalarProperty Name="ExternalID" ColumnName="ExternalID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="UrlName" ColumnName="UrlName" />
                 <ScalarProperty Name="Thumb" ColumnName="Thumb" />

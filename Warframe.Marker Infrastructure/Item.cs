@@ -34,6 +34,7 @@ namespace Warframe.Market_Infrastructure
         public Nullable<int> DescriptionID { get; set; }
         public Nullable<int> WikiLinkID { get; set; }
         public Nullable<int> ItemNameID { get; set; }
+        public int ExternalID { get; set; }
     
         public virtual Translation Translation { get; set; }
         public virtual IconFormatType IconFormatType { get; set; }
