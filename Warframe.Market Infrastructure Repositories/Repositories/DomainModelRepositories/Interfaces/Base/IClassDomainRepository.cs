@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using Warframe.Market_DomainModels.Abstractions;
-using Warframe.Market_Infrastructure;
 
 namespace Warframe.Market_Infrastructure_Repositories.Repositories.Interfaces.Base
 {
-    public interface IClassDomainRepository<TEntity, TDomain> 
-        where TEntity : class
+    public interface IClassDomainRepository<TDomain> 
         where TDomain : ADomainModel
     {
         void Create (ref TDomain entity);

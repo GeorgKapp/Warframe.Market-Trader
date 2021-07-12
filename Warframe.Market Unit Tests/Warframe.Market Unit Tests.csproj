@@ -71,6 +71,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Tests\DomainServiceTests\ItemServiceTests.cs" />
     <Compile Include="Tests\RepositoryTests\DomainModelRepositoryTests.cs" />
     <Compile Include="Tests\RepositoryTests\EntityModelRepositoryTests.cs" />
     <Compile Include="Utilities\AsyncHelpers.cs" />
@@ -99,6 +100,10 @@
     <ProjectReference Include="..\Warframe.Market DomainModels\Warframe.Market DomainModels.csproj">
       <Project>{b7d70e21-e5ed-41b0-a1e1-7895f901266e}</Project>
       <Name>Warframe.Market DomainModels</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Warframe.Market DomainServices\Warframe.Market DomainServices.csproj">
+      <Project>{bbc063ca-f109-426f-b409-9ffea1ac53c8}</Project>
+      <Name>Warframe.Market DomainServices</Name>
     </ProjectReference>
     <ProjectReference Include="..\Warframe.Market Infrastructure Repositories\Warframe.Market Infrastructure Repositories.csproj">
       <Project>{127245a2-286a-42f8-94de-a824b8a4f9b3}</Project>

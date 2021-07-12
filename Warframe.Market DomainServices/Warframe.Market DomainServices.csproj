@@ -41,7 +41,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Implementation\ItemService.cs" />
+    <Compile Include="Interfaces\IItemService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Warframe.Market Api\Warframe.Market Api.csproj">
+      <Project>{16782002-7816-4000-9ad8-dd8739c265ce}</Project>
+      <Name>Warframe.Market Api</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Warframe.Market DbContextScope\Warframe.Market DbContextScope.csproj">
+      <Project>{b99ec32d-b790-4da1-8b56-062d1c65ab3f}</Project>
+      <Name>Warframe.Market DbContextScope</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Warframe.Market DomainModels\Warframe.Market DomainModels.csproj">
+      <Project>{b7d70e21-e5ed-41b0-a1e1-7895f901266e}</Project>
+      <Name>Warframe.Market DomainModels</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Warframe.Market Infrastructure Repositories\Warframe.Market Infrastructure Repositories.csproj">
+      <Project>{127245a2-286a-42f8-94de-a824b8a4f9b3}</Project>
+      <Name>Warframe.Market Infrastructure Repositories</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
