@@ -13,11 +13,17 @@ namespace Warframe.Market_Infrastructure_Repositories.Repositories.EntityModelRe
     public class SetItemEntityRepository : ISetItemEntityRepository
     {
         private readonly IAmbientDbContextLocator _ambientDbContextLocator;
-        private DbContext DbContext => _ambientDbContextLocator.GetAmbientDbContextOrThrow<EntityContext>();
+        private EntityContext DbContext => _ambientDbContextLocator.GetAmbientDbContextOrThrow<EntityContext>();
 
         public SetItemEntityRepository(IAmbientDbContextLocator ambientDbContextLocator)
         {
             _ambientDbContextLocator = ambientDbContextLocator ?? throw new ArgumentNullException(nameof(ambientDbContextLocator));
+        }
+
+        public void CreateMany(ref IEnumerable<SetItem> entities)
+        {
+            DbContext.SetItem.AddRange(entities);
+            DbContext.SaveChanges();
         }
 
         public void Create(ref SetItem entity)

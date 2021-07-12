@@ -8,6 +8,7 @@ namespace Warframe.Market_Infrastructure_Repositories.Repositories.EntityModelRe
     public interface IEntityRepository<TEntity> 
         where TEntity : class
     {
+        void CreateMany(ref IEnumerable<TEntity> entities);
         void Create(ref TEntity entity);
         void Update(ref TEntity entity);
         void Delete(int entityID);

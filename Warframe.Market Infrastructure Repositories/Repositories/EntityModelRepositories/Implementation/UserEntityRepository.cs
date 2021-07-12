@@ -13,11 +13,17 @@ namespace Warframe.Market_Infrastructure_Repositories.Repositories.EntityModelRe
     public class UserEntityRepository : IUserEntityRepository
     {
         private readonly IAmbientDbContextLocator _ambientDbContextLocator;
-        private DbContext DbContext => _ambientDbContextLocator.GetAmbientDbContextOrThrow<EntityContext>();
+        private EntityContext DbContext => _ambientDbContextLocator.GetAmbientDbContextOrThrow<EntityContext>();
 
         public UserEntityRepository(IAmbientDbContextLocator ambientDbContextLocator)
         {
             _ambientDbContextLocator = ambientDbContextLocator ?? throw new ArgumentNullException(nameof(ambientDbContextLocator));
+        }
+
+        public void CreateMany(ref IEnumerable<User> entities)
+        {
+            DbContext.User.AddRange(entities);
+            DbContext.SaveChanges();
         }
 
         public void Create(ref User entity)
